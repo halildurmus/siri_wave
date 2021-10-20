@@ -14,7 +14,8 @@ class SiriWave extends StatefulWidget {
 class _SiriWaveState extends State<SiriWave>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  final double _amplitude = .6;
+  final double _amplitude = .3;
+  final int _frequency = 6;
   double _phase = 0;
   final double _speed = .2;
   bool _shouldUpdatePhase = false;
@@ -25,7 +26,7 @@ class _SiriWaveState extends State<SiriWave>
       vsync: this,
       // Since we don't use AnimationController's value in the animation,
       // the duration value does not have any affect on the animation.
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 1),
     )..repeat();
     super.initState();
   }
@@ -51,6 +52,7 @@ class _SiriWaveState extends State<SiriWave>
             return CustomPaint(
               painter: ClassicSiriWavePainter(
                 amplitude: _amplitude,
+                frequency: _frequency,
                 phase: _phase,
               ),
             );
