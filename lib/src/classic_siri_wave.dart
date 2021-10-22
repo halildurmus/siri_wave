@@ -4,20 +4,26 @@ import 'package:flutter/material.dart';
 
 import 'classic_siri_wave_painter.dart';
 
-class SiriWave extends StatefulWidget {
-  const SiriWave({Key? key}) : super(key: key);
+class ClassicSiriWave extends StatefulWidget {
+  const ClassicSiriWave({
+    Key? key,
+    this.amplitude = .3,
+    this.frequency = 6,
+    this.speed = .2,
+  }) : super(key: key);
+
+  final double amplitude;
+  final int frequency;
+  final double speed;
 
   @override
-  _SiriWaveState createState() => _SiriWaveState();
+  _ClassicSiriWaveState createState() => _ClassicSiriWaveState();
 }
 
-class _SiriWaveState extends State<SiriWave>
+class _ClassicSiriWaveState extends State<ClassicSiriWave>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  final double _amplitude = .3;
-  final int _frequency = 6;
   double _phase = 0;
-  final double _speed = .2;
   bool _shouldUpdatePhase = false;
 
   @override
@@ -46,13 +52,13 @@ class _SiriWaveState extends State<SiriWave>
           animation: _controller,
           builder: (_, __) {
             if (_shouldUpdatePhase) {
-              _phase = (_phase + (math.pi / 2) * _speed) % (2 * math.pi);
+              _phase = (_phase + (math.pi / 2) * widget.speed) % (2 * math.pi);
             }
             _shouldUpdatePhase = true;
             return CustomPaint(
               painter: ClassicSiriWavePainter(
-                amplitude: _amplitude,
-                frequency: _frequency,
+                amplitude: widget.amplitude,
+                frequency: widget.frequency,
                 phase: _phase,
               ),
             );
