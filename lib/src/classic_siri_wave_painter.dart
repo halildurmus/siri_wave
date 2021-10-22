@@ -15,7 +15,11 @@ class _ClassicCurve {
 }
 
 class ClassicSiriWavePainter extends CustomPainter {
-  ClassicSiriWavePainter({required this.amplitude, required this.frequency, required this.phase,});
+  ClassicSiriWavePainter({
+    required this.amplitude,
+    required this.frequency,
+    required this.phase,
+  });
 
   final double amplitude;
   final int frequency;
@@ -51,22 +55,21 @@ class ClassicSiriWavePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final double maxHeight = size.height / 2;
-    // final paint = Paint()..blendMode = BlendMode.dstOut;
-    // canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), paint);
+    final maxHeight = size.height / 2;
     for (var curve in kCurves) {
       final Path path = Path();
       path.moveTo(0, maxHeight);
       // Cycle the graph from -X to +X every pixelDepth and draw the line
       for (var i = -kGraphX; i <= kGraphX; i += kPixelDepth) {
-        path.lineTo(
-            _xPos(i, size), maxHeight + _yPos(i, curve.attenuation, maxHeight));
+        final x = _xPos(i, size);
+        final y = maxHeight + _yPos(i, curve.attenuation, maxHeight);
+        path.lineTo(x, y);
       }
 
       final paint = Paint()
         ..color = kColor.withOpacity(curve.opacity)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = curve.lineWidth;
+        ..strokeWidth = curve.lineWidth
+        ..style = PaintingStyle.stroke;
 
       canvas.drawPath(path, paint);
     }
