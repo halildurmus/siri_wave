@@ -74,5 +74,7 @@ class ClassicSiriWavePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(ClassicSiriWavePainter oldDelegate) =>
-      oldDelegate.amplitude != amplitude || oldDelegate.phase != phase;
+      oldDelegate.amplitude != amplitude ||
+      oldDelegate.frequency != frequency ||
+      oldDelegate.phase != phase;
 }
