@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'src/siri_wave.dart';
+import 'siri_wave.dart';
 
 void main() {
   runApp(
