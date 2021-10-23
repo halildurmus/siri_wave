@@ -2,8 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/rendering.dart';
 
-class _IOS7Curve {
-  const _IOS7Curve({
+class _IOS7SiriWaveCurve {
+  const _IOS7SiriWaveCurve({
     required this.attenuation,
     required this.lineWidth,
     required this.opacity,
@@ -28,11 +28,11 @@ class IOS7SiriWavePainter extends CustomPainter {
   static const double kAmplitudeFactor = .6;
   static const int kAttenuationFactor = 4;
   static const kCurves = [
-    _IOS7Curve(attenuation: -2, lineWidth: 1, opacity: .1),
-    _IOS7Curve(attenuation: -6, lineWidth: 1, opacity: .2),
-    _IOS7Curve(attenuation: 4, lineWidth: 1, opacity: .4),
-    _IOS7Curve(attenuation: 2, lineWidth: 1, opacity: .6),
-    _IOS7Curve(attenuation: 1, lineWidth: 1.5, opacity: 1),
+    _IOS7SiriWaveCurve(attenuation: -2, lineWidth: 1, opacity: .1),
+    _IOS7SiriWaveCurve(attenuation: -6, lineWidth: 1, opacity: .2),
+    _IOS7SiriWaveCurve(attenuation: 4, lineWidth: 1, opacity: .4),
+    _IOS7SiriWaveCurve(attenuation: 2, lineWidth: 1, opacity: .6),
+    _IOS7SiriWaveCurve(attenuation: 1, lineWidth: 1.5, opacity: 1),
   ];
   static const double kGraphX = 2;
   static const double kPixelDepth = .02;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'ios_7_siri_wave.dart';
-import 'ios_9_siri_wave.dart';
+import 'ios_7/ios_7_siri_wave.dart';
+import 'ios_9/ios_9_siri_wave.dart';
 import 'models/siri_wave_style.dart';
 
 class SiriWave extends StatelessWidget {

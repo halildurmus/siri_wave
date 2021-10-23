@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart' show ChangeNotifier;
 
-import 'models/ios_9_wave.dart';
+import 'ios_9_wave.dart';
 
 class PainterController extends ChangeNotifier {
   List<IOS9Wave> waves = [];

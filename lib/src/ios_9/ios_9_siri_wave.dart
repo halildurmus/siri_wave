@@ -3,11 +3,11 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import 'ios_9_siri_wave_painter.dart';
-import 'models/ios_9_wave.dart';
+import 'ios_9_wave.dart';
 import 'painter_controller.dart';
 import 'support_line_painter.dart';
 
-class _IOS9Wave {
+class _IOS9SiriWave {
   int noOfCurves = 0;
   double prevMaxY = 0;
   int spawnAt = 0;
@@ -62,10 +62,10 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
   late AnimationController _animationController;
   late PainterController _painterController;
 
-  final Map<String, _IOS9Wave> _waves = {
-    'red': _IOS9Wave(),
-    'green': _IOS9Wave(),
-    'blue': _IOS9Wave(),
+  final Map<String, _IOS9SiriWave> _waves = {
+    'red': _IOS9SiriWave(),
+    'green': _IOS9SiriWave(),
+    'blue': _IOS9SiriWave(),
   };
 
   @override
