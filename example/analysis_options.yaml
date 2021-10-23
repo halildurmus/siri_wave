@@ -5,3 +5,4 @@ linter:
     directives_ordering: true
     prefer_relative_imports: true
     prefer_single_quotes: true
+    sort_pub_dependencies: true
