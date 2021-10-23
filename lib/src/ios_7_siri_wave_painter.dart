@@ -2,8 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/rendering.dart';
 
-class _ClassicCurve {
-  const _ClassicCurve({
+class _IOS7Curve {
+  const _IOS7Curve({
     required this.attenuation,
     required this.lineWidth,
     required this.opacity,
@@ -14,8 +14,8 @@ class _ClassicCurve {
   final double opacity;
 }
 
-class ClassicSiriWavePainter extends CustomPainter {
-  ClassicSiriWavePainter({
+class IOS7SiriWavePainter extends CustomPainter {
+  IOS7SiriWavePainter({
     required this.amplitude,
     required this.frequency,
     required this.phase,
@@ -29,11 +29,11 @@ class ClassicSiriWavePainter extends CustomPainter {
   static const int kAttenuationFactor = 4;
   static const kColor = Color(0xFFFFFFFF);
   static const kCurves = [
-    _ClassicCurve(attenuation: -2, lineWidth: 1, opacity: .1),
-    _ClassicCurve(attenuation: -6, lineWidth: 1, opacity: .2),
-    _ClassicCurve(attenuation: 4, lineWidth: 1, opacity: .4),
-    _ClassicCurve(attenuation: 2, lineWidth: 1, opacity: .6),
-    _ClassicCurve(attenuation: 1, lineWidth: 1.5, opacity: 1),
+    _IOS7Curve(attenuation: -2, lineWidth: 1, opacity: .1),
+    _IOS7Curve(attenuation: -6, lineWidth: 1, opacity: .2),
+    _IOS7Curve(attenuation: 4, lineWidth: 1, opacity: .4),
+    _IOS7Curve(attenuation: 2, lineWidth: 1, opacity: .6),
+    _IOS7Curve(attenuation: 1, lineWidth: 1.5, opacity: 1),
   ];
   static const double kGraphX = 2;
   static const double kPixelDepth = .02;
@@ -76,7 +76,7 @@ class ClassicSiriWavePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(ClassicSiriWavePainter oldDelegate) =>
+  bool shouldRepaint(IOS7SiriWavePainter oldDelegate) =>
       oldDelegate.amplitude != amplitude ||
       oldDelegate.frequency != frequency ||
       oldDelegate.phase != phase;

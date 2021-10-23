@@ -2,10 +2,10 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'classic_siri_wave_painter.dart';
+import 'ios_7_siri_wave_painter.dart';
 
-class ClassicSiriWave extends StatefulWidget {
-  const ClassicSiriWave({
+class IOS7SiriWave extends StatefulWidget {
+  const IOS7SiriWave({
     Key? key,
     this.amplitude = .3,
     this.frequency = 6,
@@ -17,10 +17,10 @@ class ClassicSiriWave extends StatefulWidget {
   final double speed;
 
   @override
-  _ClassicSiriWaveState createState() => _ClassicSiriWaveState();
+  _IOS7SiriWaveState createState() => _IOS7SiriWaveState();
 }
 
-class _ClassicSiriWaveState extends State<ClassicSiriWave>
+class _IOS7SiriWaveState extends State<IOS7SiriWave>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   double _phase = 0;
@@ -56,7 +56,7 @@ class _ClassicSiriWaveState extends State<ClassicSiriWave>
             }
             _shouldUpdatePhase = true;
             return CustomPaint(
-              painter: ClassicSiriWavePainter(
+              painter: IOS7SiriWavePainter(
                 amplitude: widget.amplitude,
                 frequency: widget.frequency,
                 phase: _phase,
