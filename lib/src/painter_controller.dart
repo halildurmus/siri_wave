@@ -1,18 +1,15 @@
 import 'package:flutter/foundation.dart' show ChangeNotifier;
-import 'package:flutter/painting.dart' show Color, Path;
+
+import 'wave_definition.dart';
 
 class PainterController extends ChangeNotifier {
-  PainterController(this.color);
+  List<WaveDefinition> waves = [];
 
-  final Color color;
-
-  List<Path> paths = [];
-
-  void add(Path path) {
-    if (paths.length == 2) {
-      paths.clear();
+  void add(WaveDefinition wave) {
+    if (waves.length == 6) {
+      waves.clear();
     }
-    paths.add(path);
+    waves.add(wave);
     notifyListeners();
   }
 }
