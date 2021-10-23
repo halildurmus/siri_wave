@@ -20,8 +20,8 @@ class _WaveData {
   List<double> verses = [];
 }
 
-class IOS13SiriWave extends StatefulWidget {
-  const IOS13SiriWave({
+class IOS9SiriWave extends StatefulWidget {
+  const IOS9SiriWave({
     Key? key,
     this.amplitude = 1,
     this.speed = .2,
@@ -33,10 +33,10 @@ class IOS13SiriWave extends StatefulWidget {
   final PainterController? controller;
 
   @override
-  _IOS13SiriWaveState createState() => _IOS13SiriWaveState();
+  _IOS9SiriWaveState createState() => _IOS9SiriWaveState();
 }
 
-class _IOS13SiriWaveState extends State<IOS13SiriWave>
+class _IOS9SiriWaveState extends State<IOS9SiriWave>
     with SingleTickerProviderStateMixin {
   static const List<Color> kColors = [
     Color.fromRGBO(173, 57, 76, 1),
