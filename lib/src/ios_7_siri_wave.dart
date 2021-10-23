@@ -45,26 +45,21 @@ class _IOS7SiriWaveState extends State<IOS7SiriWave>
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      child: AspectRatio(
-        aspectRatio: 2 / 1,
-        child: AnimatedBuilder(
-          animation: _controller,
-          builder: (_, __) {
-            if (_shouldUpdatePhase) {
-              _phase = (_phase + (math.pi / 2) * widget.speed) % (2 * math.pi);
-            }
-            _shouldUpdatePhase = true;
-            return CustomPaint(
-              painter: IOS7SiriWavePainter(
-                amplitude: widget.amplitude,
-                frequency: widget.frequency,
-                phase: _phase,
-              ),
-            );
-          },
-        ),
-      ),
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (_, __) {
+        if (_shouldUpdatePhase) {
+          _phase = (_phase + (math.pi / 2) * widget.speed) % (2 * math.pi);
+        }
+        _shouldUpdatePhase = true;
+        return CustomPaint(
+          painter: IOS7SiriWavePainter(
+            amplitude: widget.amplitude,
+            frequency: widget.frequency,
+            phase: _phase,
+          ),
+        );
+      },
     );
   }
 }
