@@ -15,17 +15,14 @@ class WavePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    for (final path in controller.paths) {
+    for (final wave in controller.waves) {
       final paint = Paint()
-        ..blendMode = BlendMode.lighten
-        ..color = controller.color;
-      canvas.drawPath(path, paint);
+        ..blendMode = BlendMode.plus
+        ..color = wave.color;
+      canvas.drawPath(wave.path, paint);
     }
   }
 
   @override
-  bool shouldRepaint(WavePainter oldDelegate) {
-    return true;
-    // return oldDelegate.controller != controller;
-  }
+  bool shouldRepaint(WavePainter oldDelegate) => true;
 }
