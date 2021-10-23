@@ -2,9 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import 'models/wave_definition.dart';
 import 'painter_controller.dart';
 import 'support_line_painter.dart';
-import 'wave_definition.dart';
 import 'wave_painter.dart';
 
 class _WaveData {
