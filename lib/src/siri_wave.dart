@@ -5,9 +5,13 @@ import 'ios_9/ios_9_siri_wave.dart';
 import 'models/siri_wave_style.dart';
 
 class SiriWave extends StatelessWidget {
-  const SiriWave({Key? key, this.siriWaveStyle = SiriWaveStyle.ios9})
-      : super(key: key);
+  const SiriWave({
+    Key? key,
+    this.amplitude,
+    this.siriWaveStyle = SiriWaveStyle.ios9,
+  }) : super(key: key);
 
+  final double? amplitude;
   final SiriWaveStyle siriWaveStyle;
 
   @override
@@ -16,8 +20,8 @@ class SiriWave extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 2 / 1,
         child: siriWaveStyle == SiriWaveStyle.ios7
-            ? const IOS7SiriWave()
-            : const IOS9SiriWave(),
+            ? IOS7SiriWave(amplitude: amplitude ?? .3)
+            : IOS9SiriWave(amplitude: amplitude ?? 1),
       ),
     );
   }
