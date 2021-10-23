@@ -3,15 +3,9 @@ import 'package:flutter/rendering.dart';
 import 'painter_controller.dart';
 
 class WavePainter extends CustomPainter {
-  WavePainter(
-    this.controller,
-    this.maxHeight,
-    this.width,
-  ) : super(repaint: controller);
+  WavePainter(this.controller) : super(repaint: controller);
 
   final PainterController controller;
-  final double maxHeight;
-  final double width;
 
   @override
   void paint(Canvas canvas, Size size) {
