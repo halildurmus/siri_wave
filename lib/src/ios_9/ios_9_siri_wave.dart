@@ -219,7 +219,7 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
         drawingController.add(IOS9Wave(color: color, path: path));
       }
 
-      if (maxY < _kDeadPixel && wave.prevMaxY > maxY) {
+      if (maxY < _kDeadPixel && wave.prevMaxY >= maxY) {
         wave.spawnAt = 0;
       }
 
