@@ -27,7 +27,6 @@ class IOS7SiriWavePainter extends CustomPainter {
 
   static const double kAmplitudeFactor = .6;
   static const int kAttenuationFactor = 4;
-  static const kColor = Color(0xFFFFFFFF);
   static const kCurves = [
     _IOS7Curve(attenuation: -2, lineWidth: 1, opacity: .1),
     _IOS7Curve(attenuation: -6, lineWidth: 1, opacity: .2),
@@ -37,6 +36,7 @@ class IOS7SiriWavePainter extends CustomPainter {
   ];
   static const double kGraphX = 2;
   static const double kPixelDepth = .02;
+  static const kWaveColor = Color(0xFFFFFFFF);
 
   num _globalAttenuationFactor(num x) => math.pow(
       kAttenuationFactor /
@@ -56,6 +56,7 @@ class IOS7SiriWavePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final maxHeight = size.height / 2;
+
     for (var curve in kCurves) {
       final Path path = Path();
       path.moveTo(0, maxHeight);
@@ -67,7 +68,7 @@ class IOS7SiriWavePainter extends CustomPainter {
       }
 
       final paint = Paint()
-        ..color = kColor.withOpacity(curve.opacity)
+        ..color = kWaveColor.withOpacity(curve.opacity)
         ..strokeWidth = curve.lineWidth
         ..style = PaintingStyle.stroke;
 
