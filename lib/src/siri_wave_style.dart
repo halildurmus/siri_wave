@@ -1,0 +1,1 @@
+enum SiriWaveStyle { ios7, ios9 }
