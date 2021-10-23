@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart' show ChangeNotifier;
 
-import 'models/wave_definition.dart';
+import 'models/ios_9_wave.dart';
 
 class PainterController extends ChangeNotifier {
-  List<WaveDefinition> waves = [];
+  List<IOS9Wave> waves = [];
 
-  void add(WaveDefinition wave) {
+  void add(IOS9Wave wave) {
     if (waves.length == 6) {
       waves.clear();
     }

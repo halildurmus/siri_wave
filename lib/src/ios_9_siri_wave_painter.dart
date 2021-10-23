@@ -2,8 +2,8 @@ import 'package:flutter/rendering.dart';
 
 import 'painter_controller.dart';
 
-class WavePainter extends CustomPainter {
-  WavePainter(this.controller) : super(repaint: controller);
+class IOS9SiriWavePainter extends CustomPainter {
+  IOS9SiriWavePainter(this.controller) : super(repaint: controller);
 
   final PainterController controller;
 
@@ -18,5 +18,5 @@ class WavePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(WavePainter oldDelegate) => true;
+  bool shouldRepaint(IOS9SiriWavePainter oldDelegate) => true;
 }
