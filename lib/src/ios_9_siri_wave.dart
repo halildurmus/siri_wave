@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import 'painter_controller.dart';
+import 'support_line_painter.dart';
 import 'wave_definition.dart';
 import 'wave_painter.dart';
 
@@ -234,13 +235,16 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
         _height = constraints.maxHeight;
         _maxHeight = _height / 2;
         _width = constraints.maxWidth;
-        final painter = WavePainter(_painterController, _maxHeight, _width);
+        final painter = WavePainter(_painterController);
 
         return AnimatedBuilder(
           animation: _animationController,
           builder: (_, __) {
             _calc(_painterController);
-            return CustomPaint(painter: painter);
+            return CustomPaint(
+              painter: const SupportLinePainter(),
+              foregroundPainter: painter,
+            );
           },
         );
       },
