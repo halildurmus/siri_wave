@@ -23,8 +23,7 @@ class IOS7SiriWave extends StatefulWidget {
 class _IOS7SiriWaveState extends State<IOS7SiriWave>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  double _phase = 0;
-  bool _shouldUpdatePhase = false;
+  double? _phase;
 
   @override
   void initState() {
@@ -43,20 +42,29 @@ class _IOS7SiriWaveState extends State<IOS7SiriWave>
     super.dispose();
   }
 
+  double _calculatePhase() =>
+      (_phase! + (math.pi / 2) * widget.speed) % (2 * math.pi);
+
+  void _initializePhase() {
+    if (_phase == null) {
+      _phase = 0;
+    } else {
+      _phase = _calculatePhase();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _controller,
       builder: (_, __) {
-        if (_shouldUpdatePhase) {
-          _phase = (_phase + (math.pi / 2) * widget.speed) % (2 * math.pi);
-        }
-        _shouldUpdatePhase = true;
+        _initializePhase();
+        
         return CustomPaint(
           painter: IOS7SiriWavePainter(
             amplitude: widget.amplitude,
             frequency: widget.frequency,
-            phase: _phase,
+            phase: _phase!,
           ),
         );
       },
