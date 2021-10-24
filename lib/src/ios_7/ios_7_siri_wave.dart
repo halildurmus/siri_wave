@@ -7,7 +7,7 @@ import 'ios_7_siri_wave_painter.dart';
 class IOS7SiriWave extends StatefulWidget {
   const IOS7SiriWave({
     Key? key,
-    this.amplitude = .5,
+    this.amplitude = 1,
     this.frequency = 6,
     this.speed = .2,
   }) : super(key: key);
