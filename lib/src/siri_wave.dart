@@ -18,7 +18,7 @@ class SiriWave extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       child: AspectRatio(
-        aspectRatio: 2 / 1,
+        aspectRatio: 19.5 / 9,
         child: siriWaveStyle == SiriWaveStyle.ios7
             ? IOS7SiriWave(amplitude: amplitude ?? .3)
             : IOS9SiriWave(amplitude: amplitude ?? 1),
