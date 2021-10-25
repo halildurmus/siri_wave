@@ -83,7 +83,7 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
       // the duration value does not have any affect on the animation.
       duration: const Duration(seconds: 1),
     );
-    if (widget.amplitude > 0) {
+    if (widget.amplitude > 0 && widget.speed > 0) {
       _animationController.repeat();
     }
     super.initState();
@@ -262,13 +262,14 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
     return AnimatedBuilder(
       animation: _animationController,
       builder: (_, __) {
-        if (widget.amplitude > 0) {
+        final shouldPaint = widget.amplitude > 0 && widget.speed > 0;
+        if (shouldPaint) {
           _calculateWaves();
         }
 
         return CustomPaint(
           painter: supportLinePainter,
-          foregroundPainter: widget.amplitude > 0 ? wavesPainter : null,
+          foregroundPainter: shouldPaint ? wavesPainter : null,
         );
       },
     );

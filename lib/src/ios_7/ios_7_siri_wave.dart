@@ -30,7 +30,7 @@ class _IOS7SiriWaveState extends State<IOS7SiriWave>
       // the duration value does not have any affect on the animation.
       duration: const Duration(seconds: 1),
     );
-    if (widget.amplitude > 0) {
+    if (widget.amplitude > 0 && widget.speed > 0) {
       _controller.repeat();
     }
     super.initState();
