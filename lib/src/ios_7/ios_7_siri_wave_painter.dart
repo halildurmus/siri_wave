@@ -18,13 +18,15 @@ class _IOS7SiriWaveCurve {
 class IOS7SiriWavePainter extends CustomPainter {
   IOS7SiriWavePainter({
     required this.amplitude,
-    required this.frequency,
     required this.controller,
+    required this.frequency,
+    required this.speed,
   }) : super(repaint: controller);
 
   final double amplitude;
-  final int frequency;
   final AnimationController controller;
+  final int frequency;
+  final double speed;
 
   static const double _kAmplitudeFactor = .6;
   static const int _kAttenuationFactor = 4;
@@ -78,7 +80,7 @@ class IOS7SiriWavePainter extends CustomPainter {
       canvas.drawPath(path, paint);
     }
 
-    _phase = (_phase + (math.pi / 2) * .2) % (2 * math.pi);
+    _phase = (_phase + (math.pi / 2) * speed) % (2 * math.pi);
   }
 
   @override

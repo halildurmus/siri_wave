@@ -58,8 +58,9 @@ class _IOS7SiriWaveState extends State<IOS7SiriWave>
     final customPaint = CustomPaint(
       painter: IOS7SiriWavePainter(
         amplitude: widget.amplitude,
-        frequency: widget.frequency,
         controller: _controller,
+        frequency: widget.frequency,
+        speed: widget.speed,
       ),
     );
 
