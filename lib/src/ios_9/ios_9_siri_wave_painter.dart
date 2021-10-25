@@ -18,5 +18,6 @@ class IOS9SiriWavePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(IOS9SiriWavePainter oldDelegate) => true;
+  bool shouldRepaint(IOS9SiriWavePainter oldDelegate) =>
+      oldDelegate.controller.waves != controller.waves;
 }
