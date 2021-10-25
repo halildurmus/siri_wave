@@ -73,6 +73,16 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget _buildDivider() {
+    return SizedBox(
+      width: 360,
+      child: Divider(
+        color: Theme.of(context).colorScheme.primary,
+        thickness: 1,
+      ),
+    );
+  }
+
   Widget _buildSiriWave() {
     return SiriWave(
       amplitude: _amplitude,
@@ -101,19 +111,9 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 30),
             _buildToggleButtons(),
             const Spacer(),
-            Divider(
-              color: Theme.of(context).colorScheme.primary,
-              indent: 16,
-              endIndent: 16,
-              thickness: 1,
-            ),
+            _buildDivider(),
             _buildSiriWave(),
-            Divider(
-              color: Theme.of(context).colorScheme.primary,
-              indent: 16,
-              endIndent: 16,
-              thickness: 1,
-            ),
+            _buildDivider(),
           ],
         ),
       ),
