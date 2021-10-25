@@ -39,10 +39,11 @@ class _IOS7SiriWaveState extends State<IOS7SiriWave>
   @override
   void didUpdateWidget(covariant IOS7SiriWave oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // TODO(halildurmus): Handle frequency and speed values
-    if (_controller.isAnimating && widget.amplitude == 0) {
+    if (_controller.isAnimating &&
+        (widget.amplitude == 0 || widget.speed == 0)) {
       _controller.stop(canceled: false);
-    } else if (!_controller.isAnimating && widget.amplitude > 0) {
+    } else if (!_controller.isAnimating &&
+        (widget.amplitude > 0 || widget.speed > 0)) {
       _controller.repeat();
     }
   }
