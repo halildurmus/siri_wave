@@ -67,6 +67,7 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
     'green': _IOS9SiriWave(),
     'blue': _IOS9SiriWave(),
   };
+  final _wavesList = <IOS9Wave>[];
 
   @override
   void initState() {
@@ -191,6 +192,7 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
   }
 
   void _calculateWaves(PainterController drawingController) {
+    _wavesList.clear();
     for (final entry in _waves.entries) {
       final wave = entry.value;
       final color = _getWaveColor(entry.key);
@@ -230,7 +232,7 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
         }
 
         path.close();
-        drawingController.add(IOS9Wave(color: color, path: path));
+        _wavesList.add(IOS9Wave(color: color, path: path));
       }
 
       if (maxY < _kDeadPixel && wave.prevMaxY >= maxY) {
@@ -239,26 +241,28 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
 
       wave.prevMaxY = maxY;
     }
+
+    drawingController.waves = _wavesList;
   }
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        _height = constraints.maxHeight;
-        _maxHeight = _height / 2;
-        _width = constraints.maxWidth;
-        final painter = IOS9SiriWavePainter(_painterController);
+    _height = 180;
+    _maxHeight = _height / 2;
+    _width = 360;
+    const supportLinePainter = SupportLinePainter();
+    final wavesPainter = IOS9SiriWavePainter(_painterController);
 
-        return AnimatedBuilder(
-          animation: _animationController,
-          builder: (_, __) {
-            _calculateWaves(_painterController);
-            return CustomPaint(
-              painter: const SupportLinePainter(),
-              foregroundPainter: painter,
-            );
-          },
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (_, __) {
+        if (widget.amplitude > 0) {
+          _calculateWaves(_painterController);
+        }
+
+        return CustomPaint(
+          painter: supportLinePainter,
+          foregroundPainter: widget.amplitude > 0 ? wavesPainter : null,
         );
       },
     );

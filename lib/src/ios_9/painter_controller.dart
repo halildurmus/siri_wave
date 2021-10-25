@@ -3,13 +3,12 @@ import 'package:flutter/foundation.dart' show ChangeNotifier;
 import 'ios_9_wave.dart';
 
 class PainterController extends ChangeNotifier {
-  List<IOS9Wave> waves = [];
+  var _waves = <IOS9Wave>[];
 
-  void add(IOS9Wave wave) {
-    if (waves.length == 6) {
-      waves.clear();
-    }
-    waves.add(wave);
+  List<IOS9Wave> get waves => _waves;
+
+  set waves(List<IOS9Wave> waves) {
+    _waves = waves;
     notifyListeners();
   }
 }
