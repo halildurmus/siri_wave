@@ -19,6 +19,11 @@ class _IOS9SiriWave {
   List<double> speeds = [];
   List<double> verses = [];
   List<double> widths = [];
+
+  @override
+  String toString() {
+    return '_IOS9SiriWave(noOfCurves: $noOfCurves, prevMaxY: $prevMaxY, spawnAt: $spawnAt, amplitudes: $amplitudes, despawnTimeouts: $despawnTimeouts, finalAmplitudes: $finalAmplitudes, offsets: $offsets, phases: $phases, speeds: $speeds, verses: $verses, widths: $widths)';
+  }
 }
 
 class IOS9SiriWave extends StatefulWidget {

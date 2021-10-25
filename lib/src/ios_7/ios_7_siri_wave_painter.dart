@@ -13,6 +13,10 @@ class _IOS7SiriWaveCurve {
   final double attenuation;
   final double lineWidth;
   final double opacity;
+
+  @override
+  String toString() =>
+      '_IOS7SiriWaveCurve(attenuation: $attenuation, lineWidth: $lineWidth, opacity: $opacity)';
 }
 
 class IOS7SiriWavePainter extends CustomPainter {

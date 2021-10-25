@@ -11,4 +11,7 @@ class PainterController extends ChangeNotifier {
     _waves = waves;
     notifyListeners();
   }
+
+  @override
+  String toString() => 'PainterController(_waves: $_waves)';
 }

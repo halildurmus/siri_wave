@@ -5,4 +5,7 @@ class IOS9Wave {
 
   final Color color;
   final Path path;
+
+  @override
+  String toString() => 'IOS9Wave(color: $color, path: $path)';
 }
