@@ -196,7 +196,7 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
     return _kWaveColors[2];
   }
 
-  void _calculateWaves(PainterController drawingController) {
+  void _calculateWaves() {
     _wavesList.clear();
     for (final entry in _waves.entries) {
       final wave = entry.value;
@@ -247,7 +247,7 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
       wave.prevMaxY = maxY;
     }
 
-    drawingController.waves = _wavesList;
+    _painterController.waves = _wavesList;
   }
 
   @override
@@ -262,7 +262,7 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
       animation: _animationController,
       builder: (_, __) {
         if (widget.amplitude > 0) {
-          _calculateWaves(_painterController);
+          _calculateWaves();
         }
 
         return CustomPaint(
