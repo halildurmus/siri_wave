@@ -89,5 +89,7 @@ class IOS7SiriWavePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(IOS7SiriWavePainter oldDelegate) =>
-      oldDelegate.amplitude != amplitude || oldDelegate.frequency != frequency;
+      oldDelegate.amplitude != amplitude ||
+      oldDelegate.frequency != frequency ||
+      oldDelegate.speed != speed;
 }
