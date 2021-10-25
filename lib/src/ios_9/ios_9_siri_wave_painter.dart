@@ -45,7 +45,7 @@ class IOS9SiriWavePainter extends CustomPainter {
   static const double _kGraphX = 25;
   static const List<int> _kNoOfCurvesRanges = [2, 5];
   static const List<int> _kOffsetRanges = [-3, 3];
-  static const double _kPixelDepth = .02;
+  static const double _kPixelDepth = .1;
   static const int _kSpeedFactor = 1;
   static const List<double> _kSpeedRanges = [.5, 1];
   static const List<Color> _kWaveColors = [
