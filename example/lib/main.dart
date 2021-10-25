@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:siri_wave/siri_wave.dart';
 
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildSlider() {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * .5,
+      width: 360,
       child: Slider(
         value: _amplitude,
         min: 0,
@@ -50,56 +51,69 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildToggleButtons() {
     return ToggleButtons(
-      borderRadius: BorderRadius.circular(16),
-      children: const [
-        Padding(padding: EdgeInsets.all(16), child: Text('iOS 7 Siri Wave')),
-        Padding(padding: EdgeInsets.all(16), child: Text('iOS 9 Siri Wave')),
-      ],
       onPressed: (int index) {
         if (_isSelected[index]) {
           return;
         }
 
         setState(() {
-          _amplitude = index == 0 ? .3 : 1;
           for (int i = 0; i < _isSelected.length; i++) {
             _isSelected[i] = i == index;
           }
         });
       },
       isSelected: _isSelected,
+      borderColor: Theme.of(context).primaryColorLight,
+      borderRadius: BorderRadius.circular(16),
+      selectedBorderColor: Theme.of(context).colorScheme.primary,
+      children: const [
+        Padding(padding: EdgeInsets.all(16), child: Text('iOS 7 Siri Wave')),
+        Padding(padding: EdgeInsets.all(16), child: Text('iOS 9 Siri Wave')),
+      ],
     );
   }
 
   Widget _buildSiriWave() {
-    return SizedBox(
-      height: 400,
-      child: SiriWave(
-        amplitude: _amplitude,
-        siriWaveStyle: _isSelected[0] ? SiriWaveStyle.ios7 : SiriWaveStyle.ios9,
-      ),
+    return SiriWave(
+      amplitude: _amplitude,
+      siriWaveStyle: _isSelected[0] ? SiriWaveStyle.ios7 : SiriWaveStyle.ios9,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * .1,
-        ),
+      appBar: AppBar(
+        centerTitle: kIsWeb,
+        title: const Text('Siri Wave Demo'),
+      ),
+      backgroundColor: Colors.black,
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Spacer(),
             Text('Amplitude', style: Theme.of(context).textTheme.headline6),
-            const SizedBox(height: 30),
+            const SizedBox(height: 10),
             _buildSlider(),
-            const SizedBox(height: 30),
+            const SizedBox(height: 10),
             Text('Style', style: Theme.of(context).textTheme.headline6),
             const SizedBox(height: 30),
             _buildToggleButtons(),
-            const SizedBox(height: 30),
+            const Spacer(),
+            Divider(
+              color: Theme.of(context).colorScheme.primary,
+              indent: 16,
+              endIndent: 16,
+              thickness: 1,
+            ),
             _buildSiriWave(),
+            Divider(
+              color: Theme.of(context).colorScheme.primary,
+              indent: 16,
+              endIndent: 16,
+              thickness: 1,
+            ),
           ],
         ),
       ),
