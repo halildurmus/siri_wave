@@ -8,17 +8,21 @@ class SiriWave extends StatelessWidget {
   const SiriWave({
     Key? key,
     this.amplitude = 1,
+    this.height = 180,
     this.siriWaveStyle = SiriWaveStyle.ios9,
+    this.width = 360,
   }) : super(key: key);
 
   final double amplitude;
+  final double height;
   final SiriWaveStyle siriWaveStyle;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 180,
-      width: 360,
+      height: height,
+      width: width,
       child: DecoratedBox(
         decoration: const BoxDecoration(color: Colors.black),
         child: siriWaveStyle == SiriWaveStyle.ios7
