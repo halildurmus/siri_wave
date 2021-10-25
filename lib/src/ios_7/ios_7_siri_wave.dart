@@ -45,7 +45,7 @@ class _IOS7SiriWaveState extends State<IOS7SiriWave>
       painter: IOS7SiriWavePainter(
         amplitude: widget.amplitude,
         frequency: widget.frequency,
-        listenable: _controller,
+        controller: _controller,
       ),
     );
 

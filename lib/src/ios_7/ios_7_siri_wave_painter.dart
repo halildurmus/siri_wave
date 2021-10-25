@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:flutter/animation.dart' show Animation;
+import 'package:flutter/animation.dart' show AnimationController;
 import 'package:flutter/rendering.dart';
 
 class _IOS7SiriWaveCurve {
@@ -19,12 +19,12 @@ class IOS7SiriWavePainter extends CustomPainter {
   IOS7SiriWavePainter({
     required this.amplitude,
     required this.frequency,
-    required this.listenable,
-  }) : super(repaint: listenable);
+    required this.controller,
+  }) : super(repaint: controller);
 
   final double amplitude;
   final int frequency;
-  final Animation listenable;
+  final AnimationController controller;
 
   static const double _kAmplitudeFactor = .6;
   static const int _kAttenuationFactor = 4;
