@@ -84,6 +84,17 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
   }
 
   @override
+  void didUpdateWidget(covariant IOS9SiriWave oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // TODO(halildurmus): Handle speed value
+    if (_animationController.isAnimating && widget.amplitude == 0) {
+      _animationController.stop(canceled: false);
+    } else if (!_animationController.isAnimating && widget.amplitude > 0) {
+      _animationController.repeat();
+    }
+  }
+
+  @override
   void dispose() {
     _animationController.dispose();
     _painterController.dispose();
