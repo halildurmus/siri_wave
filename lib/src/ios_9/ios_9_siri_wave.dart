@@ -24,7 +24,7 @@ class _IOS9SiriWave {
 class IOS9SiriWave extends StatefulWidget {
   const IOS9SiriWave({
     Key? key,
-    this.amplitude = 1,
+    required this.amplitude,
     this.speed = .2,
   }) : super(key: key);
 
