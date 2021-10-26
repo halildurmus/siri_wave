@@ -8,7 +8,8 @@ class IOS7SiriWave extends StatefulWidget {
     required this.amplitude,
     this.frequency = 6,
     this.speed = .2,
-  })  : assert(speed >= 0 && speed <= 1),
+  })  : assert(amplitude >= 0 && amplitude <= 1),
+        assert(speed >= 0 && speed <= 1),
         super(key: key);
 
   final double amplitude;

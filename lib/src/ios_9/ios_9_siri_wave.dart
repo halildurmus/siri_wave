@@ -8,7 +8,9 @@ class IOS9SiriWave extends StatefulWidget {
     Key? key,
     required this.amplitude,
     this.speed = .2,
-  }) : super(key: key);
+  })  : assert(amplitude >= 0 && amplitude <= 1),
+        assert(speed >= 0 && speed <= 1),
+        super(key: key);
 
   final double amplitude;
   final double speed;
@@ -19,7 +21,6 @@ class IOS9SiriWave extends StatefulWidget {
 
 class _IOS9SiriWaveState extends State<IOS9SiriWave>
     with SingleTickerProviderStateMixin {
-
   late AnimationController _animationController;
 
   @override

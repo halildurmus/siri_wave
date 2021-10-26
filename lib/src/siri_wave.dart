@@ -11,7 +11,8 @@ class SiriWave extends StatelessWidget {
     this.height = 180,
     this.siriWaveStyle = SiriWaveStyle.ios9,
     this.width = 360,
-  }) : super(key: key);
+  })  : assert(amplitude >= 0 && amplitude <= 1),
+        super(key: key);
 
   final double amplitude;
   final double height;

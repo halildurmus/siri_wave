@@ -30,7 +30,9 @@ class IOS9SiriWavePainter extends CustomPainter {
     required this.amplitude,
     required this.controller,
     required this.speed,
-  }) : super(repaint: controller);
+  })  : assert(amplitude >= 0 && amplitude <= 1),
+        assert(speed >= 0 && speed <= 1),
+        super(repaint: controller);
 
   final double amplitude;
   final AnimationController controller;
@@ -140,7 +142,7 @@ class IOS9SiriWavePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final maxHeight = size.height / 2;
-    
+
     for (final entry in _waves.entries) {
       final wave = entry.value;
       if (wave.spawnAt == 0) {
