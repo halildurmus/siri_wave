@@ -55,7 +55,7 @@ class IOS9SiriWavePainter extends CustomPainter {
   ];
   static const List<int> _kWidthRanges = [1, 3];
 
-  final Map<String, _IOS9SiriWave> _waves = {
+  final _waves = <String, _IOS9SiriWave>{
     'red': _IOS9SiriWave(color: _kWaveColors[0]),
     'green': _IOS9SiriWave(color: _kWaveColors[1]),
     'blue': _IOS9SiriWave(color: _kWaveColors[2]),
@@ -78,7 +78,7 @@ class IOS9SiriWavePainter extends CustomPainter {
     wave.verses[ci] = _getRandomRange([-1, 1]).toDouble();
   }
 
-  List<double> _getEmptyArray(int n) => List.filled(n, 0);
+  List<double> _getEmptyArray(int n) => List.filled(n, 0.0);
 
   void _spawn(String key) {
     final wave = _waves[key]!;
