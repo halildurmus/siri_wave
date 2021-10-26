@@ -6,15 +6,15 @@ import 'package:flutter/rendering.dart';
 class _IOS9SiriWave {
   _IOS9SiriWave({required this.color});
 
-  final Color color;
-  int noOfCurves = 0;
-  double prevMaxY = 0;
-  int spawnAt = 0;
   List<double> amplitudes = [];
+  final Color color;
   List<double> despawnTimeouts = [];
   List<double> finalAmplitudes = [];
+  int noOfCurves = 0;
   List<double> offsets = [];
   List<double> phases = [];
+  double prevMaxY = 0;
+  int spawnAt = 0;
   List<double> speeds = [];
   List<double> verses = [];
   List<double> widths = [];
