@@ -140,6 +140,7 @@ class IOS9SiriWavePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final maxHeight = size.height / 2;
+    
     for (final entry in _waves.entries) {
       final wave = entry.value;
       if (wave.spawnAt == 0) {
