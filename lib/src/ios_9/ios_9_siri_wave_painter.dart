@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:flutter/animation.dart';
+import 'package:flutter/animation.dart' show AnimationController;
 import 'package:flutter/rendering.dart';
 
 class _IOS9SiriWave {
