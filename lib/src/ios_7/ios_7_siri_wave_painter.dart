@@ -24,13 +24,11 @@ class IOS7SiriWavePainter extends CustomPainter {
     required this.amplitude,
     required this.controller,
     required this.frequency,
-    required this.speed,
   }) : super(repaint: controller);
 
   final double amplitude;
   final AnimationController controller;
   final int frequency;
-  final double speed;
 
   static const double _kAmplitudeFactor = .6;
   static const int _kAttenuationFactor = 4;
@@ -45,8 +43,6 @@ class IOS7SiriWavePainter extends CustomPainter {
   static const double _kPixelDepth = .02;
   static const _kWaveColor = Color(0xFFFFFFFF);
 
-  double _phase = 0;
-
   num _globalAttenuationFactor(num x) => math.pow(
       _kAttenuationFactor /
           (_kAttenuationFactor + math.pow(x, _kAttenuationFactor)),
@@ -60,7 +56,7 @@ class IOS7SiriWavePainter extends CustomPainter {
           (_globalAttenuationFactor(i) *
               (maxHeight * amplitude) *
               (1 / attenuation) *
-              math.sin(frequency * i - _phase)));
+              math.sin(frequency * i - controller.value)));
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -82,13 +78,9 @@ class IOS7SiriWavePainter extends CustomPainter {
         ..style = PaintingStyle.stroke;
       canvas.drawPath(path, paint);
     }
-
-    _phase = (_phase + (math.pi / 2) * speed) % (2 * math.pi);
   }
 
   @override
   bool shouldRepaint(IOS7SiriWavePainter oldDelegate) =>
-      oldDelegate.amplitude != amplitude ||
-      oldDelegate.frequency != frequency ||
-      oldDelegate.speed != speed;
+      oldDelegate.amplitude != amplitude || oldDelegate.frequency != frequency;
 }

@@ -24,14 +24,23 @@ class _IOS7SiriWaveState extends State<IOS7SiriWave>
 
   @override
   void initState() {
+    final _duration = widget.speed == 0 ? 0 : (64 / widget.speed).round();
     _controller = AnimationController(
       vsync: this,
-      // Since we don't use AnimationController's value in the animation,
-      // the duration value does not have any affect on the animation.
-      duration: const Duration(seconds: 1),
+      duration: Duration(milliseconds: _duration),
+      upperBound: 6,
     );
+
     if (widget.amplitude > 0 && widget.speed > 0) {
-      _controller.repeat();
+      // We have to manually use the forward() to repeat the animation because
+      // there is an issue with using repeat().
+      // See https://github.com/flutter/flutter/issues/67507
+      _controller.addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _controller.forward(from: 0);
+        }
+      });
+      _controller.forward();
     }
     super.initState();
   }
@@ -43,8 +52,8 @@ class _IOS7SiriWaveState extends State<IOS7SiriWave>
         (widget.amplitude == 0 || widget.speed == 0)) {
       _controller.stop(canceled: false);
     } else if (!_controller.isAnimating &&
-        (widget.amplitude > 0 || widget.speed > 0)) {
-      _controller.repeat();
+        (widget.amplitude > 0 && widget.speed > 0)) {
+      _controller.forward(from: 0);
     }
   }
 
@@ -61,7 +70,6 @@ class _IOS7SiriWaveState extends State<IOS7SiriWave>
         amplitude: widget.amplitude,
         controller: _controller,
         frequency: widget.frequency,
-        speed: widget.speed,
       ),
     );
 
