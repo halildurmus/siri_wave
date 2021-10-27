@@ -38,29 +38,29 @@ class IOS9SiriWavePainter extends CustomPainter {
   final AnimationController controller;
   final double speed;
 
-  static const double _kAmplitudeFactor = .8;
-  static const List<double> _kAmplitudeRanges = [.3, 1];
-  static const int _kAttenuationFactor = 4;
-  static const int _kDeadPixel = 2;
-  static const double _kDespawnFactor = .02;
-  static const List<int> _kDespawnTimeoutRanges = [500, 2000];
-  static const double _kGraphX = 25;
-  static const List<int> _kNoOfCurvesRanges = [2, 5];
-  static const List<int> _kOffsetRanges = [-3, 3];
-  static const double _kPixelDepth = .1;
-  static const int _kSpeedFactor = 1;
-  static const List<double> _kSpeedRanges = [.5, 1];
-  static const List<Color> _kWaveColors = [
+  static const double _amplitudeFactor = .8;
+  static const List<double> _amplitudeRanges = [.3, 1];
+  static const int _attenuationFactor = 4;
+  static const int _deadPixel = 2;
+  static const double _despawnFactor = .02;
+  static const List<int> _despawnTimeoutRanges = [500, 2000];
+  static const double _graphX = 25;
+  static const List<int> _noOfCurvesRanges = [2, 5];
+  static const List<int> _offsetRanges = [-3, 3];
+  static const double _pixelDepth = .1;
+  static const int _speedFactor = 1;
+  static const List<double> _speedRanges = [.5, 1];
+  static const List<Color> _waveColors = [
     Color.fromRGBO(173, 57, 76, 1),
     Color.fromRGBO(48, 220, 155, 1),
     Color.fromRGBO(15, 82, 169, 1),
   ];
-  static const List<int> _kWidthRanges = [1, 3];
+  static const List<int> _widthRanges = [1, 3];
 
   final _waves = <String, _IOS9SiriWave>{
-    'red': _IOS9SiriWave(color: _kWaveColors[0]),
-    'green': _IOS9SiriWave(color: _kWaveColors[1]),
-    'blue': _IOS9SiriWave(color: _kWaveColors[2]),
+    'red': _IOS9SiriWave(color: _waveColors[0]),
+    'green': _IOS9SiriWave(color: _waveColors[1]),
+    'blue': _IOS9SiriWave(color: _waveColors[2]),
   };
 
   num _getRandomRange(List<num> e) =>
@@ -72,11 +72,11 @@ class IOS9SiriWavePainter extends CustomPainter {
     wave.amplitudes[ci] = 0;
 
     wave.despawnTimeouts[ci] =
-        _getRandomRange(_kDespawnTimeoutRanges).toDouble();
-    wave.offsets[ci] = _getRandomRange(_kOffsetRanges).toDouble();
-    wave.speeds[ci] = _getRandomRange(_kSpeedRanges).toDouble();
-    wave.finalAmplitudes[ci] = _getRandomRange(_kAmplitudeRanges).toDouble();
-    wave.widths[ci] = _getRandomRange(_kWidthRanges).toDouble();
+        _getRandomRange(_despawnTimeoutRanges).toDouble();
+    wave.offsets[ci] = _getRandomRange(_offsetRanges).toDouble();
+    wave.speeds[ci] = _getRandomRange(_speedRanges).toDouble();
+    wave.finalAmplitudes[ci] = _getRandomRange(_amplitudeRanges).toDouble();
+    wave.widths[ci] = _getRandomRange(_widthRanges).toDouble();
     wave.verses[ci] = _getRandomRange([-1, 1]).toDouble();
   }
 
@@ -85,7 +85,7 @@ class IOS9SiriWavePainter extends CustomPainter {
   void _spawn(String key) {
     final wave = _waves[key]!;
     wave.spawnAt = DateTime.now().millisecondsSinceEpoch;
-    wave.noOfCurves = _getRandomRange(_kNoOfCurvesRanges).floor();
+    wave.noOfCurves = _getRandomRange(_noOfCurvesRanges).floor();
 
     wave.amplitudes = _getEmptyArray(wave.noOfCurves);
     wave.despawnTimeouts = _getEmptyArray(wave.noOfCurves);
@@ -102,8 +102,8 @@ class IOS9SiriWavePainter extends CustomPainter {
   }
 
   num _globalAttenuationFactor(double x) => math.pow(
-      _kAttenuationFactor / (_kAttenuationFactor + math.pow(x, 2)),
-      _kAttenuationFactor);
+      _attenuationFactor / (_attenuationFactor + math.pow(x, 2)),
+      _attenuationFactor);
 
   num _sin(double x, double phase) => math.sin(x - phase);
 
@@ -130,14 +130,14 @@ class IOS9SiriWavePainter extends CustomPainter {
     return y / wave.noOfCurves;
   }
 
-  double _yPos(double i, String key, double maxHeight) => (_kAmplitudeFactor *
+  double _yPos(double i, String key, double maxHeight) => (_amplitudeFactor *
       maxHeight *
       amplitude *
       _yRelativePos(i, key) *
-      _globalAttenuationFactor((i / _kGraphX) * 2));
+      _globalAttenuationFactor((i / _graphX) * 2));
 
   double _xPos(double i, double width) =>
-      width * ((i + _kGraphX) / (_kGraphX * 2));
+      width * ((i + _graphX) / (_graphX * 2));
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -152,15 +152,15 @@ class IOS9SiriWavePainter extends CustomPainter {
       for (int ci = 0; ci < wave.noOfCurves; ci++) {
         if (wave.spawnAt + wave.despawnTimeouts[ci] <=
             DateTime.now().millisecondsSinceEpoch) {
-          wave.amplitudes[ci] -= _kDespawnFactor;
+          wave.amplitudes[ci] -= _despawnFactor;
         } else {
-          wave.amplitudes[ci] += _kDespawnFactor;
+          wave.amplitudes[ci] += _despawnFactor;
         }
 
         wave.amplitudes[ci] = math.min(
             math.max(wave.amplitudes[ci], 0), wave.finalAmplitudes[ci]);
         wave.phases[ci] =
-            (wave.phases[ci] + speed * wave.speeds[ci] * _kSpeedFactor) %
+            (wave.phases[ci] + speed * wave.speeds[ci] * _speedFactor) %
                 (2 * math.pi);
       }
 
@@ -171,7 +171,7 @@ class IOS9SiriWavePainter extends CustomPainter {
       for (final sign in [1, -1]) {
         final path = Path();
         path.moveTo(0, maxHeight);
-        for (double i = -_kGraphX; i <= _kGraphX; i += _kPixelDepth) {
+        for (double i = -_graphX; i <= _graphX; i += _pixelDepth) {
           final x = _xPos(i, size.width);
           final y = _yPos(i, entry.key, maxHeight);
           path.lineTo(x, maxHeight - sign * y);
@@ -187,7 +187,7 @@ class IOS9SiriWavePainter extends CustomPainter {
         canvas.drawPath(path, paint);
       }
 
-      if (maxY < _kDeadPixel && wave.prevMaxY >= maxY) {
+      if (maxY < _deadPixel && wave.prevMaxY >= maxY) {
         wave.spawnAt = 0;
       }
 

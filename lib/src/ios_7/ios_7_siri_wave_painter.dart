@@ -30,29 +30,29 @@ class IOS7SiriWavePainter extends CustomPainter {
   final AnimationController controller;
   final int frequency;
 
-  static const double _kAmplitudeFactor = .6;
-  static const int _kAttenuationFactor = 4;
-  static const _kCurves = [
+  static const double _amplitudeFactor = .6;
+  static const int _attenuationFactor = 4;
+  static const _curves = [
     _IOS7SiriWaveCurve(attenuation: -2, lineWidth: 1, opacity: .1),
     _IOS7SiriWaveCurve(attenuation: -6, lineWidth: 1, opacity: .2),
     _IOS7SiriWaveCurve(attenuation: 4, lineWidth: 1, opacity: .4),
     _IOS7SiriWaveCurve(attenuation: 2, lineWidth: 1, opacity: .6),
     _IOS7SiriWaveCurve(attenuation: 1, lineWidth: 1.5, opacity: 1),
   ];
-  static const double _kGraphX = 2;
-  static const double _kPixelDepth = .02;
-  static const _kWaveColor = Color(0xFFFFFFFF);
+  static const double _graphX = 2;
+  static const double _pixelDepth = .02;
+  static const _waveColor = Color(0xFFFFFFFF);
 
   num _globalAttenuationFactor(num x) => math.pow(
-      _kAttenuationFactor /
-          (_kAttenuationFactor + math.pow(x, _kAttenuationFactor)),
-      _kAttenuationFactor);
+      _attenuationFactor /
+          (_attenuationFactor + math.pow(x, _attenuationFactor)),
+      _attenuationFactor);
 
   double _xPos(double i, Size size) =>
-      size.width * ((i + _kGraphX) / (_kGraphX * 2));
+      size.width * ((i + _graphX) / (_graphX * 2));
 
   double _yPos(double i, double attenuation, double maxHeight) =>
-      (_kAmplitudeFactor *
+      (_amplitudeFactor *
           (_globalAttenuationFactor(i) *
               (maxHeight * amplitude) *
               (1 / attenuation) *
@@ -62,18 +62,18 @@ class IOS7SiriWavePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final maxHeight = size.height / 2;
 
-    for (var curve in _kCurves) {
+    for (var curve in _curves) {
       final Path path = Path();
       path.moveTo(0, maxHeight);
       // Cycle the graph from -X to +X every pixelDepth and draw the line
-      for (var i = -_kGraphX; i <= _kGraphX; i += _kPixelDepth) {
+      for (var i = -_graphX; i <= _graphX; i += _pixelDepth) {
         final x = _xPos(i, size);
         final y = maxHeight + _yPos(i, curve.attenuation, maxHeight);
         path.lineTo(x, y);
       }
 
       final paint = Paint()
-        ..color = _kWaveColor.withOpacity(curve.opacity)
+        ..color = _waveColor.withOpacity(curve.opacity)
         ..strokeWidth = curve.lineWidth
         ..style = PaintingStyle.stroke;
       canvas.drawPath(path, paint);
