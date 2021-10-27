@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
+import 'ios7_options.dart';
 import 'ios_7_siri_wave_painter.dart';
 
 class IOS7SiriWave extends StatefulWidget {
   const IOS7SiriWave({
     Key? key,
-    required this.amplitude,
     this.frequency = 6,
+    required this.options,
     this.speed = .2,
-  })  : assert(amplitude >= 0 && amplitude <= 1),
-        assert(speed >= 0 && speed <= 1),
+  })  : assert(speed >= 0 && speed <= 1),
         super(key: key);
 
-  final double amplitude;
   final int frequency;
+  final IOS7Options options;
   final double speed;
 
   @override
@@ -33,7 +33,7 @@ class _IOS7SiriWaveState extends State<IOS7SiriWave>
       upperBound: 6,
     );
 
-    if (widget.amplitude > 0 && widget.speed > 0) {
+    if (widget.options.amplitude > 0 && widget.speed > 0) {
       // We have to manually use the forward() to repeat the animation because
       // there is an issue with using repeat().
       // See https://github.com/flutter/flutter/issues/67507
@@ -51,10 +51,10 @@ class _IOS7SiriWaveState extends State<IOS7SiriWave>
   void didUpdateWidget(covariant IOS7SiriWave oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (_controller.isAnimating &&
-        (widget.amplitude == 0 || widget.speed == 0)) {
+        (widget.options.amplitude == 0 || widget.speed == 0)) {
       _controller.stop(canceled: false);
     } else if (!_controller.isAnimating &&
-        (widget.amplitude > 0 && widget.speed > 0)) {
+        (widget.options.amplitude > 0 && widget.speed > 0)) {
       _controller.forward(from: 0);
     }
   }
@@ -69,9 +69,9 @@ class _IOS7SiriWaveState extends State<IOS7SiriWave>
   Widget build(BuildContext context) {
     final customPaint = CustomPaint(
       painter: IOS7SiriWavePainter(
-        amplitude: widget.amplitude,
         controller: _controller,
         frequency: widget.frequency,
+        options: widget.options,
       ),
     );
 

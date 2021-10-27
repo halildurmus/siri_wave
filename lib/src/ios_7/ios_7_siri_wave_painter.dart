@@ -3,6 +3,8 @@ import 'dart:math' as math;
 import 'package:flutter/animation.dart' show AnimationController;
 import 'package:flutter/rendering.dart';
 
+import 'ios7_options.dart';
+
 class _IOS7SiriWaveCurve {
   const _IOS7SiriWaveCurve({
     required this.attenuation,
@@ -21,14 +23,14 @@ class _IOS7SiriWaveCurve {
 
 class IOS7SiriWavePainter extends CustomPainter {
   IOS7SiriWavePainter({
-    required this.amplitude,
     required this.controller,
     required this.frequency,
+    required this.options,
   }) : super(repaint: controller);
 
-  final double amplitude;
   final AnimationController controller;
   final int frequency;
+  final IOS7Options options;
 
   static const double _amplitudeFactor = .6;
   static const int _attenuationFactor = 4;
@@ -54,7 +56,7 @@ class IOS7SiriWavePainter extends CustomPainter {
   double _yPos(double i, double attenuation, double maxHeight) =>
       (_amplitudeFactor *
           (_globalAttenuationFactor(i) *
-              (maxHeight * amplitude) *
+              (maxHeight * options.amplitude) *
               (1 / attenuation) *
               math.sin(frequency * i - controller.value)));
 
@@ -82,5 +84,6 @@ class IOS7SiriWavePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(IOS7SiriWavePainter oldDelegate) =>
-      oldDelegate.amplitude != amplitude || oldDelegate.frequency != frequency;
+      oldDelegate.options.amplitude != options.amplitude ||
+      oldDelegate.frequency != frequency;
 }

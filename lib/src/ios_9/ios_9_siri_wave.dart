@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'ios9_options.dart';
 import 'ios_9_siri_wave_painter.dart';
 import 'support_line_painter.dart';
 
 class IOS9SiriWave extends StatefulWidget {
   const IOS9SiriWave({
     Key? key,
-    required this.amplitude,
+    required this.options,
     this.speed = .2,
-  })  : assert(amplitude >= 0 && amplitude <= 1),
-        assert(speed >= 0 && speed <= 1),
+  })  : assert(speed >= 0 && speed <= 1),
         super(key: key);
 
-  final double amplitude;
+  final IOS9Options options;
   final double speed;
 
   @override
@@ -31,7 +31,7 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
       // the duration value does not have any affect on the animation.
       duration: const Duration(seconds: 1),
     );
-    if (widget.amplitude > 0 && widget.speed > 0) {
+    if (widget.options.amplitude > 0 && widget.speed > 0) {
       _animationController.repeat();
     }
     super.initState();
@@ -41,10 +41,10 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
   void didUpdateWidget(covariant IOS9SiriWave oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (_animationController.isAnimating &&
-        (widget.amplitude == 0 || widget.speed == 0)) {
+        (widget.options.amplitude == 0 || widget.speed == 0)) {
       _animationController.stop(canceled: false);
     } else if (!_animationController.isAnimating &&
-        (widget.amplitude > 0 || widget.speed > 0)) {
+        (widget.options.amplitude > 0 || widget.speed > 0)) {
       _animationController.repeat();
     }
   }
@@ -59,15 +59,15 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
   Widget build(BuildContext context) {
     const supportLinePainter = SupportLinePainter();
     final wavePainter = IOS9SiriWavePainter(
-      amplitude: widget.amplitude,
       controller: _animationController,
+      options: widget.options,
       speed: widget.speed,
     );
 
     return AnimatedBuilder(
       animation: _animationController,
       builder: (_, __) {
-        final shouldPaint = widget.amplitude > 0 && widget.speed > 0;
+        final shouldPaint = widget.options.amplitude > 0 && widget.speed > 0;
 
         return CustomPaint(
           painter: supportLinePainter,

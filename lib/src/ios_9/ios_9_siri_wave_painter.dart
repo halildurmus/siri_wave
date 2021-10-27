@@ -3,6 +3,8 @@ import 'dart:math' as math;
 import 'package:flutter/animation.dart' show AnimationController;
 import 'package:flutter/rendering.dart';
 
+import 'ios9_options.dart';
+
 class _IOS9SiriWave {
   _IOS9SiriWave({required this.color});
 
@@ -27,15 +29,14 @@ class _IOS9SiriWave {
 
 class IOS9SiriWavePainter extends CustomPainter {
   IOS9SiriWavePainter({
-    required this.amplitude,
     required this.controller,
+    required this.options,
     required this.speed,
-  })  : assert(amplitude >= 0 && amplitude <= 1),
-        assert(speed >= 0 && speed <= 1),
+  })  : assert(speed >= 0 && speed <= 1),
         super(repaint: controller);
 
-  final double amplitude;
   final AnimationController controller;
+  final IOS9Options options;
   final double speed;
 
   static const double _amplitudeFactor = .8;
@@ -132,7 +133,7 @@ class IOS9SiriWavePainter extends CustomPainter {
 
   double _yPos(double i, String key, double maxHeight) => (_amplitudeFactor *
       maxHeight *
-      amplitude *
+      options.amplitude *
       _yRelativePos(i, key) *
       _globalAttenuationFactor((i / _graphX) * 2));
 
@@ -197,5 +198,6 @@ class IOS9SiriWavePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(IOS9SiriWavePainter oldDelegate) =>
-      oldDelegate.amplitude != amplitude || oldDelegate.speed != speed;
+      oldDelegate.options.amplitude != options.amplitude ||
+      oldDelegate.speed != speed;
 }
