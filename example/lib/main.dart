@@ -86,8 +86,8 @@ class _HomePageState extends State<HomePage> {
   Widget _buildSiriWave() {
     return SiriWave(
       options: SiriWaveOptions(
-        ios7options: IOS7Options(amplitude: _amplitude),
-        ios9options: IOS9Options(amplitude: _amplitude),
+        ios7Options: IOS7Options(amplitude: _amplitude),
+        ios9Options: IOS9Options(amplitude: _amplitude),
       ),
       siriWaveStyle: _isSelected[0] ? SiriWaveStyle.ios_7 : SiriWaveStyle.ios_9,
     );

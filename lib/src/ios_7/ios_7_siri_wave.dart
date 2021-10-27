@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'ios7_options.dart';
+import 'ios_7_options.dart';
 import 'ios_7_siri_wave_painter.dart';
 
 class IOS7SiriWave extends StatefulWidget {

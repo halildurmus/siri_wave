@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/animation.dart' show AnimationController;
 import 'package:flutter/rendering.dart';
 
-import 'ios9_options.dart';
+import 'ios_9_options.dart';
 
 class _IOS9SiriWave {
   _IOS9SiriWave({required this.color});

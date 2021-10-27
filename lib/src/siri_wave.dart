@@ -23,8 +23,8 @@ class SiriWave extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(color: options.backgroundColor),
         child: siriWaveStyle == SiriWaveStyle.ios_7
-            ? IOS7SiriWave(options: options.ios7options)
-            : IOS9SiriWave(options: options.ios9options),
+            ? IOS7SiriWave(options: options.ios7Options)
+            : IOS9SiriWave(options: options.ios9Options),
       ),
     );
   }

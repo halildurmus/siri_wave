@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/animation.dart' show AnimationController;
 import 'package:flutter/rendering.dart';
 
-import 'ios7_options.dart';
+import 'ios_7_options.dart';
 
 class _IOS7SiriWaveCurve {
   const _IOS7SiriWaveCurve({
