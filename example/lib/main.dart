@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
         ios7options: IOS7Options(amplitude: _amplitude),
         ios9options: IOS9Options(amplitude: _amplitude),
       ),
-      siriWaveStyle: _isSelected[0] ? SiriWaveStyle.ios7 : SiriWaveStyle.ios9,
+      siriWaveStyle: _isSelected[0] ? SiriWaveStyle.ios_7 : SiriWaveStyle.ios_9,
     );
   }
 

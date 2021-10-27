@@ -1,1 +1,1 @@
-enum SiriWaveStyle { ios7, ios9 }
+enum SiriWaveStyle { ios_7, ios_9 }
