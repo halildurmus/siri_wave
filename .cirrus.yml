@@ -1,0 +1,35 @@
+task:
+  name: Run analyzer
+  container:
+    image: cirrusci/flutter:stable
+  pub_cache:
+    folder: ~/.pub-cache
+  analyze_script: flutter analyze
+  
+task:
+  name: Run tests
+  container:
+    image: cirrusci/flutter:stable
+  pub_cache:
+    folder: ~/.pub-cache
+  test_script: flutter test
+      
+task:
+  name: Build example app (Android)
+  container:
+    image: cirrusci/flutter:stable
+  pub_cache:
+    folder: ~/.pub-cache
+  build_script:
+    - cd example
+    - flutter build apk --debug
+
+task:
+  name: Build example app (iOS)
+  osx_instance:
+    image: big-sur-xcode-13
+  pub_cache:
+    folder: ~/.pub-cache
+  build_script:
+    - cd example
+    - flutter build ios --no-codesign --debug
