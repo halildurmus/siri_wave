@@ -19,9 +19,11 @@ void main() {
           ),
         ),
       );
+
       // Find the IOS9SiriWave widget.
       final ios9SiriWave =
           tester.firstWidget<IOS9SiriWave>(find.byType(IOS9SiriWave));
+
       expect(ios9SiriWave.options.amplitude, 1);
       expect(ios9SiriWave.speed, .2);
     });
@@ -39,6 +41,7 @@ void main() {
           ),
         ),
       );
+
       // Find the CustomPaint widget.
       final customPaint = tester.firstWidget<CustomPaint>(
         find.descendant(
@@ -46,6 +49,7 @@ void main() {
           matching: find.byType(CustomPaint),
         ),
       );
+
       expect(customPaint.painter, isA<SupportLinePainter>());
       expect(customPaint.foregroundPainter, isA<IOS9SiriWavePainter>());
     });
@@ -63,6 +67,7 @@ void main() {
           ),
         ),
       );
+
       // Find the CustomPaint widget.
       final customPaint = tester.firstWidget<CustomPaint>(
         find.descendant(
@@ -70,6 +75,7 @@ void main() {
           matching: find.byType(CustomPaint),
         ),
       );
+      
       expect(customPaint.painter, isA<SupportLinePainter>());
       expect(customPaint.foregroundPainter, null);
     });

@@ -16,14 +16,18 @@ void main() {
           ),
         ),
       );
+
       // Find the SizedBox widget.
       final sizedBox = tester.firstWidget<SizedBox>(find.byType(SizedBox));
+
       expect(sizedBox.height, 180);
       expect(sizedBox.width, 360);
+
       // Find the BoxDecoration widget.
       final boxDecoration =
           (tester.firstWidget<DecoratedBox>(find.byType(DecoratedBox)))
               .decoration as BoxDecoration;
+
       expect(boxDecoration.color, Colors.black);
     });
 
@@ -37,6 +41,7 @@ void main() {
           ),
         ),
       );
+
       // The IOS9SiriWave should exist in the widget tree.
       expect(find.byType(IOS9SiriWave), findsOneWidget);
     });
@@ -54,6 +59,7 @@ void main() {
           ),
         ),
       );
+      
       // The IOS7SiriWave should exist in the widget tree.
       expect(find.byType(IOS7SiriWave), findsOneWidget);
     });

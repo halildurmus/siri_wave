@@ -16,9 +16,11 @@ void main() {
           ),
         ),
       );
+
       // Find the IOS7SiriWave widget.
       final ios7SiriWave =
           tester.firstWidget<IOS7SiriWave>(find.byType(IOS7SiriWave));
+          
       expect(ios7SiriWave.frequency, 6);
       expect(ios7SiriWave.options.amplitude, 1);
       expect(ios7SiriWave.speed, .2);
@@ -36,6 +38,7 @@ void main() {
           ),
         ),
       );
+
       // Find the CustomPaint widget.
       final customPaint = tester.firstWidget<CustomPaint>(
         find.descendant(
@@ -43,6 +46,7 @@ void main() {
           matching: find.byType(CustomPaint),
         ),
       );
+
       expect(customPaint.painter, isA<IOS7SiriWavePainter>());
     });
   });
