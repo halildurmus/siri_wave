@@ -17,4 +17,5 @@ jobs:
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
           baseHref: /siri_wave/
+          webRenderer: canvaskit
           workingDir: example
