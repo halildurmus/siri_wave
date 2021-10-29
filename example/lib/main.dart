@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildDivider() {
     return SizedBox(
-      width: 360,
+      width: kIsWeb ? 600 : 360,
       child: Divider(
         color: Theme.of(context).colorScheme.primary,
         thickness: 1,
@@ -86,10 +86,34 @@ class _HomePageState extends State<HomePage> {
   Widget _buildSiriWave() {
     return SiriWave(
       options: SiriWaveOptions(
+        height: 300,
         ios7Options: IOS7Options(amplitude: _amplitude),
         ios9Options: IOS9Options(amplitude: _amplitude),
+        width: 600,
       ),
       siriWaveStyle: _isSelected[0] ? SiriWaveStyle.ios_7 : SiriWaveStyle.ios_9,
+    );
+  }
+
+  Widget _buildBody() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (!kIsWeb) const Spacer(),
+          Text('Amplitude', style: Theme.of(context).textTheme.headline6),
+          const SizedBox(height: 10),
+          _buildSlider(),
+          const SizedBox(height: 10),
+          Text('Style', style: Theme.of(context).textTheme.headline6),
+          const SizedBox(height: 30),
+          _buildToggleButtons(),
+          if (kIsWeb) const SizedBox(height: 150) else const Spacer(),
+          _buildDivider(),
+          _buildSiriWave(),
+          _buildDivider(),
+        ],
+      ),
     );
   }
 
@@ -101,25 +125,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Siri Wave Demo'),
       ),
       backgroundColor: Colors.black,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Spacer(),
-            Text('Amplitude', style: Theme.of(context).textTheme.headline6),
-            const SizedBox(height: 10),
-            _buildSlider(),
-            const SizedBox(height: 10),
-            Text('Style', style: Theme.of(context).textTheme.headline6),
-            const SizedBox(height: 30),
-            _buildToggleButtons(),
-            const Spacer(),
-            _buildDivider(),
-            _buildSiriWave(),
-            _buildDivider(),
-          ],
-        ),
-      ),
+      body: _buildBody(),
     );
   }
 }
