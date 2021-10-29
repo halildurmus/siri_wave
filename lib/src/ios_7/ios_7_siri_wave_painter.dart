@@ -8,17 +8,17 @@ import 'ios_7_options.dart';
 class _IOS7SiriWaveCurve {
   const _IOS7SiriWaveCurve({
     required this.attenuation,
-    required this.lineWidth,
+    required this.width,
     required this.opacity,
   });
 
   final double attenuation;
-  final double lineWidth;
+  final double width;
   final double opacity;
 
   @override
   String toString() =>
-      '_IOS7SiriWaveCurve(attenuation: $attenuation, lineWidth: $lineWidth, opacity: $opacity)';
+      '_IOS7SiriWaveCurve(attenuation: $attenuation, lineWidth: $width, opacity: $opacity)';
 }
 
 class IOS7SiriWavePainter extends CustomPainter {
@@ -35,11 +35,11 @@ class IOS7SiriWavePainter extends CustomPainter {
   static const double _amplitudeFactor = .6;
   static const int _attenuationFactor = 4;
   static const _curves = [
-    _IOS7SiriWaveCurve(attenuation: -2, lineWidth: 1, opacity: .1),
-    _IOS7SiriWaveCurve(attenuation: -6, lineWidth: 1, opacity: .2),
-    _IOS7SiriWaveCurve(attenuation: 4, lineWidth: 1, opacity: .4),
-    _IOS7SiriWaveCurve(attenuation: 2, lineWidth: 1, opacity: .6),
-    _IOS7SiriWaveCurve(attenuation: 1, lineWidth: 1.5, opacity: 1),
+    _IOS7SiriWaveCurve(attenuation: -2, width: 1, opacity: .1),
+    _IOS7SiriWaveCurve(attenuation: -6, width: 1, opacity: .2),
+    _IOS7SiriWaveCurve(attenuation: 4, width: 1, opacity: .4),
+    _IOS7SiriWaveCurve(attenuation: 2, width: 1, opacity: .6),
+    _IOS7SiriWaveCurve(attenuation: 1, width: 1.5, opacity: 1),
   ];
   static const double _graphX = 2;
   static const double _pixelDepth = .02;
@@ -76,7 +76,7 @@ class IOS7SiriWavePainter extends CustomPainter {
 
       final paint = Paint()
         ..color = _waveColor.withOpacity(curve.opacity)
-        ..strokeWidth = curve.lineWidth
+        ..strokeWidth = curve.width
         ..style = PaintingStyle.stroke;
       canvas.drawPath(path, paint);
     }
