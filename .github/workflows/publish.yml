@@ -1,8 +1,9 @@
 name: Publish to GitHub Pages
 
 on:
-  push:
-    branches: [ main ]
+  release:
+    types:
+      - created
 
 jobs:
   build:
