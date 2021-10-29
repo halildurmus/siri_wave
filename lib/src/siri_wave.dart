@@ -6,13 +6,24 @@ import 'models/siri_wave_options.dart';
 import 'models/siri_wave_style.dart';
 
 class SiriWave extends StatelessWidget {
+  /// Creates a Siri style waveform.
+  ///
+  /// The dimensions of the waveform can be configured with [options] or
+  /// wrapping the [SiriWave] with a [SizedBox] or [Container] or any other
+  /// widget that constraints it's child.
+  ///
+  /// The style of the waveform can be configured with [siriWaveStyle].
+  /// By default, iOS 9 Siri style waveform is shown.
   const SiriWave({
     Key? key,
     this.options = const SiriWaveOptions(),
     this.siriWaveStyle = SiriWaveStyle.ios_9,
-  })  : super(key: key);
+  }) : super(key: key);
 
+  /// See [SiriWaveStyle].
   final SiriWaveStyle siriWaveStyle;
+
+  /// See [SiriWaveOptions].
   final SiriWaveOptions options;
 
   @override
