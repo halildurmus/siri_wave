@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 
 import 'ios_9_options.dart';
 
+// Describes the curve properties will be used by `IOS7SiriWavePainter`.
 class _IOS9SiriWave {
   _IOS9SiriWave({required this.color});
 

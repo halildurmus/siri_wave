@@ -34,8 +34,8 @@ class _IOS7SiriWaveState extends State<IOS7SiriWave>
     );
 
     if (widget.options.amplitude > 0 && widget.speed > 0) {
-      // We have to manually use the forward() to repeat the animation because
-      // there is an issue with using repeat().
+      // We have to use the forward() to repeat the animation because there is
+      // an issue with using repeat().
       // See https://github.com/flutter/flutter/issues/67507
       _controller.addStatusListener((status) {
         if (status == AnimationStatus.completed) {
