@@ -20,7 +20,7 @@ void main() {
       // Find the IOS7SiriWave widget.
       final ios7SiriWave =
           tester.firstWidget<IOS7SiriWave>(find.byType(IOS7SiriWave));
-          
+
       expect(ios7SiriWave.frequency, 6);
       expect(ios7SiriWave.options.amplitude, 1);
       expect(ios7SiriWave.speed, .2);

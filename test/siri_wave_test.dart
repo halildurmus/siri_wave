@@ -59,7 +59,7 @@ void main() {
           ),
         ),
       );
-      
+
       // The IOS7SiriWave should exist in the widget tree.
       expect(find.byType(IOS7SiriWave), findsOneWidget);
     });

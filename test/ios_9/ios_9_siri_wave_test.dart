@@ -75,7 +75,7 @@ void main() {
           matching: find.byType(CustomPaint),
         ),
       );
-      
+
       expect(customPaint.painter, isA<SupportLinePainter>());
       expect(customPaint.foregroundPainter, null);
     });
