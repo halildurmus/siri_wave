@@ -5,7 +5,7 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/halildurmus/hotdeals-app?style=for-the-badge)
 [![CirrusCI](https://img.shields.io/cirrus/github/halildurmus/siri_wave?style=for-the-badge)](https://cirrus-ci.com/halildurmus/siri_wave)
 [![CodeFactor](https://www.codefactor.io/repository/github/halildurmus/siri_wave/badge?style=for-the-badge)](https://www.codefactor.io/repository/github/halildurmus/siri_wave)
-![Visits](https://badges.pufler.dev/visits/halildurmus/hotdeals-app?style=for-the-badge)
+![Visits](https://badges.pufler.dev/visits/halildurmus/siri_wave?style=for-the-badge)
 
 > A Flutter package to create waveforms like in *Siri*. It was inspired from the [siriwave](https://github.com/kopiro/siriwave) library.
 
