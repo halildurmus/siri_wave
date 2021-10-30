@@ -7,7 +7,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/halildurmus/siri_wave/badge?style=for-the-badge)](https://www.codefactor.io/repository/github/halildurmus/siri_wave)
 ![Visits](https://badges.pufler.dev/visits/halildurmus/siri_wave?style=for-the-badge)
 
-> A Flutter package to create waveforms like in *Siri*. It was inspired from the [siriwave](https://github.com/kopiro/siriwave) library.
+> A Flutter package to create beautiful waveforms like in *Siri*. It was inspired from the [siriwave](https://github.com/kopiro/siriwave) library.
 
 ## Demo
 
