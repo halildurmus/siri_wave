@@ -1,7 +1,8 @@
 name: siri_wave
 description: A new Flutter package project.
 version: 0.0.1
-homepage:
+homepage: https://pub.dev/packages/siri_wave
+repository: https://github.com/halildurmus/siri_wave
 
 environment:
   sdk: ">=2.14.0 <3.0.0"
