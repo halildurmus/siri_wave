@@ -5,7 +5,7 @@ _See also: [SiriWave's code of conduct](https://github.com/halildurmus/siri_wave
 :+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
 
 
-The following is a guideline for contributing to <b>BMI Calculator</b>. These are mostly guidelines, not rules. 
+The following is a guideline for contributing to <b>BMI Calculator</b>. These are mostly guidelines, not rules.
 Use your best judgment, and feel free to propose changes to this document in a pull request.
 
 ## Getting Started
@@ -21,7 +21,7 @@ Follow these steps to clone <b>SiriWave</b> and set up the development environme
 
 ### File an issue first!
 
-If the work you intend to do is non-trivial, **it is necessary to [file an issue](https://github.com/halildurmus/siri_wave/issues/new/choose) before starting writing your code**. 
+If the work you intend to do is non-trivial, **it is necessary to [file an issue](https://github.com/halildurmus/siri_wave/issues/new/choose) before starting writing your code**.
 This helps us and the community to discuss the issue and choose what is deemed to be the best solution.
 
 ### Checking your code's quality
@@ -30,10 +30,10 @@ After you have made your changes, you have to make sure your code works correctl
 - Make sure the code passes the tests. To run tests, run `flutter test`.
 - Make sure to run `flutter analyze` and resolve any warnings or errors.
 - The code should be formatted correctly. To format your code you can run this command inside the project from the command line: `flutter format`.
-  
+
 ## Creating a Pull Request
 
-Congratulations! Your code meets all of our guidelines :100:. Now you have to submit a pull request (or PR for short) to us. 
+Congratulations! Your code meets all of our guidelines :100:. Now you have to submit a pull request (or PR for short) to us.
 
 These are the steps you should follow when creating a PR:
 - Make a descriptive title that summarizes what changes were in the PR.
