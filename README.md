@@ -40,38 +40,53 @@ class MyWidget extends StatelessWidget {
   }
 }
 ```
-You can use `options` and `siriWaveStyle` parameters to customize the `SiriWave`.
+
+To be able to change the amplitude and speed of the waveform, create a `SiriWaveController` and pass it to the `SiriWave` widget:
+
+```dart
+// You can change the default `amplitude` and `speed values` while creating the controller.
+final controller = SiriWaveController();
+
+SiriWave(controller: controller);
+```
+
+And then call `setAmplitude` or `setSpeed` methods in the controller.
+
+```dart
+controller.setAmplitude(0.8);
+controller.setSpeed(0.1);
+```
 
 See the [example](https://github.com/halildurmus/siri_wave/blob/main/example/lib/main.dart) directory for a complete sample app.
 
 ## SiriWave
 
-| Parameter              | Type               | Description                                                            | Default    | Required |
-| ----------------- | ------------------ | ---------------------------------------------------------------------- | ---------- | -------- |
-| `options`       | SiriWaveOptions         | The configuration of the SiriWave.           | SiriWaveOptions()       | no      |
-| `style`       | SiriWaveStyle        | The wave style of the SiriWave.           | SiriWaveStyle.ios_9       | no      |
+| Parameter    | Type                | Description                               | Default                 |
+| ------------ | ------------------- | ----------------------------------------- | ----------------------- |
+| `controller` | SiriWaveController  | The controller of the SiriWave.           | SiriWaveController()    |
+| `options`    | SiriWaveOptions     | The configuration of the SiriWave.        | SiriWaveOptions()       |
+| `style`      | SiriWaveStyle       | The wave style of the SiriWave.           | SiriWaveStyle.ios_9     |
+
+
+## SiriWaveController
+
+| Parameter    | Type     | Description                       | Default |
+| ------------ | -------- | --------------------------------- | ------- |
+| `amplitude`  | double   | The amplitude of the waveform.    | 1.0     |
+| `speed`      | double   | The speed of the waveform.        | 0.2     |
+
+| Function                      | Description                                                                |
+| ----------------------------- | -------------------------------------------------------------------------- |
+| `setAmplitude(double value)`  | Sets the amplitude of the waveform. The value must be in the [0,1] range.  |
+| `setSpeed(double value)`      | Sets the speed of the waveform. The value must be in the [0,1] range       |
 
 ## SiriWaveOptions
 
-| Parameter               | Type               | Description                                                            | Default    | Required |
-| ----------------- | ------------------ | ---------------------------------------------------------------------- | ---------- | -------- |
-| `backgroundColor`       | Color         | Background color of the waveform.          | Colors.black       | no      |
-| `height`           | double      | The height of the waveform.                                                 | 180      | no       |
-| `ios7Options`           | IOS7Options             | The configuration of the iOS 7 Siri wave style.                    | IOS7Options() | no       |
-| `ios9Options`           | IOS9Options             | The configuration of the iOS 9 Siri wave style.                                            | IOS9Options()        | no       |
-| `width`       | double             | Width of the waveform.                              | 360          | no       |
-
-## IOS7Options
-
-| Parameter              | Type               | Description                                                            | Default    | Required |
-| ----------------- | ------------------ | ---------------------------------------------------------------------- | ---------- | -------- |
-| `amplitude`       | double         | Amplitude of the waveform. Must be in [0,1] range.           | 1       | no      |
-
-## IOS9Options
-
-| Parameter               | Type               | Description                                                            | Default    | Required |
-| ----------------- | ------------------ | ---------------------------------------------------------------------- | ---------- | -------- |
-| `amplitude`       | double         | Amplitude of the waveform. Must be in [0,1] range.         | 1       | no      |
+| Parameter          | Type     | Description                              | Default       |
+| ------------------ | -------- | ---------------------------------------- | ------------- |
+| `backgroundColor`  | Color    | The background color of the waveform.    | Colors.black  |
+| `height`           | double   | The height of the waveform.              | 180           |
+| `width`            | double   | The width of the waveform.               | 360           |
 
 ## 🤝 Contributing
 
