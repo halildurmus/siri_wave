@@ -10,7 +10,7 @@ void main() {
         (WidgetTester tester) async {
       // Build the SiriWave widget.
       await tester.pumpWidget(
-        const MaterialApp(
+        MaterialApp(
           home: Material(
             child: SiriWave(),
           ),
@@ -35,7 +35,7 @@ void main() {
         (WidgetTester tester) async {
       // Build the SiriWave widget.
       await tester.pumpWidget(
-        const MaterialApp(
+        MaterialApp(
           home: Material(
             child: SiriWave(),
           ),
@@ -51,10 +51,10 @@ void main() {
         (WidgetTester tester) async {
       // Build the SiriWave widget.
       await tester.pumpWidget(
-        const MaterialApp(
+        MaterialApp(
           home: Material(
             child: SiriWave(
-              siriWaveStyle: SiriWaveStyle.ios_7,
+              style: SiriWaveStyle.ios_7,
             ),
           ),
         ),

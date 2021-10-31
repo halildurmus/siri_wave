@@ -10,9 +10,11 @@ void main() {
         (WidgetTester tester) async {
       // Build the SiriWave widget.
       await tester.pumpWidget(
-        const MaterialApp(
+        MaterialApp(
           home: Material(
-            child: IOS7SiriWave(options: IOS7Options()),
+            child: IOS7SiriWave(
+              controller: SiriWaveController(),
+            ),
           ),
         ),
       );
@@ -22,18 +24,18 @@ void main() {
           tester.firstWidget<IOS7SiriWave>(find.byType(IOS7SiriWave));
 
       expect(ios7SiriWave.frequency, 6);
-      expect(ios7SiriWave.options.amplitude, 1);
-      expect(ios7SiriWave.speed, .2);
+      expect(ios7SiriWave.controller.amplitude, 1);
+      expect(ios7SiriWave.controller.speed, .2);
     });
 
     testWidgets('widget should paint the canvas with IOS7SiriWavePainter',
         (WidgetTester tester) async {
       // Build the SiriWave widget.
       await tester.pumpWidget(
-        const MaterialApp(
+        MaterialApp(
           home: Material(
             child: IOS7SiriWave(
-              options: IOS7Options(),
+              controller: SiriWaveController(),
             ),
           ),
         ),
