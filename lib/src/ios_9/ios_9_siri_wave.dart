@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'ios_9_options.dart';
+import '../models/siri_wave_controller.dart';
 import 'ios_9_siri_wave_painter.dart';
 import 'support_line_painter.dart';
 
 class IOS9SiriWave extends StatefulWidget {
   const IOS9SiriWave({
     Key? key,
-    required this.options,
-    this.speed = .2,
-  })  : assert(speed >= 0 && speed <= 1),
-        super(key: key);
+    required this.controller,
+  }) : super(key: key);
 
-  final IOS9Options options;
-  final double speed;
+  final SiriWaveController controller;
 
   @override
   _IOS9SiriWaveState createState() => _IOS9SiriWaveState();
@@ -31,7 +28,7 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
       // the duration value does not have any affect on the animation.
       duration: const Duration(seconds: 1),
     );
-    if (widget.options.amplitude > 0 && widget.speed > 0) {
+    if (widget.controller.amplitude > 0 && widget.controller.speed > 0) {
       _animationController.repeat();
     }
     super.initState();
@@ -41,10 +38,10 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
   void didUpdateWidget(covariant IOS9SiriWave oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (_animationController.isAnimating &&
-        (widget.options.amplitude == 0 || widget.speed == 0)) {
+        (widget.controller.amplitude == 0 || widget.controller.speed == 0)) {
       _animationController.stop(canceled: false);
     } else if (!_animationController.isAnimating &&
-        (widget.options.amplitude > 0 || widget.speed > 0)) {
+        (widget.controller.amplitude > 0 || widget.controller.speed > 0)) {
       _animationController.repeat();
     }
   }
@@ -59,21 +56,16 @@ class _IOS9SiriWaveState extends State<IOS9SiriWave>
   Widget build(BuildContext context) {
     const supportLinePainter = SupportLinePainter();
     final wavePainter = IOS9SiriWavePainter(
-      controller: _animationController,
-      options: widget.options,
-      speed: widget.speed,
+      animationController: _animationController,
+      controller: widget.controller,
     );
 
     return AnimatedBuilder(
       animation: _animationController,
-      builder: (_, __) {
-        final shouldPaint = widget.options.amplitude > 0 && widget.speed > 0;
-
-        return CustomPaint(
-          painter: supportLinePainter,
-          foregroundPainter: shouldPaint ? wavePainter : null,
-        );
-      },
+      builder: (_, __) => CustomPaint(
+        painter: supportLinePainter,
+        foregroundPainter: widget.controller.amplitude > 0 ? wavePainter : null,
+      ),
     );
   }
 }

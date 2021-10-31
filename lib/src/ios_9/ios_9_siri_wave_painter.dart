@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/animation.dart' show AnimationController;
 import 'package:flutter/rendering.dart';
 
-import 'ios_9_options.dart';
+import '../models/siri_wave_controller.dart';
 
 // Describes the curve properties will be used by `IOS7SiriWavePainter`.
 class _IOS9SiriWave {
@@ -30,15 +30,12 @@ class _IOS9SiriWave {
 
 class IOS9SiriWavePainter extends CustomPainter {
   IOS9SiriWavePainter({
+    required this.animationController,
     required this.controller,
-    required this.options,
-    required this.speed,
-  })  : assert(speed >= 0 && speed <= 1),
-        super(repaint: controller);
+  }) : super(repaint: animationController);
 
-  final AnimationController controller;
-  final IOS9Options options;
-  final double speed;
+  final AnimationController animationController;
+  final SiriWaveController controller;
 
   static const double _amplitudeFactor = .8;
   static const List<double> _amplitudeRanges = [.3, 1];
@@ -134,7 +131,7 @@ class IOS9SiriWavePainter extends CustomPainter {
 
   double _yPos(double i, String key, double maxHeight) => (_amplitudeFactor *
       maxHeight *
-      options.amplitude *
+      controller.amplitude *
       _yRelativePos(i, key) *
       _globalAttenuationFactor((i / _graphX) * 2));
 
@@ -144,6 +141,9 @@ class IOS9SiriWavePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final maxHeight = size.height / 2;
+
+    // Interpolate amplitude and speed values.
+    controller.lerp();
 
     for (final entry in _waves.entries) {
       final wave = entry.value;
@@ -161,9 +161,9 @@ class IOS9SiriWavePainter extends CustomPainter {
 
         wave.amplitudes[ci] = math.min(
             math.max(wave.amplitudes[ci], 0), wave.finalAmplitudes[ci]);
-        wave.phases[ci] =
-            (wave.phases[ci] + speed * wave.speeds[ci] * _speedFactor) %
-                (2 * math.pi);
+        wave.phases[ci] = (wave.phases[ci] +
+                controller.speed * wave.speeds[ci] * _speedFactor) %
+            (2 * math.pi);
       }
 
       double maxY = double.negativeInfinity;
@@ -199,6 +199,6 @@ class IOS9SiriWavePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(IOS9SiriWavePainter oldDelegate) =>
-      oldDelegate.options.amplitude != options.amplitude ||
-      oldDelegate.speed != speed;
+      oldDelegate.controller.amplitude != controller.amplitude ||
+      oldDelegate.controller.speed != controller.speed;
 }

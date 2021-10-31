@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/animation.dart' show AnimationController;
 import 'package:flutter/rendering.dart';
 
-import 'ios_7_options.dart';
+import '../models/siri_wave_controller.dart';
 
 // Describes the curve properties will be used by `IOS7SiriWavePainter`.
 class _IOS7SiriWaveCurve {
@@ -24,14 +24,14 @@ class _IOS7SiriWaveCurve {
 
 class IOS7SiriWavePainter extends CustomPainter {
   IOS7SiriWavePainter({
+    required this.animationController,
     required this.controller,
     required this.frequency,
-    required this.options,
-  }) : super(repaint: controller);
+  }) : super(repaint: animationController);
 
-  final AnimationController controller;
+  final AnimationController animationController;
+  final SiriWaveController controller;
   final int frequency;
-  final IOS7Options options;
 
   static const double _amplitudeFactor = .6;
   static const int _attenuationFactor = 4;
@@ -46,6 +46,8 @@ class IOS7SiriWavePainter extends CustomPainter {
   static const double _pixelDepth = .02;
   static const _waveColor = Color(0xFFFFFFFF);
 
+  double _phase = 0;
+
   num _globalAttenuationFactor(num x) => math.pow(
       _attenuationFactor /
           (_attenuationFactor + math.pow(x, _attenuationFactor)),
@@ -57,13 +59,16 @@ class IOS7SiriWavePainter extends CustomPainter {
   double _yPos(double i, double attenuation, double maxHeight) =>
       (_amplitudeFactor *
           (_globalAttenuationFactor(i) *
-              (maxHeight * options.amplitude) *
+              (maxHeight * controller.amplitude) *
               (1 / attenuation) *
-              math.sin(frequency * i - controller.value)));
+              math.sin(frequency * i - _phase)));
 
   @override
   void paint(Canvas canvas, Size size) {
     final maxHeight = size.height / 2;
+
+    // Interpolate amplitude and speed values.
+    controller.lerp();
 
     for (var curve in _curves) {
       final Path path = Path();
@@ -81,10 +86,13 @@ class IOS7SiriWavePainter extends CustomPainter {
         ..style = PaintingStyle.stroke;
       canvas.drawPath(path, paint);
     }
+
+    _phase = (_phase + (math.pi / 2) * controller.speed) % (2 * math.pi);
   }
 
   @override
   bool shouldRepaint(IOS7SiriWavePainter oldDelegate) =>
-      oldDelegate.options.amplitude != options.amplitude ||
+      oldDelegate.controller.amplitude != controller.amplitude ||
+      oldDelegate.controller.speed != controller.speed ||
       oldDelegate.frequency != frequency;
 }

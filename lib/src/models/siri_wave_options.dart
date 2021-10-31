@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart' show Color, Colors;
 
-import '../ios_7/ios_7_options.dart';
-import '../ios_9/ios_9_options.dart';
-
-/// Describes the configuration will be used by [SiriWave].
 class SiriWaveOptions {
+  /// Describes the configuration will be used by [SiriWave].
   const SiriWaveOptions({
     this.backgroundColor = Colors.black,
     this.height = 180,
-    this.ios7Options = const IOS7Options(),
-    this.ios9Options = const IOS9Options(),
     this.width = 360,
   });
 
@@ -23,12 +18,6 @@ class SiriWaveOptions {
   /// Defaults to `180`.
   final double height;
 
-  /// See [IOS7Options].
-  final IOS7Options ios7Options;
-
-  /// See [IOS9Options].
-  final IOS9Options ios9Options;
-
   /// Width of the [SiriWave].
   ///
   /// Defaults to `360`.
@@ -36,6 +25,6 @@ class SiriWaveOptions {
 
   @override
   String toString() {
-    return 'SiriWaveOptions(backgroundColor: $backgroundColor, height: $height, ios7Options: $ios7Options, ios9Options: $ios9Options, width: $width)';
+    return 'SiriWaveOptions(backgroundColor: $backgroundColor, height: $height, width: $width)';
   }
 }

@@ -2,40 +2,72 @@ import 'package:flutter/material.dart';
 
 import 'ios_7/ios_7_siri_wave.dart';
 import 'ios_9/ios_9_siri_wave.dart';
+import 'models/siri_wave_controller.dart';
 import 'models/siri_wave_options.dart';
 import 'models/siri_wave_style.dart';
 
-class SiriWave extends StatelessWidget {
+class SiriWave extends StatefulWidget {
   /// Creates a Siri style waveform.
   ///
   /// The dimensions of the waveform can be configured with [options] or
   /// wrapping the [SiriWave] with a [SizedBox] or [Container] or any other
   /// widget that constraints it's child.
   ///
-  /// The style of the waveform can be configured with [siriWaveStyle].
+  /// The style of the waveform can be configured with [style].
   /// By default, iOS 9 Siri style waveform is shown.
-  const SiriWave({
+  SiriWave({
     Key? key,
+    SiriWaveController? controller,
     this.options = const SiriWaveOptions(),
-    this.siriWaveStyle = SiriWaveStyle.ios_9,
-  }) : super(key: key);
+    this.style = SiriWaveStyle.ios_9,
+  }) : super(key: key) {
+    _controller = controller ?? SiriWaveController();
+  }
+
+  /// See [SiriWaveController].
+  late final SiriWaveController _controller;
 
   /// See [SiriWaveStyle].
-  final SiriWaveStyle siriWaveStyle;
+  final SiriWaveStyle style;
 
   /// See [SiriWaveOptions].
   final SiriWaveOptions options;
 
   @override
+  State<SiriWave> createState() => _SiriWaveState();
+}
+
+class _SiriWaveState extends State<SiriWave> {
+  late Widget _siriWave;
+
+  void _setSiriWaveWidget() {
+    _siriWave = widget.style == SiriWaveStyle.ios_7
+        ? IOS7SiriWave(controller: widget._controller)
+        : IOS9SiriWave(controller: widget._controller);
+  }
+
+  @override
+  void initState() {
+    _setSiriWaveWidget();
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant SiriWave oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.style != widget.style) {
+      _setSiriWaveWidget();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: options.height,
-      width: options.width,
+      height: widget.options.height,
+      width: widget.options.width,
       child: DecoratedBox(
-        decoration: BoxDecoration(color: options.backgroundColor),
-        child: siriWaveStyle == SiriWaveStyle.ios_7
-            ? IOS7SiriWave(options: options.ios7Options)
-            : IOS9SiriWave(options: options.ios9Options),
+        decoration: BoxDecoration(color: widget.options.backgroundColor),
+        child: _siriWave,
       ),
     );
   }
