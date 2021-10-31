@@ -6,6 +6,7 @@ import 'models/siri_wave_controller.dart';
 import 'models/siri_wave_options.dart';
 import 'models/siri_wave_style.dart';
 
+/// Displays a Siri style waveform.
 class SiriWave extends StatefulWidget {
   /// Creates a Siri style waveform.
   ///
