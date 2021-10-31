@@ -9,7 +9,9 @@ class SiriWaveController {
   /// A controller for the waveform.
   ///
   /// Controls the `amplitude` and `speed` values of the waveform.
-  SiriWaveController({this.amplitude = 1, this.speed = .2}) {
+  SiriWaveController({this.amplitude = 1, this.speed = .2})
+      : assert(amplitude >= 0 && amplitude <= 1),
+        assert(speed >= 0 && speed <= 1) {
     _interpolation = _Interpolation(amplitude, speed);
   }
 
