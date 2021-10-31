@@ -31,9 +31,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   double _amplitude = 1;
+  double _speed = .2;
   final _isSelected = [false, true];
+  final SiriWaveController _controller = SiriWaveController();
 
-  Widget _buildSlider() {
+  Widget _buildAmplitudeSlider() {
     return SizedBox(
       width: 360,
       child: Slider(
@@ -41,9 +43,25 @@ class _HomePageState extends State<HomePage> {
         min: 0,
         max: 1,
         onChanged: (double value) {
-          setState(() {
-            _amplitude = value;
-          });
+          _controller.setAmplitude(value);
+          _amplitude = value;
+          setState(() {});
+        },
+      ),
+    );
+  }
+
+  Widget _buildSpeedSlider() {
+    return SizedBox(
+      width: 360,
+      child: Slider(
+        value: _speed,
+        min: 0,
+        max: 1,
+        onChanged: (double value) {
+          _controller.setSpeed(value);
+          _speed = value;
+          setState(() {});
         },
       ),
     );
@@ -85,13 +103,12 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildSiriWave() {
     return SiriWave(
-      options: SiriWaveOptions(
+      controller: _controller,
+      options: const SiriWaveOptions(
         height: kIsWeb ? 300 : 180,
-        ios7Options: IOS7Options(amplitude: _amplitude),
-        ios9Options: IOS9Options(amplitude: _amplitude),
         width: kIsWeb ? 600 : 360,
       ),
-      siriWaveStyle: _isSelected[0] ? SiriWaveStyle.ios_7 : SiriWaveStyle.ios_9,
+      style: _isSelected[0] ? SiriWaveStyle.ios_7 : SiriWaveStyle.ios_9,
     );
   }
 
@@ -103,7 +120,11 @@ class _HomePageState extends State<HomePage> {
           if (!kIsWeb) const Spacer(),
           Text('Amplitude', style: Theme.of(context).textTheme.headline6),
           const SizedBox(height: 10),
-          _buildSlider(),
+          _buildAmplitudeSlider(),
+          const SizedBox(height: 10),
+          Text('Speed', style: Theme.of(context).textTheme.headline6),
+          const SizedBox(height: 10),
+          _buildSpeedSlider(),
           const SizedBox(height: 10),
           Text('Style', style: Theme.of(context).textTheme.headline6),
           const SizedBox(height: 30),
