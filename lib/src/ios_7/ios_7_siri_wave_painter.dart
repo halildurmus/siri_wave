@@ -9,29 +9,27 @@ import '../models/siri_wave_controller.dart';
 class _IOS7SiriWaveCurve {
   const _IOS7SiriWaveCurve({
     required this.attenuation,
-    required this.width,
     required this.opacity,
+    required this.width,
   });
 
   final double attenuation;
-  final double width;
   final double opacity;
+  final double width;
 
   @override
   String toString() =>
-      '_IOS7SiriWaveCurve(attenuation: $attenuation, lineWidth: $width, opacity: $opacity)';
+      '_IOS7SiriWaveCurve(attenuation: $attenuation, opacity: $opacity, width: $width)';
 }
 
 class IOS7SiriWavePainter extends CustomPainter {
   IOS7SiriWavePainter({
     required this.animationController,
     required this.controller,
-    required this.frequency,
   }) : super(repaint: animationController);
 
   final AnimationController animationController;
   final SiriWaveController controller;
-  final int frequency;
 
   static const double _amplitudeFactor = .6;
   static const int _attenuationFactor = 4;
@@ -44,7 +42,6 @@ class IOS7SiriWavePainter extends CustomPainter {
   ];
   static const double _graphX = 2;
   static const double _pixelDepth = .02;
-  static const _waveColor = Color(0xFFFFFFFF);
 
   double _phase = 0;
 
@@ -61,7 +58,7 @@ class IOS7SiriWavePainter extends CustomPainter {
           (_globalAttenuationFactor(i) *
               (maxHeight * controller.amplitude) *
               (1 / attenuation) *
-              math.sin(frequency * i - _phase)));
+              math.sin(controller.frequency * i - _phase)));
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -81,7 +78,7 @@ class IOS7SiriWavePainter extends CustomPainter {
       }
 
       final paint = Paint()
-        ..color = _waveColor.withOpacity(curve.opacity)
+        ..color = controller.waveColor.withOpacity(curve.opacity)
         ..strokeWidth = curve.width
         ..style = PaintingStyle.stroke;
       canvas.drawPath(path, paint);
@@ -93,6 +90,6 @@ class IOS7SiriWavePainter extends CustomPainter {
   @override
   bool shouldRepaint(IOS7SiriWavePainter oldDelegate) =>
       oldDelegate.controller.amplitude != controller.amplitude ||
-      oldDelegate.controller.speed != controller.speed ||
-      oldDelegate.frequency != frequency;
+      oldDelegate.controller.frequency != controller.frequency ||
+      oldDelegate.controller.speed != controller.speed;
 }

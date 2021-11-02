@@ -4,14 +4,9 @@ import '../models/siri_wave_controller.dart';
 import 'ios_7_siri_wave_painter.dart';
 
 class IOS7SiriWave extends StatefulWidget {
-  const IOS7SiriWave({
-    Key? key,
-    required this.controller,
-    this.frequency = 6,
-  }) : super(key: key);
+  const IOS7SiriWave({Key? key, required this.controller}) : super(key: key);
 
   final SiriWaveController controller;
-  final int frequency;
 
   @override
   _IOS7SiriWaveState createState() => _IOS7SiriWaveState();
@@ -60,7 +55,6 @@ class _IOS7SiriWaveState extends State<IOS7SiriWave>
       painter: IOS7SiriWavePainter(
         animationController: _animationController,
         controller: widget.controller,
-        frequency: widget.frequency,
       ),
     );
 

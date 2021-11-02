@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart' show Color, Colors;
+
 class _Interpolation {
   _Interpolation(this.amplitude, this.speed);
 
@@ -5,12 +7,16 @@ class _Interpolation {
   double? speed;
 }
 
+/// Controls the `amplitude`, `frequency` and `speed` values of the waveform.
 class SiriWaveController {
-  /// A controller for the waveform.
-  ///
-  /// Controls the `amplitude` and `speed` values of the waveform.
-  SiriWaveController({this.amplitude = 1, this.speed = .2})
-      : assert(amplitude >= 0 && amplitude <= 1),
+  /// Creates a [SiriWaveController].
+  SiriWaveController({
+    this.amplitude = 1,
+    this.frequency = 6,
+    this.speed = .2,
+    this.waveColor = Colors.white,
+  })  : assert(amplitude >= 0 && amplitude <= 1),
+        assert(frequency >= -20 && frequency <= 20),
         assert(speed >= 0 && speed <= 1) {
     _interpolation = _Interpolation(amplitude, speed);
   }
@@ -22,12 +28,24 @@ class SiriWaveController {
   /// The value must be in the `[0, 1]` range.
   double amplitude;
 
+  /// The frequency of the iOS 7 style waveform.
+  ///
+  /// Defaults to `6`.
+  ///
+  /// The value must be in the `[-20, 20]` range.
+  int frequency;
+
   /// The speed of the waveform.
   ///
   /// Defaults to `0.2`.
   ///
   /// The value must be in the `[0, 1]` range.
   double speed;
+
+  /// The color of the iOS 7 style waveform.
+  ///
+  /// Defaults to `Colors.white`.
+  Color waveColor;
 
   late _Interpolation _interpolation;
 
@@ -57,6 +75,12 @@ class SiriWaveController {
   /// Set a new interpolated value for the `amplitude`.
   void setAmplitude(double newAmplitude) => amplitude = newAmplitude;
 
+  /// Set a new value for the `frequency`.
+  void setFrequency(int newFrequency) => frequency = newFrequency;
+
   /// Set a new interpolated value for the `speed`.
   void setSpeed(double newSpeed) => speed = newSpeed;
+
+  /// Set a new color for the `waveColor`.
+  void setWaveColor(Color newWaveColor) => waveColor = newWaveColor;
 }
