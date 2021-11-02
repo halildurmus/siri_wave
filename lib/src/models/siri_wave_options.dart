@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart' show Color, Colors;
 
+/// Describes the configuration will be used by [SiriWave].
 class SiriWaveOptions {
-  /// Describes the configuration will be used by [SiriWave].
+  /// Creates a [SiriWaveOptions].
   const SiriWaveOptions({
     this.backgroundColor = Colors.black,
     this.height = 180,
