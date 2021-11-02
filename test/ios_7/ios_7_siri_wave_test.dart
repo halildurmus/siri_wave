@@ -24,9 +24,9 @@ void main() {
           tester.firstWidget<IOS7SiriWave>(find.byType(IOS7SiriWave));
 
       expect(ios7SiriWave.controller.amplitude, 1);
+      expect(ios7SiriWave.controller.color, Colors.white);
       expect(ios7SiriWave.controller.frequency, 6);
       expect(ios7SiriWave.controller.speed, .2);
-      expect(ios7SiriWave.controller.waveColor, Colors.white);
     });
 
     testWidgets('widget should paint the canvas with IOS7SiriWavePainter',

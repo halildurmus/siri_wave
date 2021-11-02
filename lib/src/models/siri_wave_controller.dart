@@ -7,14 +7,14 @@ class _Interpolation {
   double? speed;
 }
 
-/// Controls the `amplitude`, `frequency` and `speed` values of the waveform.
+/// Controls the `amplitude`, `color`, `frequency` and `speed` of the waveform.
 class SiriWaveController {
   /// Creates a [SiriWaveController].
   SiriWaveController({
     this.amplitude = 1,
+    this.color = Colors.white,
     this.frequency = 6,
     this.speed = .2,
-    this.waveColor = Colors.white,
   })  : assert(amplitude >= 0 && amplitude <= 1),
         assert(frequency >= -20 && frequency <= 20),
         assert(speed >= 0 && speed <= 1) {
@@ -23,10 +23,15 @@ class SiriWaveController {
 
   /// The amplitude of the waveform.
   ///
-  /// Defaults to `1`.
+  /// Defaults to `1.0`.
   ///
   /// The value must be in the `[0, 1]` range.
   double amplitude;
+
+  /// The color of the iOS 7 style waveform.
+  ///
+  /// Defaults to `Colors.white`.
+  Color color;
 
   /// The frequency of the iOS 7 style waveform.
   ///
@@ -41,11 +46,6 @@ class SiriWaveController {
   ///
   /// The value must be in the `[0, 1]` range.
   double speed;
-
-  /// The color of the iOS 7 style waveform.
-  ///
-  /// Defaults to `Colors.white`.
-  Color waveColor;
 
   late _Interpolation _interpolation;
 
@@ -75,12 +75,12 @@ class SiriWaveController {
   /// Set a new interpolated value for the `amplitude`.
   void setAmplitude(double newAmplitude) => amplitude = newAmplitude;
 
+  /// Set a new color for the `color`.
+  void setColor(Color newColor) => color = newColor;
+
   /// Set a new value for the `frequency`.
   void setFrequency(int newFrequency) => frequency = newFrequency;
 
   /// Set a new interpolated value for the `speed`.
   void setSpeed(double newSpeed) => speed = newSpeed;
-
-  /// Set a new color for the `waveColor`.
-  void setWaveColor(Color newWaveColor) => waveColor = newWaveColor;
 }
