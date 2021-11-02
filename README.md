@@ -41,20 +41,30 @@ class MyWidget extends StatelessWidget {
 }
 ```
 
-To be able to change the amplitude and speed of the waveform, create a `SiriWaveController` and pass it to the `SiriWave` widget:
+To be able to change the `amplitude`, `frequency`, `speed` and `color` of the waveform, create a `SiriWaveController` and pass it to the `SiriWave` widget:
 
 ```dart
-// You can change the default `amplitude` and `speed values` while creating the controller.
+// You can change the default values while creating the controller.
+//  final controller = SiriWaveController(
+//    amplitude: 0.5,
+//    color: Colors.red,
+//    frequency: 4,
+//    speed: 0.15,
+//  );
 final controller = SiriWaveController();
 
 SiriWave(controller: controller);
 ```
 
-And then call `setAmplitude` or `setSpeed` methods in the controller.
+And then call any method you want from the controller.
 
 ```dart
 controller.setAmplitude(0.8);
 controller.setSpeed(0.1);
+
+// Only available in iOS 7 style waveform.
+controller.setColor(Colors.yellow);
+controller.setFrequency(4);
 ```
 
 See the [example](https://github.com/halildurmus/siri_wave/blob/main/example/lib/main.dart) directory for a complete sample app.
@@ -70,15 +80,19 @@ See the [example](https://github.com/halildurmus/siri_wave/blob/main/example/lib
 
 ## SiriWaveController
 
-| Parameter    | Type     | Description                       | Default |
-| ------------ | -------- | --------------------------------- | ------- |
-| `amplitude`  | double   | The amplitude of the waveform.    | 1.0     |
-| `speed`      | double   | The speed of the waveform.        | 0.2     |
+| Parameter    | Type     | Description                                 | Default      |
+| ------------ | -------- | ------------------------------------------- | ------------ |
+| `amplitude`  | double   | The amplitude of the waveform.              | 1.0          |
+| `color`      | Color    | The color of the iOS 7 style waveform.      | Colors.white |
+| `frequency`  | int      | The frequency of the iOS 7 style waveform.  | 6            |
+| `speed`      | double   | The speed of the waveform.                  | 0.2          |
 
-| Function                      | Description                                                                |
-| ----------------------------- | -------------------------------------------------------------------------- |
-| `setAmplitude(double value)`  | Sets the amplitude of the waveform. The value must be in the [0,1] range.  |
-| `setSpeed(double value)`      | Sets the speed of the waveform. The value must be in the [0,1] range       |
+| Function                      | Description                                                                              |
+| ----------------------------- | ---------------------------------------------------------------------------------------- |
+| `setAmplitude(double value)`  | Sets the amplitude of the waveform. The value must be in the [0,1] range.                |
+| `setColor(Color color)`       | Sets the color of the iOS 7 style waveform.                                              |
+| `setFrequency(double value)`  | Sets the frequency of the iOS 7 style waveform. The value must be in the [-20,20] range. |
+| `setSpeed(double value)`      | Sets the speed of the waveform. The value must be in the [0,1] range.                    |
 
 ## SiriWaveOptions
 

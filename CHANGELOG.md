@@ -1,3 +1,7 @@
+## 0.1.1
+
+- Added support to change the `color` and `frequency` of the iOS 7 style waveform.
+
 ## 0.1.0
 
 - Added support to change the `speed` of the waveform.
