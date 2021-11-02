@@ -10,6 +10,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_colorpicker: ^0.6.0
   siri_wave:
     path: ../
 
