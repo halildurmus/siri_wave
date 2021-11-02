@@ -2,11 +2,18 @@ pub_cache:
   folder: ~/.pub-cache
 
 task:
+  name: Verify formatting
+  container:
+    image: cirrusci/flutter:stable
+  format_script: flutter format . --set-exit-if-changed
+
+task:
   name: Run analyzer
   container:
     image: cirrusci/flutter:stable
-
-  analyze_script: flutter analyze
+  analyze_script:
+    - flutter pub get
+    - flutter analyze --no-pub
 
 task:
   name: Run tests
