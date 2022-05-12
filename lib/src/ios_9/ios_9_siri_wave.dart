@@ -13,10 +13,10 @@ class IOS9SiriWave extends StatefulWidget {
   final SiriWaveController controller;
 
   @override
-  _IOS9SiriWaveState createState() => _IOS9SiriWaveState();
+  IOS9SiriWaveState createState() => IOS9SiriWaveState();
 }
 
-class _IOS9SiriWaveState extends State<IOS9SiriWave>
+class IOS9SiriWaveState extends State<IOS9SiriWave>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
