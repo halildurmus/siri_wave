@@ -1,3 +1,8 @@
+## 0.2.0
+
+- Updated minimum Dart version to `2.17` and Flutter version to `3.0.0`.
+- Updated the example app.
+
 ## 0.1.1
 
 - Added support to change the `color` and `frequency` of the iOS 7 style waveform.
