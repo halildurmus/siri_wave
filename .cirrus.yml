@@ -31,8 +31,8 @@ task:
 
 task:
   name: Build example app (iOS)
-  osx_instance:
-    image: big-sur-xcode-13
+  macos_instance:
+    image: ghcr.io/cirruslabs/macos-monterey-base:latest
   build_script:
     - cd example
     - flutter build ios --no-codesign --debug
