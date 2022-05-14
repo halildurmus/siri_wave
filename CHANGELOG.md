@@ -1,3 +1,7 @@
+## 0.2.1
+
+- No changes.
+
 ## 0.2.0
 
 - Updated minimum Dart version to `2.17` and Flutter version to `3.0.0`.
