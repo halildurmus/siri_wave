@@ -1,3 +1,8 @@
+## 0.2.2
+
+- Applied more lints to source code.
+- Improved code quality.
+
 ## 0.2.1
 
 - No changes.
