@@ -7,8 +7,7 @@ import 'package:siri_wave/src/ios_9/support_line_painter.dart';
 
 void main() {
   group('IOS9SiriWave', () {
-    testWidgets('widget\'s properties should be set correctly',
-        (WidgetTester tester) async {
+    testWidgets("widget's properties should be set correctly", (tester) async {
       // Build the SiriWave widget.
       await tester.pumpWidget(
         MaterialApp(
@@ -30,7 +29,7 @@ void main() {
 
     testWidgets(
         'widget should paint the canvas with SupportLinePainter and IOS9SiriWavePainter',
-        (WidgetTester tester) async {
+        (tester) async {
       // Build the SiriWave widget.
       await tester.pumpWidget(
         MaterialApp(
@@ -56,7 +55,7 @@ void main() {
 
     testWidgets(
         'widget should only paint the canvas with SupportLinePainter if the amplitude is 0',
-        (WidgetTester tester) async {
+        (tester) async {
       // Build the SiriWave widget.
       await tester.pumpWidget(
         MaterialApp(

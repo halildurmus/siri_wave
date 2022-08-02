@@ -6,8 +6,7 @@ import 'package:siri_wave/src/ios_9/ios_9_siri_wave.dart';
 
 void main() {
   group('SiriWave', () {
-    testWidgets('widget\'s properties should be set correctly',
-        (WidgetTester tester) async {
+    testWidgets('widget\'s properties should be set correctly', (tester) async {
       // Build the SiriWave widget.
       await tester.pumpWidget(
         MaterialApp(
@@ -32,7 +31,7 @@ void main() {
     });
 
     testWidgets('widget should display the IOS9SiriWave widget by default',
-        (WidgetTester tester) async {
+        (tester) async {
       // Build the SiriWave widget.
       await tester.pumpWidget(
         MaterialApp(
@@ -48,7 +47,7 @@ void main() {
 
     testWidgets(
         'widget should display the IOS7SiriWave widget if the siriWaveStyle parameter is set to SiriWaveStyle.ios_7',
-        (WidgetTester tester) async {
+        (tester) async {
       // Build the SiriWave widget.
       await tester.pumpWidget(
         MaterialApp(

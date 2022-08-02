@@ -31,8 +31,8 @@ class IOS7SiriWavePainter extends CustomPainter {
   final AnimationController animationController;
   final SiriWaveController controller;
 
-  static const double _amplitudeFactor = .6;
-  static const int _attenuationFactor = 4;
+  static const _amplitudeFactor = .6;
+  static const _attenuationFactor = 4;
   static const _curves = [
     _IOS7SiriWaveCurve(attenuation: -2, width: 1, opacity: .1),
     _IOS7SiriWaveCurve(attenuation: -6, width: 1, opacity: .2),
@@ -40,8 +40,8 @@ class IOS7SiriWavePainter extends CustomPainter {
     _IOS7SiriWaveCurve(attenuation: 2, width: 1, opacity: .6),
     _IOS7SiriWaveCurve(attenuation: 1, width: 1.5, opacity: 1),
   ];
-  static const double _graphX = 2;
-  static const double _pixelDepth = .02;
+  static const _graphX = 2.0;
+  static const _pixelDepth = .02;
 
   double _phase = 0;
 
@@ -54,11 +54,11 @@ class IOS7SiriWavePainter extends CustomPainter {
       size.width * ((i + _graphX) / (_graphX * 2));
 
   double _yPos(double i, double attenuation, double maxHeight) =>
-      (_amplitudeFactor *
-          (_globalAttenuationFactor(i) *
-              (maxHeight * controller.amplitude) *
-              (1 / attenuation) *
-              math.sin(controller.frequency * i - _phase)));
+      _amplitudeFactor *
+      (_globalAttenuationFactor(i) *
+          (maxHeight * controller.amplitude) *
+          (1 / attenuation) *
+          math.sin(controller.frequency * i - _phase));
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -67,9 +67,8 @@ class IOS7SiriWavePainter extends CustomPainter {
     // Interpolate amplitude and speed values.
     controller.lerp();
 
-    for (var curve in _curves) {
-      final Path path = Path();
-      path.moveTo(0, maxHeight);
+    for (final curve in _curves) {
+      final path = Path()..moveTo(0, maxHeight);
       // Cycle the graph from -X to +X every pixelDepth and draw the line
       for (var i = -_graphX; i <= _graphX; i += _pixelDepth) {
         final x = _xPos(i, size);

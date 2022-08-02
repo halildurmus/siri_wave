@@ -17,16 +17,14 @@ class SiriWave extends StatefulWidget {
   /// The style of the waveform can be configured with [style].
   /// By default, iOS 9 Siri style waveform is shown.
   SiriWave({
-    Key? key,
+    super.key,
     SiriWaveController? controller,
     this.options = const SiriWaveOptions(),
     this.style = SiriWaveStyle.ios_9,
-  }) : super(key: key) {
-    _controller = controller ?? SiriWaveController();
-  }
+  }) : _controller = controller ?? SiriWaveController();
 
   /// See [SiriWaveController].
-  late final SiriWaveController _controller;
+  final SiriWaveController _controller;
 
   /// See [SiriWaveStyle].
   final SiriWaveStyle style;

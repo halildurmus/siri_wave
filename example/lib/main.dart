@@ -6,7 +6,7 @@ import 'package:siri_wave/siri_wave.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +24,19 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  double _amplitude = 1;
-  double _frequency = 6;
-  double _speed = .2;
+  var _amplitude = 1.0;
+  var _frequency = 6.0;
+  var _speed = .2;
   final _isSelected = [false, true];
   final _controller = SiriWaveController();
-  Color _currentColor = Colors.white;
+  var _currentColor = Colors.white;
 
   void _changeColor(Color color) {
     _currentColor = color;
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
           value: _amplitude,
           min: 0,
           max: 1,
-          onChanged: (double value) {
+          onChanged: (value) {
             _controller.setAmplitude(value);
             _amplitude = value;
             setState(() {});
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
           divisions: 40,
           min: -20,
           max: 20,
-          onChanged: (double value) {
+          onChanged: (value) {
             _controller.setFrequency(value.round());
             _frequency = value;
             setState(() {});
@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
           value: _speed,
           min: 0,
           max: 1,
-          onChanged: (double value) {
+          onChanged: (value) {
             _controller.setSpeed(value);
             _speed = value;
             setState(() {});
@@ -120,14 +120,12 @@ class _HomePageState extends State<HomePage> {
     void _showColorPickerDialog() {
       showDialog(
         context: context,
-        builder: (BuildContext context) {
+        builder: (context) {
           return AlertDialog(
             titlePadding: const EdgeInsets.all(0.0),
             contentPadding: const EdgeInsets.all(0.0),
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(9),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(9)),
             ),
             content: SingleChildScrollView(
               child: ColorPicker(
@@ -159,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: ElevatedButton(
-                    onPressed: () => _showColorPickerDialog(),
+                    onPressed: _showColorPickerDialog,
                     child: const Text('Change color'),
                   ),
                 ),
@@ -171,12 +169,10 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildToggleButtons() {
     return ToggleButtons(
-      onPressed: (int index) {
-        if (_isSelected[index]) {
-          return;
-        }
+      onPressed: (index) {
+        if (_isSelected[index]) return;
 
-        for (int i = 0; i < _isSelected.length; i++) {
+        for (var i = 0; i < _isSelected.length; i++) {
           _isSelected[i] = i == index;
         }
         setState(() {});

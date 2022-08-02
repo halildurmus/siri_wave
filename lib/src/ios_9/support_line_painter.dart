@@ -15,7 +15,7 @@ class SupportLinePainter extends CustomPainter {
       ],
       stops: const [0, .1, .8, 1],
     ).createShader(rect);
-    final Paint paint = Paint()..shader = shader;
+    final paint = Paint()..shader = shader;
     canvas.drawRect(rect, paint);
   }
 

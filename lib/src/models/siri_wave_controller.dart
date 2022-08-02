@@ -49,7 +49,7 @@ class SiriWaveController {
 
   late _Interpolation _interpolation;
 
-  static const double _lerpSpeed = .1;
+  static const _lerpSpeed = .1;
 
   double _intLerp(double v0, double v1, double t) => v0 * (1 - t) + v1 * t;
 

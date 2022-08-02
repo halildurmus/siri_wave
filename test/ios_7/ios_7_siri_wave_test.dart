@@ -6,8 +6,7 @@ import 'package:siri_wave/src/ios_7/ios_7_siri_wave_painter.dart';
 
 void main() {
   group('IOS7SiriWave', () {
-    testWidgets('widget\'s properties should be set correctly',
-        (WidgetTester tester) async {
+    testWidgets("widget's properties should be set correctly", (tester) async {
       // Build the SiriWave widget.
       await tester.pumpWidget(
         MaterialApp(
@@ -30,7 +29,7 @@ void main() {
     });
 
     testWidgets('widget should paint the canvas with IOS7SiriWavePainter',
-        (WidgetTester tester) async {
+        (tester) async {
       // Build the SiriWave widget.
       await tester.pumpWidget(
         MaterialApp(

@@ -9,18 +9,18 @@ import '../models/siri_wave_controller.dart';
 class _IOS9SiriWave {
   _IOS9SiriWave({required this.color});
 
-  List<double> amplitudes = [];
+  var amplitudes = <double>[];
   final Color color;
-  List<double> despawnTimeouts = [];
-  List<double> finalAmplitudes = [];
+  var despawnTimeouts = <double>[];
+  var finalAmplitudes = <double>[];
   int noOfCurves = 0;
-  List<double> offsets = [];
-  List<double> phases = [];
+  var offsets = <double>[];
+  var phases = <double>[];
   double prevMaxY = 0;
   int spawnAt = 0;
-  List<double> speeds = [];
-  List<double> verses = [];
-  List<double> widths = [];
+  var speeds = <double>[];
+  var verses = <double>[];
+  var widths = <double>[];
 
   @override
   String toString() {
@@ -37,24 +37,24 @@ class IOS9SiriWavePainter extends CustomPainter {
   final AnimationController animationController;
   final SiriWaveController controller;
 
-  static const double _amplitudeFactor = .8;
-  static const List<double> _amplitudeRanges = [.3, 1];
-  static const int _attenuationFactor = 4;
-  static const int _deadPixel = 2;
-  static const double _despawnFactor = .02;
-  static const List<int> _despawnTimeoutRanges = [500, 2000];
-  static const double _graphX = 25;
-  static const List<int> _noOfCurvesRanges = [2, 5];
-  static const List<int> _offsetRanges = [-3, 3];
-  static const double _pixelDepth = .1;
-  static const int _speedFactor = 1;
-  static const List<double> _speedRanges = [.5, 1];
-  static const List<Color> _waveColors = [
+  static const _amplitudeFactor = .8;
+  static const _amplitudeRanges = <double>[.3, 1];
+  static const _attenuationFactor = 4;
+  static const _deadPixel = 2;
+  static const _despawnFactor = .02;
+  static const _despawnTimeoutRanges = [500, 2000];
+  static const _graphX = 25.0;
+  static const _noOfCurvesRanges = [2, 5];
+  static const _offsetRanges = [-3, 3];
+  static const _pixelDepth = .1;
+  static const _speedFactor = 1;
+  static const _speedRanges = <double>[.5, 1];
+  static const _waveColors = [
     Color.fromRGBO(173, 57, 76, 1),
     Color.fromRGBO(48, 220, 155, 1),
     Color.fromRGBO(15, 82, 169, 1),
   ];
-  static const List<int> _widthRanges = [1, 3];
+  static const _widthRanges = [1, 3];
 
   final _waves = <String, _IOS9SiriWave>{
     'red': _IOS9SiriWave(color: _waveColors[0]),
@@ -79,23 +79,24 @@ class IOS9SiriWavePainter extends CustomPainter {
     wave.verses[ci] = _getRandomRange([-1, 1]).toDouble();
   }
 
-  List<double> _getEmptyArray(int n) => List.filled(n, 0.0);
+  List<double> _getEmptyArray(int length) => List.filled(length, 0.0);
 
   void _spawn(String key) {
-    final wave = _waves[key]!;
-    wave.spawnAt = DateTime.now().millisecondsSinceEpoch;
-    wave.noOfCurves = _getRandomRange(_noOfCurvesRanges).floor();
+    final curvesCount = _getRandomRange(_noOfCurvesRanges).floor();
 
-    wave.amplitudes = _getEmptyArray(wave.noOfCurves);
-    wave.despawnTimeouts = _getEmptyArray(wave.noOfCurves);
-    wave.finalAmplitudes = _getEmptyArray(wave.noOfCurves);
-    wave.offsets = _getEmptyArray(wave.noOfCurves);
-    wave.phases = _getEmptyArray(wave.noOfCurves);
-    wave.speeds = _getEmptyArray(wave.noOfCurves);
-    wave.verses = _getEmptyArray(wave.noOfCurves);
-    wave.widths = _getEmptyArray(wave.noOfCurves);
+    final wave = _waves[key]!
+      ..spawnAt = DateTime.now().millisecondsSinceEpoch
+      ..noOfCurves = curvesCount
+      ..amplitudes = _getEmptyArray(curvesCount)
+      ..despawnTimeouts = _getEmptyArray(curvesCount)
+      ..finalAmplitudes = _getEmptyArray(curvesCount)
+      ..offsets = _getEmptyArray(curvesCount)
+      ..phases = _getEmptyArray(curvesCount)
+      ..speeds = _getEmptyArray(curvesCount)
+      ..verses = _getEmptyArray(curvesCount)
+      ..widths = _getEmptyArray(curvesCount);
 
-    for (int ci = 0; ci < wave.noOfCurves; ci++) {
+    for (var ci = 0; ci < wave.noOfCurves; ci++) {
       _spawnSingle(ci, key);
     }
   }
@@ -108,11 +109,11 @@ class IOS9SiriWavePainter extends CustomPainter {
 
   num _yRelativePos(double i, String key) {
     final wave = _waves[key]!;
-    double y = 0;
+    var y = .0;
 
-    for (int ci = 0; ci < wave.noOfCurves; ci++) {
+    for (var ci = 0; ci < wave.noOfCurves; ci++) {
       // Generate a static t so that each curve is distant from each other
-      double t = 4 * (-1 + (ci / (wave.noOfCurves - 1)) * 2);
+      var t = 4 * (-1 + (ci / (wave.noOfCurves - 1)) * 2);
       // but add a dynamic offset
       t += wave.offsets[ci];
 
@@ -129,11 +130,12 @@ class IOS9SiriWavePainter extends CustomPainter {
     return y / wave.noOfCurves;
   }
 
-  double _yPos(double i, String key, double maxHeight) => (_amplitudeFactor *
+  double _yPos(double i, String key, double maxHeight) =>
+      _amplitudeFactor *
       maxHeight *
       controller.amplitude *
       _yRelativePos(i, key) *
-      _globalAttenuationFactor((i / _graphX) * 2));
+      _globalAttenuationFactor((i / _graphX) * 2);
 
   double _xPos(double i, double width) =>
       width * ((i + _graphX) / (_graphX * 2));
@@ -151,7 +153,7 @@ class IOS9SiriWavePainter extends CustomPainter {
         _spawn(entry.key);
       }
 
-      for (int ci = 0; ci < wave.noOfCurves; ci++) {
+      for (var ci = 0; ci < wave.noOfCurves; ci++) {
         if (wave.spawnAt + wave.despawnTimeouts[ci] <=
             DateTime.now().millisecondsSinceEpoch) {
           wave.amplitudes[ci] -= _despawnFactor;
@@ -166,14 +168,13 @@ class IOS9SiriWavePainter extends CustomPainter {
             (2 * math.pi);
       }
 
-      double maxY = double.negativeInfinity;
-      double minX = double.infinity;
+      var maxY = double.negativeInfinity;
+      var minX = double.infinity;
 
       // Create two opposite waves
       for (final sign in [1, -1]) {
-        final path = Path();
-        path.moveTo(0, maxHeight);
-        for (double i = -_graphX; i <= _graphX; i += _pixelDepth) {
+        final path = Path()..moveTo(0, maxHeight);
+        for (var i = -_graphX; i <= _graphX; i += _pixelDepth) {
           final x = _xPos(i, size.width);
           final y = _yPos(i, entry.key, maxHeight);
           path.lineTo(x, maxHeight - sign * y);

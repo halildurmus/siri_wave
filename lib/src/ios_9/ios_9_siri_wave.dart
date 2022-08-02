@@ -5,10 +5,7 @@ import 'ios_9_siri_wave_painter.dart';
 import 'support_line_painter.dart';
 
 class IOS9SiriWave extends StatefulWidget {
-  const IOS9SiriWave({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
+  const IOS9SiriWave({super.key, required this.controller});
 
   final SiriWaveController controller;
 
