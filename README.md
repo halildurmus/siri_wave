@@ -44,16 +44,22 @@ class MyWidget extends StatelessWidget {
 To be able to change the `amplitude`, `frequency`, `speed` and `color` of the waveform, create a `SiriWaveController` and pass it to the `SiriWave` widget:
 
 ```dart
-// You can change the default values while creating the controller.
-//  final controller = SiriWaveController(
-//    amplitude: 0.5,
-//    color: Colors.red,
-//    frequency: 4,
-//    speed: 0.15,
-//  );
-final controller = SiriWaveController();
+import 'package:siri_wave/siri_wave.dart';
 
-SiriWave(controller: controller);
+class MyWidget extends StatelessWidget {
+  Widget build(BuildContext context) {
+    // You can change the default values while creating the controller.
+    //  final controller = SiriWaveController(
+    //    amplitude: 0.5,
+    //    color: Colors.red,
+    //    frequency: 4,
+    //    speed: 0.15,
+    //  );
+    final controller = SiriWaveController();
+
+    return SiriWave(controller: controller);
+  }
+}
 ```
 
 And then call any method you want from the controller.
