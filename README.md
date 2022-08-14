@@ -24,8 +24,8 @@ Check out the live demo [here](https://halildurmus.github.io/siri_wave).
 ## Getting Started
 
 ### Requirements
-- `Dart >= 2.14.0`
-- `Flutter >= 2.0.0`
+- `Dart >= 2.17.0`
+- `Flutter >= 3.0.0`
 
 ## Usage
 
