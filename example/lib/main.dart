@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildWaveColorSection() {
-    void _showColorPickerDialog() {
+    void showColorPickerDialog() {
       showDialog(
         context: context,
         builder: (context) {
@@ -157,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: ElevatedButton(
-                    onPressed: _showColorPickerDialog,
+                    onPressed: showColorPickerDialog,
                     child: const Text('Change color'),
                   ),
                 ),
