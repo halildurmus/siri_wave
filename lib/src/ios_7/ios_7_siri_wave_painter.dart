@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 
 import '../models/siri_wave_controller.dart';
 
-// Describes the curve properties will be used by `IOS7SiriWavePainter`.
+/// Describes the curve properties will be used by [IOS7SiriWavePainter].
 class _IOS7SiriWaveCurve {
   const _IOS7SiriWaveCurve({
     required this.attenuation,

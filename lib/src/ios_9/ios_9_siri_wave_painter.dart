@@ -1,11 +1,10 @@
 import 'dart:math' as math;
 
-import 'package:flutter/animation.dart' show AnimationController;
-import 'package:flutter/rendering.dart';
+import 'package:flutter/material.dart';
 
 import '../models/siri_wave_controller.dart';
 
-// Describes the curve properties will be used by `IOS7SiriWavePainter`.
+/// Describes the curve properties will be used by [IOS7SiriWavePainter].
 class _IOS9SiriWave {
   _IOS9SiriWave({required this.color});
 
@@ -69,7 +68,6 @@ class IOS9SiriWavePainter extends CustomPainter {
     final wave = _waves[key]!;
     wave.phases[ci] = 0;
     wave.amplitudes[ci] = 0;
-
     wave.despawnTimeouts[ci] =
         _getRandomRange(_despawnTimeoutRanges).toDouble();
     wave.offsets[ci] = _getRandomRange(_offsetRanges).toDouble();
@@ -83,7 +81,6 @@ class IOS9SiriWavePainter extends CustomPainter {
 
   void _spawn(String key) {
     final curvesCount = _getRandomRange(_noOfCurvesRanges).floor();
-
     final wave = _waves[key]!
       ..spawnAt = DateTime.now().millisecondsSinceEpoch
       ..noOfCurves = curvesCount

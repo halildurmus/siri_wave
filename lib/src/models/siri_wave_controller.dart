@@ -7,7 +7,8 @@ class _Interpolation {
   double? speed;
 }
 
-/// Controls the `amplitude`, `color`, `frequency` and `speed` of the waveform.
+/// Controls the `amplitude`, `color`, `frequency` and `speed` properties of the
+/// waveform.
 class SiriWaveController {
   /// Creates a [SiriWaveController].
   SiriWaveController({
@@ -15,11 +16,10 @@ class SiriWaveController {
     this.color = Colors.white,
     this.frequency = 6,
     this.speed = .2,
-  })  : assert(amplitude >= 0 && amplitude <= 1),
+  })  : _interpolation = _Interpolation(amplitude, speed),
+        assert(amplitude >= 0 && amplitude <= 1),
         assert(frequency >= -20 && frequency <= 20),
-        assert(speed >= 0 && speed <= 1) {
-    _interpolation = _Interpolation(amplitude, speed);
-  }
+        assert(speed >= 0 && speed <= 1);
 
   /// The amplitude of the waveform.
   ///
@@ -30,7 +30,7 @@ class SiriWaveController {
 
   /// The color of the iOS 7 style waveform.
   ///
-  /// Defaults to `Colors.white`.
+  /// Defaults to [Colors.white].
   Color color;
 
   /// The frequency of the iOS 7 style waveform.
@@ -47,7 +47,7 @@ class SiriWaveController {
   /// The value must be in the `[0, 1]` range.
   double speed;
 
-  late _Interpolation _interpolation;
+  final _Interpolation _interpolation;
 
   static const _lerpSpeed = .1;
 

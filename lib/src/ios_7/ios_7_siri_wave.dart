@@ -20,8 +20,8 @@ class IOS7SiriWaveState extends State<IOS7SiriWave>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      // Since we don't use AnimationController's value in the animation,
-      // the duration value does not have any affect on the animation.
+      // Since AnimationController's value is not used in the animation, the
+      // duration value does not have any affect on the animation.
       duration: const Duration(seconds: 1),
     );
 
