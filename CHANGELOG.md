@@ -1,3 +1,11 @@
+## 0.3.0
+
+- `SiriWave`'s background is now transparent -- which should now be visible in light backgrounds.
+- `SiriWaveOptions`' `backgroundColor` property is deprecated, has no effect,
+  and will be removed in a future version.
+- Added `showSupportBar` property to `SiriWaveOptions` to show/hide the support bar on iOS 9 style waveform. By default, the support bar is shown.
+- Improved code quality.
+
 ## 0.2.2
 
 - Applied more lints to source code.
