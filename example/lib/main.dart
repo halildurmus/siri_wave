@@ -16,6 +16,14 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.amber,
+        switchTheme: SwitchThemeData(
+            thumbColor: MaterialStateProperty.all(Colors.amber),
+            trackColor: MaterialStateProperty.resolveWith((states) {
+              if (states.contains(MaterialState.selected)) {
+                return Colors.amber.shade300;
+              }
+              return Colors.grey.withOpacity(.5);
+            })),
       ),
       themeMode: ThemeMode.dark,
       title: 'Siri Wave Demo',
@@ -33,6 +41,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var _amplitude = 1.0;
   var _frequency = 6.0;
+  var _showSupportBar = true;
   var _speed = .2;
   final _isSelected = [false, true];
   final _controller = SiriWaveController();
@@ -101,6 +110,36 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget _buildShowSupportBarSwitch() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Switch(
+        value: _showSupportBar,
+        onChanged: (value) {
+          _showSupportBar = value;
+          setState(() {});
+        },
+      ),
+    );
+  }
+
+  Widget _buildShowSupportBarSection() {
+    return AnimatedSize(
+      curve: Curves.fastOutSlowIn,
+      duration: const Duration(milliseconds: 400),
+      child: _isSelected[1]
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Show support bar',
+                    style: Theme.of(context).textTheme.titleMedium),
+                _buildShowSupportBarSwitch(),
+              ],
+            )
+          : const SizedBox(),
+    );
+  }
+
   Widget _buildFrequencySection() {
     return AnimatedSize(
       curve: Curves.fastOutSlowIn,
@@ -108,7 +147,8 @@ class _HomePageState extends State<HomePage> {
       child: _isSelected[0]
           ? Column(
               children: [
-                Text('Frequency', style: Theme.of(context).textTheme.headline6),
+                Text('Frequency',
+                    style: Theme.of(context).textTheme.titleLarge),
                 _buildFrequencySlider(),
               ],
             )
@@ -122,10 +162,10 @@ class _HomePageState extends State<HomePage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            titlePadding: const EdgeInsets.all(0.0),
-            contentPadding: const EdgeInsets.all(0.0),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(9)),
+            titlePadding: EdgeInsets.zero,
+            contentPadding: EdgeInsets.zero,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(9),
             ),
             content: SingleChildScrollView(
               child: ColorPicker(
@@ -134,9 +174,7 @@ class _HomePageState extends State<HomePage> {
                 pickerAreaHeightPercent: .7,
                 displayThumbColor: true,
                 paletteType: PaletteType.hsl,
-                pickerAreaBorderRadius: const BorderRadius.all(
-                  Radius.circular(8),
-                ),
+                pickerAreaBorderRadius: BorderRadius.circular(8),
               ),
             ),
           );
@@ -152,7 +190,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text(
                   'Wave Color',
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15),
@@ -171,19 +209,18 @@ class _HomePageState extends State<HomePage> {
     return ToggleButtons(
       onPressed: (index) {
         if (_isSelected[index]) return;
-
         for (var i = 0; i < _isSelected.length; i++) {
           _isSelected[i] = i == index;
         }
         setState(() {});
       },
-      isSelected: _isSelected,
       borderColor: Theme.of(context).primaryColorLight,
       borderRadius: BorderRadius.circular(16),
+      isSelected: _isSelected,
       selectedBorderColor: Theme.of(context).colorScheme.primary,
       children: const [
-        Padding(padding: EdgeInsets.all(16), child: Text('iOS 7 Siri Wave')),
-        Padding(padding: EdgeInsets.all(16), child: Text('iOS 9 Siri Wave')),
+        Padding(padding: EdgeInsets.all(16), child: Text('iOS 7 Style')),
+        Padding(padding: EdgeInsets.all(16), child: Text('iOS 9 Style')),
       ],
     );
   }
@@ -204,36 +241,15 @@ class _HomePageState extends State<HomePage> {
         _buildDivider(),
         SiriWave(
           controller: _controller,
-          options: const SiriWaveOptions(
+          options: SiriWaveOptions(
             height: kIsWeb ? 300 : 180,
+            showSupportBar: _showSupportBar,
             width: kIsWeb ? 600 : 360,
           ),
           style: _isSelected[0] ? SiriWaveStyle.ios_7 : SiriWaveStyle.ios_9,
         ),
         _buildDivider(),
       ],
-    );
-  }
-
-  Widget _buildBody() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Spacer(),
-          Text('Amplitude', style: Theme.of(context).textTheme.headline6),
-          _buildAmplitudeSlider(),
-          Text('Speed', style: Theme.of(context).textTheme.headline6),
-          _buildSpeedSlider(),
-          _buildFrequencySection(),
-          _buildWaveColorSection(),
-          Text('Style', style: Theme.of(context).textTheme.headline6),
-          const SizedBox(height: 15),
-          _buildToggleButtons(),
-          const Spacer(),
-          _buildSiriWave(),
-        ],
-      ),
     );
   }
 
@@ -244,8 +260,26 @@ class _HomePageState extends State<HomePage> {
         centerTitle: kIsWeb,
         title: const Text('Siri Wave Demo'),
       ),
-      backgroundColor: Colors.black,
-      body: _buildBody(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Spacer(),
+            Text('Amplitude', style: Theme.of(context).textTheme.titleLarge),
+            _buildAmplitudeSlider(),
+            Text('Speed', style: Theme.of(context).textTheme.titleLarge),
+            _buildSpeedSlider(),
+            _buildShowSupportBarSection(),
+            _buildFrequencySection(),
+            _buildWaveColorSection(),
+            Text('Style', style: Theme.of(context).textTheme.titleLarge),
+            const SizedBox(height: 15),
+            _buildToggleButtons(),
+            const Spacer(),
+            _buildSiriWave(),
+          ],
+        ),
+      ),
     );
   }
 }
