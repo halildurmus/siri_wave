@@ -144,6 +144,9 @@ class IOS9SiriWavePainter extends CustomPainter {
     // Interpolate amplitude and speed values.
     controller.lerp();
 
+    canvas.saveLayer(Rect.fromLTWH(0, 0, size.width, size.height),
+        Paint()..color = Colors.white);
+
     for (final entry in _waves.entries) {
       final wave = entry.value;
       if (wave.spawnAt == 0) {
@@ -193,6 +196,8 @@ class IOS9SiriWavePainter extends CustomPainter {
 
       wave.prevMaxY = maxY;
     }
+
+    canvas.restore();
   }
 
   @override
