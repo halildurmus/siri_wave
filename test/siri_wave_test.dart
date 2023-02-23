@@ -6,7 +6,7 @@ import 'package:siri_wave/src/ios_9/ios_9_siri_wave.dart';
 
 void main() {
   group('SiriWave', () {
-    testWidgets('widget\'s properties should be set correctly', (tester) async {
+    testWidgets("widget's properties should be set correctly", (tester) async {
       // Build the SiriWave widget.
       await tester.pumpWidget(
         MaterialApp(
@@ -21,13 +21,6 @@ void main() {
 
       expect(sizedBox.height, 180);
       expect(sizedBox.width, 360);
-
-      // Find the BoxDecoration widget.
-      final boxDecoration =
-          (tester.firstWidget<DecoratedBox>(find.byType(DecoratedBox)))
-              .decoration as BoxDecoration;
-
-      expect(boxDecoration.color, Colors.black);
     });
 
     testWidgets('widget should display the IOS9SiriWave widget by default',

@@ -11,16 +11,16 @@ class SiriWave extends StatefulWidget {
   /// Creates a Siri style waveform.
   ///
   /// The dimensions of the waveform can be configured with [options] or
-  /// wrapping the [SiriWave] with a [SizedBox] or [Container] or any other
-  /// widget that constraints it's child.
+  /// wrapping the [SiriWave] with either a [SizedBox], a [Container] or any
+  /// other widget that constraints it's child.
   ///
   /// The style of the waveform can be configured with [style].
   /// By default, iOS 9 Siri style waveform is shown.
   SiriWave({
-    super.key,
     SiriWaveController? controller,
     this.options = const SiriWaveOptions(),
     this.style = SiriWaveStyle.ios_9,
+    super.key,
   }) : _controller = controller ?? SiriWaveController();
 
   /// See [SiriWaveController].
@@ -42,7 +42,7 @@ class _SiriWaveState extends State<SiriWave> {
   void _setSiriWaveWidget() {
     _siriWave = widget.style == SiriWaveStyle.ios_7
         ? IOS7SiriWave(controller: widget._controller)
-        : IOS9SiriWave(controller: widget._controller);
+        : IOS9SiriWave(controller: widget._controller, options: widget.options);
   }
 
   @override
@@ -54,7 +54,8 @@ class _SiriWaveState extends State<SiriWave> {
   @override
   void didUpdateWidget(covariant SiriWave oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.style != widget.style) {
+    if (oldWidget.style != widget.style ||
+        oldWidget.options.showSupportBar != widget.options.showSupportBar) {
       _setSiriWaveWidget();
     }
   }
@@ -64,10 +65,7 @@ class _SiriWaveState extends State<SiriWave> {
     return SizedBox(
       height: widget.options.height,
       width: widget.options.width,
-      child: DecoratedBox(
-        decoration: BoxDecoration(color: widget.options.backgroundColor),
-        child: _siriWave,
-      ),
+      child: _siriWave,
     );
   }
 }

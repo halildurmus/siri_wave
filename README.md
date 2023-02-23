@@ -1,4 +1,4 @@
-# SiriWave
+# siri_wave
 
 [![pub package](https://img.shields.io/pub/v/siri_wave.svg?style=for-the-badge)](https://pub.dev/packages/siri_wave)
 [![Platform](https://img.shields.io/badge/Platform-Flutter-02569B?logo=flutter&style=for-the-badge)](https://flutter.dev)
@@ -41,7 +41,7 @@ class MyWidget extends StatelessWidget {
 }
 ```
 
-To be able to change the `amplitude`, `frequency`, `speed` and `color` of the waveform, create a `SiriWaveController` and pass it to the `SiriWave` widget:
+To be able to change the `amplitude`, `frequency`, `speed` and `color` properties of the waveform, create a `SiriWaveController` and pass it to the `SiriWave` widget:
 
 ```dart
 import 'package:siri_wave/siri_wave.dart';
@@ -56,7 +56,6 @@ class MyWidget extends StatelessWidget {
     //    speed: 0.15,
     //  );
     final controller = SiriWaveController();
-
     return SiriWave(controller: controller);
   }
 }
@@ -68,7 +67,7 @@ And then call any method you want from the controller.
 controller.setAmplitude(0.8);
 controller.setSpeed(0.1);
 
-// Only available in iOS 7 style waveform.
+// Only available in the iOS 7 style waveform.
 controller.setColor(Colors.yellow);
 controller.setFrequency(4);
 ```
@@ -102,11 +101,11 @@ See the [example](https://github.com/halildurmus/siri_wave/blob/main/example/lib
 
 ## SiriWaveOptions
 
-| Parameter          | Type     | Description                              | Default       |
-| ------------------ | -------- | ---------------------------------------- | ------------- |
-| `backgroundColor`  | Color    | The background color of the waveform.    | Colors.black  |
-| `height`           | double   | The height of the waveform.              | 180           |
-| `width`            | double   | The width of the waveform.               | 360           |
+| Parameter          | Type     | Description                                         | Default       |
+| ------------------ | -------- | ----------------------------------------------------| ------------- |
+| `height`           | double   | The height of the waveform.                         | 180           |
+| `showSupportBar`   | bool     | Whether to show support bar on iOS 9 style waveform.| true          |
+| `width`            | double   | The width of the waveform.                          | 360           |
 
 ## 🤝 Contributing
 

@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../models/siri_wave_controller.dart';
+import '../models/siri_wave_options.dart';
 import 'ios_9_siri_wave_painter.dart';
 import 'support_line_painter.dart';
 
 class IOS9SiriWave extends StatefulWidget {
-  const IOS9SiriWave({super.key, required this.controller});
+  const IOS9SiriWave({
+    super.key,
+    required this.controller,
+    this.options = const SiriWaveOptions(),
+  });
 
   final SiriWaveController controller;
+  final SiriWaveOptions options;
 
   @override
   IOS9SiriWaveState createState() => IOS9SiriWaveState();
@@ -21,8 +27,8 @@ class IOS9SiriWaveState extends State<IOS9SiriWave>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      // Since we don't use AnimationController's value in the animation,
-      // the duration value does not have any affect on the animation.
+      // Since AnimationController's value is not used in the animation, the
+      // duration value does not have any affect on the animation.
       duration: const Duration(seconds: 1),
     );
     if (widget.controller.amplitude > 0 && widget.controller.speed > 0) {
@@ -60,8 +66,8 @@ class IOS9SiriWaveState extends State<IOS9SiriWave>
     return AnimatedBuilder(
       animation: _animationController,
       builder: (_, __) => CustomPaint(
-        painter: supportLinePainter,
         foregroundPainter: widget.controller.amplitude > 0 ? wavePainter : null,
+        painter: widget.options.showSupportBar ? supportLinePainter : null,
       ),
     );
   }
