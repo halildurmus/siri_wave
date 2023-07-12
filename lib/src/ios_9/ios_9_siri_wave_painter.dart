@@ -4,29 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../models/siri_wave_controller.dart';
 
-/// Describes the curve properties will be used by [IOS7SiriWavePainter].
-class _IOS9SiriWave {
-  _IOS9SiriWave({required this.color});
-
-  var amplitudes = <double>[];
-  final Color color;
-  var despawnTimeouts = <double>[];
-  var finalAmplitudes = <double>[];
-  int noOfCurves = 0;
-  var offsets = <double>[];
-  var phases = <double>[];
-  double prevMaxY = 0;
-  int spawnAt = 0;
-  var speeds = <double>[];
-  var verses = <double>[];
-  var widths = <double>[];
-
-  @override
-  String toString() {
-    return '_IOS9SiriWave(color: $color, noOfCurves: $noOfCurves, prevMaxY: $prevMaxY, spawnAt: $spawnAt, amplitudes: $amplitudes, despawnTimeouts: $despawnTimeouts, finalAmplitudes: $finalAmplitudes, offsets: $offsets, phases: $phases, speeds: $speeds, verses: $verses, widths: $widths)';
-  }
-}
-
 class IOS9SiriWavePainter extends CustomPainter {
   IOS9SiriWavePainter({
     required this.animationController,
@@ -204,4 +181,22 @@ class IOS9SiriWavePainter extends CustomPainter {
   bool shouldRepaint(IOS9SiriWavePainter oldDelegate) =>
       oldDelegate.controller.amplitude != controller.amplitude ||
       oldDelegate.controller.speed != controller.speed;
+}
+
+/// Describes the curve properties will be used by [IOS9SiriWavePainter].
+class _IOS9SiriWave {
+  _IOS9SiriWave({required this.color});
+
+  var amplitudes = <double>[];
+  final Color color;
+  var despawnTimeouts = <double>[];
+  var finalAmplitudes = <double>[];
+  int noOfCurves = 0;
+  var offsets = <double>[];
+  var phases = <double>[];
+  double prevMaxY = 0;
+  int spawnAt = 0;
+  var speeds = <double>[];
+  var verses = <double>[];
+  var widths = <double>[];
 }
