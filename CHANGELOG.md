@@ -1,3 +1,8 @@
+## 1.0.0
+
+  - **BREAKING**: Requires Dart `3.0.0` or later.
+  - **BREAKING**: Requires Flutter `3.7.0` or later.
+
 ## 0.3.0
 
 - `SiriWave`'s background is now transparent -- which should now be visible in light backgrounds.

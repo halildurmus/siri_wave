@@ -5,23 +5,6 @@ import 'package:flutter/rendering.dart';
 
 import '../models/siri_wave_controller.dart';
 
-/// Describes the curve properties will be used by [IOS7SiriWavePainter].
-class _IOS7SiriWaveCurve {
-  const _IOS7SiriWaveCurve({
-    required this.attenuation,
-    required this.opacity,
-    required this.width,
-  });
-
-  final double attenuation;
-  final double opacity;
-  final double width;
-
-  @override
-  String toString() =>
-      '_IOS7SiriWaveCurve(attenuation: $attenuation, opacity: $opacity, width: $width)';
-}
-
 class IOS7SiriWavePainter extends CustomPainter {
   IOS7SiriWavePainter({
     required this.animationController,
@@ -91,4 +74,17 @@ class IOS7SiriWavePainter extends CustomPainter {
       oldDelegate.controller.amplitude != controller.amplitude ||
       oldDelegate.controller.frequency != controller.frequency ||
       oldDelegate.controller.speed != controller.speed;
+}
+
+/// Describes the curve properties will be used by [IOS7SiriWavePainter].
+class _IOS7SiriWaveCurve {
+  const _IOS7SiriWaveCurve({
+    required this.attenuation,
+    required this.opacity,
+    required this.width,
+  });
+
+  final double attenuation;
+  final double opacity;
+  final double width;
 }

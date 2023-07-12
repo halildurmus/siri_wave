@@ -1,8 +1,8 @@
-/// Describes which wave style will be used by [SiriWave].
+/// Describes the wave style that will be used by the `SiriWave` widget.
 enum SiriWaveStyle {
-  /// Use the iOS 7 Siri wave style.
+  /// Represents the iOS 7 Siri wave style.
   ios_7,
 
-  /// Use the iOS 9 Siri wave style.
+  /// Represents the iOS 9 Siri wave style.
   ios_9
 }

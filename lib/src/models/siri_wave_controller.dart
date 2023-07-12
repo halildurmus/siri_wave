@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart' show Color, Colors;
 
-class _Interpolation {
-  _Interpolation(this.amplitude, this.speed);
-
-  double? amplitude;
-  double? speed;
-}
-
 /// Controls the `amplitude`, `color`, `frequency` and `speed` properties of the
 /// waveform.
 class SiriWaveController {
-  /// Creates a [SiriWaveController].
   SiriWaveController({
     this.amplitude = 1,
     this.color = Colors.white,
@@ -53,7 +45,7 @@ class SiriWaveController {
 
   double _intLerp(double v0, double v1, double t) => v0 * (1 - t) + v1 * t;
 
-  // Interpolate `amplitude` and `speed` to the values in the `_interpolation`.
+  /// Interpolate `amplitude` and `speed` to the values in the `_interpolation`.
   void lerp() {
     final currentAmplitude = _interpolation.amplitude;
     if (currentAmplitude != null) {
@@ -83,4 +75,11 @@ class SiriWaveController {
 
   /// Set a new interpolated value for the `speed`.
   void setSpeed(double newSpeed) => speed = newSpeed;
+}
+
+class _Interpolation {
+  _Interpolation(this.amplitude, this.speed);
+
+  double? amplitude;
+  double? speed;
 }

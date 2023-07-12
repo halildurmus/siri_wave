@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
             })),
       ),
       themeMode: ThemeMode.dark,
-      title: 'Siri Wave Demo',
+      title: 'siri_wave Demo',
     );
   }
 }
@@ -157,8 +157,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildWaveColorSection() {
-    void showColorPickerDialog() {
-      showDialog(
+    void showColorPickerDialog() async {
+      await showDialog<void>(
         context: context,
         builder: (context) {
           return AlertDialog(
@@ -235,7 +235,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildSiriWave() {
+  Widget _buildWaveForm() {
     return Column(
       children: [
         _buildDivider(),
@@ -258,7 +258,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: kIsWeb,
-        title: const Text('Siri Wave Demo'),
+        title: const Text('siri_wave Demo'),
       ),
       body: Center(
         child: Column(
@@ -276,7 +276,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 15),
             _buildToggleButtons(),
             const Spacer(),
-            _buildSiriWave(),
+            _buildWaveForm(),
           ],
         ),
       ),
