@@ -2,6 +2,7 @@
 
   - **BREAKING**: Requires Dart `3.0.0` or later.
   - **BREAKING**: Requires Flutter `3.7.0` or later.
+  - **BREAKING**: Removed the previously deprecated `backgroundColor` property from `SiriWaveOptions`.
 
 ## 0.3.0
 
