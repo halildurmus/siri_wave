@@ -17,13 +17,12 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primarySwatch: Colors.amber,
         switchTheme: SwitchThemeData(
-            thumbColor: MaterialStateProperty.all(Colors.amber),
-            trackColor: MaterialStateProperty.resolveWith((states) {
-              if (states.contains(MaterialState.selected)) {
-                return Colors.amber.shade300;
-              }
-              return Colors.grey.withOpacity(.5);
-            })),
+          thumbColor: MaterialStateProperty.all(Colors.amber),
+          trackColor: MaterialStateProperty.resolveWith((states) =>
+              states.contains(MaterialState.selected)
+                  ? Colors.amber.shade300
+                  : Colors.grey.withOpacity(.5)),
+        ),
       ),
       themeMode: ThemeMode.dark,
       title: 'siri_wave Demo',
@@ -219,8 +218,8 @@ class _HomePageState extends State<HomePage> {
       isSelected: _isSelected,
       selectedBorderColor: Theme.of(context).colorScheme.primary,
       children: const [
-        Padding(padding: EdgeInsets.all(16), child: Text('iOS 7 Style')),
-        Padding(padding: EdgeInsets.all(16), child: Text('iOS 9 Style')),
+        Padding(padding: EdgeInsets.all(16), child: Text('iOS 7')),
+        Padding(padding: EdgeInsets.all(16), child: Text('iOS 9')),
       ],
     );
   }

@@ -5,7 +5,8 @@ class SupportLinePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final rect = Rect.fromLTWH(0, size.height / 2, size.width, 1);
+    final maxHeight = size.height / 2;
+    final rect = Rect.fromLTWH(0, maxHeight, size.width, 1);
     final shader = LinearGradient(
       colors: [
         const Color(0xFF111111).withOpacity(.7),

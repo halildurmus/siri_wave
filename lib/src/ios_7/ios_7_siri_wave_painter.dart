@@ -16,12 +16,12 @@ class IOS7SiriWavePainter extends CustomPainter {
 
   static const _amplitudeFactor = .6;
   static const _attenuationFactor = 4;
-  static const _curves = [
-    _IOS7SiriWaveCurve(attenuation: -2, width: 1, opacity: .1),
-    _IOS7SiriWaveCurve(attenuation: -6, width: 1, opacity: .2),
-    _IOS7SiriWaveCurve(attenuation: 4, width: 1, opacity: .4),
-    _IOS7SiriWaveCurve(attenuation: 2, width: 1, opacity: .6),
-    _IOS7SiriWaveCurve(attenuation: 1, width: 1.5, opacity: 1),
+  static const _curves = <_IOS7SiriWaveCurve>[
+    (attenuation: -2, width: 1, opacity: .1),
+    (attenuation: -6, width: 1, opacity: .2),
+    (attenuation: 4, width: 1, opacity: .4),
+    (attenuation: 2, width: 1, opacity: .6),
+    (attenuation: 1, width: 1.5, opacity: 1),
   ];
   static const _graphX = 2.0;
   static const _pixelDepth = .02;
@@ -77,14 +77,8 @@ class IOS7SiriWavePainter extends CustomPainter {
 }
 
 /// Describes the curve properties will be used by [IOS7SiriWavePainter].
-class _IOS7SiriWaveCurve {
-  const _IOS7SiriWaveCurve({
-    required this.attenuation,
-    required this.opacity,
-    required this.width,
-  });
-
-  final double attenuation;
-  final double opacity;
-  final double width;
-}
+typedef _IOS7SiriWaveCurve = ({
+  double attenuation,
+  double opacity,
+  double width
+});
