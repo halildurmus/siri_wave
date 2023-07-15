@@ -1,13 +1,13 @@
 # siri_wave
 
-[![ci](https://img.shields.io/cirrus/github/halildurmus/siri_wave)](https://cirrus-ci.com/halildurmus/siri_wave)
-[![Package: siri_wave](https://img.shields.io/pub/v/siri_wave.svg)](https://pub.dev/packages/siri_wave)
-[![Publisher: halildurmus.dev](https://img.shields.io/pub/publisher/siri_wave.svg)](https://pub.dev/publishers/halildurmus.dev)
-[![Language: Dart](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
-[![Platform: Flutter](https://img.shields.io/badge/Platform-Flutter-02569B?logo=flutter)](https://flutter.dev)
-[![License: MIT](https://img.shields.io/github/license/halildurmus/siri_wave?color=blue)](https://opensource.org/licenses/mit)
+[![ci][ci_badge]][ci_link]
+[![Package: siri_wave][package_badge]][package_link]
+[![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
+[![Language: Dart][language_badge]][language_link]
+[![Platform: Flutter][platform_badge]][platform_link]
+[![License: MIT][license_badge]][license_link]
 
-> Create beautiful waveforms like in *Siri*.
+> Create visually stunning waveforms similar to those found in *Siri*.
 It was inspired from the [siriwave](https://github.com/kopiro/siriwave) library.
 
 ## Demo
@@ -115,5 +115,19 @@ For a complete sample application, please checkout the [example](https://github.
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome.
-Feel free to check [issues page](https://github.com/halildurmus/siri_wave/issues)
-if you want to contribute.
+Feel free to check the [issue tracker][issue_tracker_link] if you want to
+contribute.
+
+[ci_badge]: https://img.shields.io/cirrus/github/halildurmus/siri_wave
+[ci_link]: https://cirrus-ci.com/halildurmus/siri_wave
+[issue_tracker_link]: https://github.com/halildurmus/siri_wave/issues
+[language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
+[language_link]: https://dart.dev
+[license_badge]: https://img.shields.io/github/license/halildurmus/siri_wave?color=blue
+[license_link]: https://opensource.org/licenses/mit
+[package_badge]: https://img.shields.io/pub/v/siri_wave.svg
+[package_link]: https://pub.dev/packages/siri_wave
+[platform_badge]: https://img.shields.io/badge/platform-Flutter-02569B?logo=flutter
+[platform_link]: https://flutter.dev
+[publisher_badge]: https://img.shields.io/pub/publisher/siri_wave.svg
+[publisher_link]: https://pub.dev/publishers/halildurmus.dev

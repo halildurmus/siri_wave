@@ -1,3 +1,7 @@
+## 1.0.1
+
+  - Improved code quality.
+
 ## 1.0.0
 
   - **BREAKING**: Requires Dart `3.0.0` or later.
