@@ -1,5 +1,3 @@
-# siri_wave
-
 [![ci][ci_badge]][ci_link]
 [![Package: siri_wave][package_badge]][package_link]
 [![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
@@ -7,7 +5,7 @@
 [![Platform: Flutter][platform_badge]][platform_link]
 [![License: MIT][license_badge]][license_link]
 
-> Create visually stunning waveforms similar to those found in *Siri*.
+Create visually stunning waveforms similar to those found in *Siri*.
 It was inspired from the [siriwave](https://github.com/kopiro/siriwave) library.
 
 ## Demo
@@ -21,12 +19,6 @@ Check out the live demo [here](https://halildurmus.github.io/siri_wave).
 ## iOS 9 style waveform
 
 [![iOS 9 style waveform](https://raw.githubusercontent.com/halildurmus/siri_wave/main/gifs/ios_9.gif)](https://halildurmus.github.io/siri_wave)
-
-## Getting Started
-
-### Requirements
-- `Dart >= 3.0.0`
-- `Flutter >= 3.7.0`
 
 ## Usage
 
