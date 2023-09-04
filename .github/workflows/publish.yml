@@ -15,7 +15,7 @@ jobs:
           channel: 'stable'
       - run: flutter pub get
       - run: flutter test
-      - uses: bluefireteam/flutter-gh-pages@v7
+      - uses: bluefireteam/flutter-gh-pages@v8
         with:
           baseHref: /siri_wave/
           webRenderer: canvaskit
