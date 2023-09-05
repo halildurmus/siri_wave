@@ -1,6 +1,7 @@
 name: siri_wave
-description: Create visually stunning waveforms similar to those found in Siri.
-version: 1.0.1
+description: >
+  A Flutter package that lets you create visually stunning Siri-style waveforms.
+version: 1.0.2
 repository: https://github.com/halildurmus/siri_wave
 issue_tracker: https://github.com/halildurmus/siri_wave/issues
 
@@ -17,15 +18,16 @@ topics:
 
 environment:
   sdk: '^3.0.0'
-  flutter: '>=3.7.0'
+  flutter: '^3.7.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
+  flutter_lints: ^2.0.3
   flutter_test:
     sdk: flutter
+  melos: ^3.1.1
 
 flutter:

@@ -1,3 +1,7 @@
+// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 import 'package:flutter/material.dart';
 
 import '../models/siri_wave_controller.dart';
@@ -5,6 +9,7 @@ import '../models/siri_wave_options.dart';
 import 'ios_9_siri_wave_painter.dart';
 import 'support_line_painter.dart';
 
+/// A widget that displays the iOS 9 style Siri waveform.
 class IOS9SiriWave extends StatefulWidget {
   const IOS9SiriWave({
     super.key,

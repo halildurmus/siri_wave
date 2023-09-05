@@ -1,8 +1,10 @@
+// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:siri_wave/siri_wave.dart';
-import 'package:siri_wave/src/ios_7/ios_7_siri_wave.dart';
-import 'package:siri_wave/src/ios_7/ios_7_siri_wave_painter.dart';
 
 void main() {
   group('IOS7SiriWave', () {
@@ -21,11 +23,11 @@ void main() {
       // Find the IOS7SiriWave widget.
       final ios7SiriWave =
           tester.firstWidget<IOS7SiriWave>(find.byType(IOS7SiriWave));
-
-      expect(ios7SiriWave.controller.amplitude, 1);
-      expect(ios7SiriWave.controller.color, Colors.white);
-      expect(ios7SiriWave.controller.frequency, 6);
-      expect(ios7SiriWave.controller.speed, .2);
+      final controller = ios7SiriWave.controller;
+      expect(controller.amplitude, 1);
+      expect(controller.color, Colors.white);
+      expect(controller.frequency, 6);
+      expect(controller.speed, .2);
     });
 
     testWidgets('widget should paint the canvas with IOS7SiriWavePainter',
@@ -48,7 +50,6 @@ void main() {
           matching: find.byType(CustomPaint),
         ),
       );
-
       expect(customPaint.painter, isA<IOS7SiriWavePainter>());
     });
   });

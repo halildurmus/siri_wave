@@ -1,3 +1,7 @@
+// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 import 'package:flutter/material.dart';
 
 import 'ios_7/ios_7_siri_wave.dart';
@@ -6,16 +10,16 @@ import 'models/siri_wave_controller.dart';
 import 'models/siri_wave_options.dart';
 import 'models/siri_wave_style.dart';
 
-/// Displays a Siri style waveform.
+/// A widget that displays a Siri-style waveform.
 class SiriWave extends StatefulWidget {
-  /// Creates a Siri style waveform.
+  /// Creates a Siri-style waveform.
   ///
   /// The dimensions of the waveform can be customized by using [options] or by
   /// enclosing the [SiriWave] widget within a [SizedBox], [Container], or any
   /// other widget that applies constraints to its child."
   ///
   /// The style of the waveform can be configured with [style].
-  /// By default, iOS 9 Siri style waveform is shown.
+  /// By default, iOS 9 Siri-style waveform is shown.
   SiriWave({
     SiriWaveController? controller,
     this.options = const SiriWaveOptions(),
