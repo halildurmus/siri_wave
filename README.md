@@ -6,11 +6,11 @@
 [![License: MIT][license_badge]][license_link]
 
 Create visually stunning waveforms similar to those found in *Siri*.
-It was inspired from the [siriwave](https://github.com/kopiro/siriwave) library.
+It was inspired from the [siriwave][siriwave_link] library.
 
 ## Demo
 
-Check out the live demo [here](https://halildurmus.github.io/siri_wave).
+Check out the live demo [here][demo_link].
 
 ## iOS 7 style waveform
 
@@ -57,7 +57,7 @@ class MyWidget extends StatelessWidget {
 }
 ```
 
-Afterward, you can invoke any desired method from the controller to modify the
+Afterwards, you can invoke any desired method from the controller to modify the
 waveform:
 
 ```dart
@@ -112,6 +112,7 @@ contribute.
 
 [ci_badge]: https://img.shields.io/cirrus/github/halildurmus/siri_wave
 [ci_link]: https://cirrus-ci.com/halildurmus/siri_wave
+[demo_link]: https://halildurmus.github.io/siri_wave
 [issue_tracker_link]: https://github.com/halildurmus/siri_wave/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
@@ -123,3 +124,4 @@ contribute.
 [platform_link]: https://flutter.dev
 [publisher_badge]: https://img.shields.io/pub/publisher/siri_wave.svg
 [publisher_link]: https://pub.dev/publishers/halildurmus.dev
+[siriwave_link]: https://github.com/kopiro/siriwave

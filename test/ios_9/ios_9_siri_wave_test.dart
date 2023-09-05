@@ -1,9 +1,10 @@
+// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
+// All rights reserved. Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:siri_wave/siri_wave.dart';
-import 'package:siri_wave/src/ios_9/ios_9_siri_wave.dart';
-import 'package:siri_wave/src/ios_9/ios_9_siri_wave_painter.dart';
-import 'package:siri_wave/src/ios_9/support_line_painter.dart';
 
 void main() {
   group('IOS9SiriWave', () {
@@ -22,7 +23,6 @@ void main() {
       // Find the IOS9SiriWave widget.
       final ios9SiriWave =
           tester.firstWidget<IOS9SiriWave>(find.byType(IOS9SiriWave));
-
       expect(ios9SiriWave.controller.amplitude, 1);
       expect(ios9SiriWave.controller.speed, .2);
     });
@@ -48,7 +48,6 @@ void main() {
           matching: find.byType(CustomPaint),
         ),
       );
-
       expect(customPaint.painter, isA<SupportLinePainter>());
       expect(customPaint.foregroundPainter, isA<IOS9SiriWavePainter>());
     });
@@ -74,7 +73,6 @@ void main() {
           matching: find.byType(CustomPaint),
         ),
       );
-
       expect(customPaint.painter, isA<SupportLinePainter>());
       expect(customPaint.foregroundPainter, null);
     });
