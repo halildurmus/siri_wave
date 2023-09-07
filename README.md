@@ -3,7 +3,7 @@
 [![Publisher: halildurmus.dev][publisher_badge]][publisher_link]
 [![Language: Dart][language_badge]][language_link]
 [![Platform: Flutter][platform_badge]][platform_link]
-[![License: MIT][license_badge]][license_link]
+[![License: BSD-3-Clause][license_badge]][license_link]
 
 Create visually stunning waveforms similar to those found in *Siri*.
 It was inspired from the [siriwave][siriwave_link] library.
@@ -117,7 +117,7 @@ contribute.
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev
 [license_badge]: https://img.shields.io/github/license/halildurmus/siri_wave?color=blue
-[license_link]: https://opensource.org/licenses/mit
+[license_link]: https://opensource.org/licenses/BSD-3-Clause
 [package_badge]: https://img.shields.io/pub/v/siri_wave.svg
 [package_link]: https://pub.dev/packages/siri_wave
 [platform_badge]: https://img.shields.io/badge/platform-Flutter-02569B?logo=flutter
