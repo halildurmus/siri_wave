@@ -114,7 +114,7 @@ Contributions, issues and feature requests are welcome.
 Feel free to check the [issue tracker][issue_tracker_link] if you want to
 contribute.
 
-[api_documentation_link]: https://pub.dev/documentation/nuget/latest/
+[api_documentation_link]: https://pub.dev/documentation/siri_wave/latest/
 [ci_badge]: https://img.shields.io/cirrus/github/halildurmus/siri_wave
 [ci_link]: https://cirrus-ci.com/halildurmus/siri_wave
 [demo_link]: https://halildurmus.github.io/siri_wave

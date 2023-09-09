@@ -1,3 +1,7 @@
+## 2.0.0+1
+
+- Fixed the API Documentation link in README.
+
 ## 2.0.0
 
 ### Major Changes
