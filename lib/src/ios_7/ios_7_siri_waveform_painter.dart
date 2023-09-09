@@ -7,21 +7,28 @@ import 'dart:math' as math;
 import 'package:flutter/animation.dart' show AnimationController;
 import 'package:flutter/rendering.dart';
 
-import '../models/siri_wave_controller.dart';
+import '../models/siri_waveform_controller.dart';
 
-/// A custom painter that draws the iOS 7 style Siri waveform.
-class IOS7SiriWavePainter extends CustomPainter {
-  IOS7SiriWavePainter({
+/// A custom painter responsible for rendering an *iOS 7 Siri-style* waveform.
+class IOS7SiriWaveformPainter extends CustomPainter {
+  /// Creates an instance of [IOS7SiriWaveformPainter].
+  ///
+  /// The [animationController] is used to synchronize the animation of the
+  /// waveform.
+  ///
+  /// The [controller] contains properties to control the appearance and
+  /// behavior of the waveform.
+  IOS7SiriWaveformPainter({
     required this.animationController,
     required this.controller,
   }) : super(repaint: animationController);
 
   final AnimationController animationController;
-  final SiriWaveController controller;
+  final IOS7SiriWaveformController controller;
 
   static const _amplitudeFactor = .6;
   static const _attenuationFactor = 4;
-  static const _curves = <_IOS7SiriWaveCurve>[
+  static const _curves = <_IOS7SiriWaveformCurve>[
     (attenuation: -2, width: 1, opacity: .1),
     (attenuation: -6, width: 1, opacity: .2),
     (attenuation: 4, width: 1, opacity: .4),
@@ -57,7 +64,7 @@ class IOS7SiriWavePainter extends CustomPainter {
 
     for (final curve in _curves) {
       final path = Path()..moveTo(0, maxHeight);
-      // Cycle the graph from -X to +X every pixelDepth and draw the line
+      // Cycle the graph from -X to +X every pixelDepth and draw the line.
       for (var i = -_graphX; i <= _graphX; i += _pixelDepth) {
         final x = _xPos(i, size);
         final y = maxHeight + _yPos(i, curve.attenuation, maxHeight);
@@ -75,14 +82,16 @@ class IOS7SiriWavePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(IOS7SiriWavePainter oldDelegate) =>
-      oldDelegate.controller.amplitude != controller.amplitude ||
-      oldDelegate.controller.frequency != controller.frequency ||
-      oldDelegate.controller.speed != controller.speed;
+  bool shouldRepaint(IOS7SiriWaveformPainter oldDelegate) {
+    final oldController = oldDelegate.controller;
+    return oldController.amplitude != controller.amplitude ||
+        oldController.frequency != controller.frequency ||
+        oldController.speed != controller.speed;
+  }
 }
 
-/// Describes the curve properties will be used by [IOS7SiriWavePainter].
-typedef _IOS7SiriWaveCurve = ({
+/// Represents the curve properties will be used by [IOS7SiriWaveformPainter].
+typedef _IOS7SiriWaveformCurve = ({
   double attenuation,
   double opacity,
   double width

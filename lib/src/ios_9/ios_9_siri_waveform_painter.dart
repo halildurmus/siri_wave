@@ -6,17 +6,24 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import '../models/siri_wave_controller.dart';
+import '../models/siri_waveform_controller.dart';
 
-/// A custom painter that draws the iOS 9 style Siri waveform.
-class IOS9SiriWavePainter extends CustomPainter {
-  IOS9SiriWavePainter({
+/// A custom painter responsible for rendering an *iOS 9 Siri-style* waveform.
+class IOS9SiriWaveformPainter extends CustomPainter {
+  /// Creates an instance of [IOS9SiriWaveformPainter].
+  ///
+  /// The [animationController] is used to synchronize the animation of the
+  /// waveform.
+  ///
+  /// The [controller] contains properties to control the appearance and
+  /// behavior of the waveform.
+  IOS9SiriWaveformPainter({
     required this.animationController,
     required this.controller,
   }) : super(repaint: animationController);
 
   final AnimationController animationController;
-  final SiriWaveController controller;
+  final IOS9SiriWaveformController controller;
 
   static const _amplitudeFactor = .8;
   static const _amplitudeRanges = <double>[.3, 1];
@@ -37,33 +44,33 @@ class IOS9SiriWavePainter extends CustomPainter {
   ];
   static const _widthRanges = [1, 3];
 
-  final _waves = <String, _IOS9SiriWave>{
-    'red': _IOS9SiriWave(color: _waveColors[0]),
-    'green': _IOS9SiriWave(color: _waveColors[1]),
-    'blue': _IOS9SiriWave(color: _waveColors[2]),
+  final _waveforms = <String, _IOS9SiriWaveformProperties>{
+    'red': _IOS9SiriWaveformProperties(color: _waveColors[0]),
+    'green': _IOS9SiriWaveformProperties(color: _waveColors[1]),
+    'blue': _IOS9SiriWaveformProperties(color: _waveColors[2]),
   };
 
   num _getRandomRange(List<num> e) =>
       e[0] + math.Random().nextDouble() * (e[1] - e[0]);
 
   void _spawnSingle(int ci, String key) {
-    final wave = _waves[key]!;
-    wave.phases[ci] = 0;
-    wave.amplitudes[ci] = 0;
-    wave.despawnTimeouts[ci] =
+    final waveform = _waveforms[key]!;
+    waveform.phases[ci] = 0;
+    waveform.amplitudes[ci] = 0;
+    waveform.despawnTimeouts[ci] =
         _getRandomRange(_despawnTimeoutRanges).toDouble();
-    wave.offsets[ci] = _getRandomRange(_offsetRanges).toDouble();
-    wave.speeds[ci] = _getRandomRange(_speedRanges).toDouble();
-    wave.finalAmplitudes[ci] = _getRandomRange(_amplitudeRanges).toDouble();
-    wave.widths[ci] = _getRandomRange(_widthRanges).toDouble();
-    wave.verses[ci] = _getRandomRange([-1, 1]).toDouble();
+    waveform.offsets[ci] = _getRandomRange(_offsetRanges).toDouble();
+    waveform.speeds[ci] = _getRandomRange(_speedRanges).toDouble();
+    waveform.finalAmplitudes[ci] = _getRandomRange(_amplitudeRanges).toDouble();
+    waveform.widths[ci] = _getRandomRange(_widthRanges).toDouble();
+    waveform.verses[ci] = _getRandomRange([-1, 1]).toDouble();
   }
 
   List<double> _getEmptyArray(int length) => List.filled(length, 0.0);
 
   void _spawn(String key) {
     final curvesCount = _getRandomRange(_noOfCurvesRanges).floor();
-    final wave = _waves[key]!
+    final wave = _waveforms[key]!
       ..spawnAt = DateTime.now().millisecondsSinceEpoch
       ..noOfCurves = curvesCount
       ..amplitudes = _getEmptyArray(curvesCount)
@@ -87,7 +94,7 @@ class IOS9SiriWavePainter extends CustomPainter {
   num _sin(double x, double phase) => math.sin(x - phase);
 
   num _yRelativePos(double i, String key) {
-    final wave = _waves[key]!;
+    final wave = _waveforms[key]!;
     var y = .0;
 
     for (var ci = 0; ci < wave.noOfCurves; ci++) {
@@ -129,7 +136,7 @@ class IOS9SiriWavePainter extends CustomPainter {
     canvas.saveLayer(Rect.fromLTWH(0, 0, size.width, size.height),
         Paint()..color = Colors.white);
 
-    for (final entry in _waves.entries) {
+    for (final entry in _waveforms.entries) {
       final wave = entry.value;
       if (wave.spawnAt == 0) {
         _spawn(entry.key);
@@ -183,14 +190,16 @@ class IOS9SiriWavePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(IOS9SiriWavePainter oldDelegate) =>
-      oldDelegate.controller.amplitude != controller.amplitude ||
-      oldDelegate.controller.speed != controller.speed;
+  bool shouldRepaint(IOS9SiriWaveformPainter oldDelegate) {
+    final oldController = oldDelegate.controller;
+    return oldController.amplitude != controller.amplitude ||
+        oldController.speed != controller.speed;
+  }
 }
 
-/// Describes the curve properties will be used by [IOS9SiriWavePainter].
-class _IOS9SiriWave {
-  _IOS9SiriWave({required this.color});
+/// Describes the curve properties will be used by [IOS9SiriWaveformPainter].
+class _IOS9SiriWaveformProperties {
+  _IOS9SiriWaveformProperties({required this.color});
 
   var amplitudes = <double>[];
   final Color color;

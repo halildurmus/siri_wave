@@ -1,14 +1,14 @@
 name: siri_wave
 description: >
   A Flutter package that lets you create visually stunning Siri-style waveforms.
-version: 1.0.2
+version: 2.0.0
 repository: https://github.com/halildurmus/siri_wave
 issue_tracker: https://github.com/halildurmus/siri_wave/issues
 
 screenshots:
-  - description: Example of the iOS 9 style waveform.
+  - description: Example of the iOS 9 Siri-style waveform.
     path: gifs/ios_9.gif
-  - description: Example of the iOS 7 style waveform.
+  - description: Example of the iOS 7 Siri-style waveform.
     path: gifs/ios_7.gif
 
 topics:
@@ -17,7 +17,7 @@ topics:
   - siri
 
 environment:
-  sdk: '^3.0.0'
+  sdk: '^3.1.0'
   flutter: '>=3.7.0'
 
 dependencies:
@@ -25,7 +25,7 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  flutter_lints: ^2.0.3
+  dartwindows_lints: ^1.0.0
   flutter_test:
     sdk: flutter
   melos: ^3.1.1

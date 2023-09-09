@@ -12,97 +12,101 @@ It was inspired from the [siriwave][siriwave_link] library.
 
 Check out the live demo [here][demo_link].
 
-## iOS 7 style waveform
+## iOS 7 Siri-style waveform
 
-[![iOS 7 style waveform](https://raw.githubusercontent.com/halildurmus/siri_wave/main/gifs/ios_7.gif)](https://halildurmus.github.io/siri_wave)
+[![iOS 7 Siri-style waveform][ios_7_gif_link]][demo_link]
 
-## iOS 9 style waveform
+## iOS 9 Siri-style waveform
 
-[![iOS 9 style waveform](https://raw.githubusercontent.com/halildurmus/siri_wave/main/gifs/ios_9.gif)](https://halildurmus.github.io/siri_wave)
+[![iOS 9 Siri-style waveform][ios_9_gif_link]][demo_link]
 
 ## Usage
 
-Simply create a `SiriWave` widget:
+### iOS 7 Siri-style waveform
+
+To create an *iOS 7 Siri-style* waveform, use the `SiriWaveform.ios7()`
+constructor:
 
 ```dart
 import 'package:siri_wave/siri_wave.dart';
 
 class MyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
-    return SiriWave();
+    return SiriWaveform.ios7();
   }
 }
 ```
 
-To customize the `amplitude`, `frequency`, `speed`, and `color` properties of
-the waveform, create an instance of `SiriWaveController` and pass it to the
-`SiriWave` widget as shown in the code snippet below:
+You can customize the waveform by passing a `controller` and/or `options`:
+
+```dart
+class MyWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final controller = IOS7SiriWaveformController(
+      amplitude: 0.5,
+      color: Colors.red,
+      frequency: 4,
+      speed: 0.15,
+    );
+    return SiriWaveform.ios7(
+      controller: controller,
+      options: IOS7SiriWaveformOptions(
+        height: 180,
+        width: 360,
+      ),
+    );
+  }
+}
+```
+
+You can also change the properties of the waveform later:
+
+```dart
+  controller.amplitude = 0.3;
+  controller.color = Colors.white;
+```
+
+### iOS 9 Siri-style waveform
+
+To create an *iOS 9 Siri-style* waveform, use the `SiriWaveform.ios9()`
+constructor:
 
 ```dart
 import 'package:siri_wave/siri_wave.dart';
 
 class MyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
-    // You can customize the default values of the waveform while creating the
-    // controller:
-    //  final controller = SiriWaveController(
-    //    amplitude: 0.5,
-    //    color: Colors.red,
-    //    frequency: 4,
-    //    speed: 0.15,
-    //  );
-    final controller = SiriWaveController();
-    return SiriWave(controller: controller);
+    return SiriWaveform.ios9();
   }
 }
 ```
 
-Afterwards, you can invoke any desired method from the controller to modify the
-waveform:
+As with the *iOS 7 Siri-style* waveform, you can customize the waveform by
+passing a `controller` and/or `options`:
 
 ```dart
-controller.setAmplitude(0.8);
-controller.setSpeed(0.1);
-
-// These are only available in the iOS 7 style waveform.
-controller.setColor(Colors.yellow);
-controller.setFrequency(4);
+class MyWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final controller = IOS9SiriWaveformController(
+      amplitude: 0.5,
+      speed: 0.15,
+    );
+    return SiriWaveform.ios9(
+      controller: controller,
+      options: IOS9SiriWaveformOptions(
+        height: 180,
+        width: 360,
+      ),
+    );
+  }
+}
 ```
 
-For a complete sample application, please checkout the [example](https://github.com/halildurmus/siri_wave/blob/main/example/lib/main.dart).
+For a complete sample application, please checkout the [example][example_link].
 
-## SiriWave
-
-| Parameter    | Type               | Description                        | Default              |
-| ------------ | ------------------ | ---------------------------------- | -------------------- |
-| `controller` | SiriWaveController | The controller of the SiriWave.    | SiriWaveController() |
-| `options`    | SiriWaveOptions    | The configuration of the SiriWave. | SiriWaveOptions()    |
-| `style`      | SiriWaveStyle      | The wave style of the SiriWave.    | SiriWaveStyle.ios_9  |
-
-
-## SiriWaveController
-
-| Parameter   | Type   | Description                                | Default      |
-| ----------- | ------ | ------------------------------------------ | ------------ |
-| `amplitude` | double | The amplitude of the waveform.             | 1.0          |
-| `color`     | Color  | The color of the iOS 7 style waveform.     | Colors.white |
-| `frequency` | int    | The frequency of the iOS 7 style waveform. | 6            |
-| `speed`     | double | The speed of the waveform.                 | 0.2          |
-
-| Function                     | Description                                                                              |
-| ---------------------------- | ---------------------------------------------------------------------------------------- |
-| `setAmplitude(double value)` | Sets the amplitude of the waveform. The value must be in the [0,1] range.                |
-| `setColor(Color color)`      | Sets the color of the iOS 7 style waveform.                                              |
-| `setFrequency(double value)` | Sets the frequency of the iOS 7 style waveform. The value must be in the [-20,20] range. |
-| `setSpeed(double value)`     | Sets the speed of the waveform. The value must be in the [0,1] range.                    |
-
-## SiriWaveOptions
-
-| Parameter        | Type   | Description                                          | Default |
-| ---------------- | ------ | ---------------------------------------------------- | ------- |
-| `height`         | double | The height of the waveform.                          | 180     |
-| `showSupportBar` | bool   | Whether to show support bar on iOS 9 style waveform. | true    |
-| `width`          | double | The width of the waveform.                           | 360     |
+To learn more, see the [API Documentation][api_documentation_link].
 
 ## 🤝 Contributing
 
@@ -110,9 +114,13 @@ Contributions, issues and feature requests are welcome.
 Feel free to check the [issue tracker][issue_tracker_link] if you want to
 contribute.
 
+[api_documentation_link]: https://pub.dev/documentation/nuget/latest/
 [ci_badge]: https://img.shields.io/cirrus/github/halildurmus/siri_wave
 [ci_link]: https://cirrus-ci.com/halildurmus/siri_wave
 [demo_link]: https://halildurmus.github.io/siri_wave
+[example_link]: https://github.com/halildurmus/siri_wave/blob/main/example/lib/main.dart
+[ios_7_gif_link]: https://raw.githubusercontent.com/halildurmus/siri_wave/main/gifs/ios_7.gif
+[ios_9_gif_link]: https://raw.githubusercontent.com/halildurmus/siri_wave/main/gifs/ios_9.gif
 [issue_tracker_link]: https://github.com/halildurmus/siri_wave/issues
 [language_badge]: https://img.shields.io/badge/language-Dart-blue.svg
 [language_link]: https://dart.dev

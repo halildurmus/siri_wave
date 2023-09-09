@@ -1,3 +1,41 @@
+## 2.0.0
+
+### Major Changes
+
+- **BREAKING**: Renamed the `SiriWave` widget to `SiriWaveform`.
+
+  `SiriWaveform` widget no longer has a default constructor. Instead, it
+  provides two factory constructors:
+  - `SiriWaveform.ios7()`: Creates an *iOS 7 Siri-style* waveform.
+  - `SiriWaveform.ios9()`: Creates an *iOS 9 Siri-style* waveform.
+
+- **BREAKING**: Renamed the `SiriWaveController` class to
+  `SiriWaveformController`.
+
+  `SiriWaveformController` is now a `sealed` class and includes two concrete
+  subclasses:
+  - `IOS7SiriWaveformController`: For managing *iOS 7 Siri-style* waveforms.
+  - `IOS9SiriWaveformController`: For managing *iOS 9 Siri-style* waveforms.
+
+  The controller classes no longer have methods to change the properties of the
+  waveform (e.g., `controller.setAmplitude(0.2);`). Instead, you can directly
+  modify the properties of the controller (e.g., `controller.amplitude = 0.2;`).
+
+- **BREAKING**: Renamed the `SiriWaveOptions` class to `SiriWaveformOptions`.
+
+  `SiriWaveformOptions` is now a `sealed` class and includes two concrete
+  subclasses:
+  - `IOS7SiriWaveformOptions`: Options for *iOS 7 Siri-style* waveforms.
+  - `IOS9SiriWaveformOptions`: Options for *iOS 9 Siri-style* waveforms.
+
+- **BREAKING**: Renamed the `SiriWaveStyle` enum to `SiriWaveformStyle`.
+
+### Other Changes
+
+- Refactored the example app.
+- Improved documentation.
+- Changed the library license to the `BSD 3-Clause License`.
+
 ## 1.0.2
 
 - Exposed internally used widgets and custom painters.

@@ -7,35 +7,35 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:siri_wave/siri_wave.dart';
 
 void main() {
-  group('IOS9SiriWave', () {
+  group('IOS9SiriWaveform', () {
     testWidgets("widget's properties should be set correctly", (tester) async {
-      // Build the SiriWave widget.
+      // Build the IOS9SiriWaveform widget.
       await tester.pumpWidget(
         MaterialApp(
           home: Material(
-            child: IOS9SiriWave(
-              controller: SiriWaveController(),
+            child: IOS9SiriWaveform(
+              controller: IOS9SiriWaveformController(),
             ),
           ),
         ),
       );
 
-      // Find the IOS9SiriWave widget.
-      final ios9SiriWave =
-          tester.firstWidget<IOS9SiriWave>(find.byType(IOS9SiriWave));
-      expect(ios9SiriWave.controller.amplitude, 1);
-      expect(ios9SiriWave.controller.speed, .2);
+      // Find the IOS9SiriWaveform widget.
+      final ios9SiriWaveform =
+          tester.firstWidget<IOS9SiriWaveform>(find.byType(IOS9SiriWaveform));
+      expect(ios9SiriWaveform.controller.amplitude, 1);
+      expect(ios9SiriWaveform.controller.speed, .2);
     });
 
     testWidgets(
-        'widget should paint the canvas with SupportLinePainter and IOS9SiriWavePainter',
-        (tester) async {
-      // Build the SiriWave widget.
+        'widget should paint the canvas with IOS9SiriWaveformSupportBarPainter '
+        'and IOS9SiriWaveformPainter', (tester) async {
+      // Build the IOS9SiriWaveform widget.
       await tester.pumpWidget(
         MaterialApp(
           home: Material(
-            child: IOS9SiriWave(
-              controller: SiriWaveController(),
+            child: IOS9SiriWaveform(
+              controller: IOS9SiriWaveformController(),
             ),
           ),
         ),
@@ -48,19 +48,20 @@ void main() {
           matching: find.byType(CustomPaint),
         ),
       );
-      expect(customPaint.painter, isA<SupportLinePainter>());
-      expect(customPaint.foregroundPainter, isA<IOS9SiriWavePainter>());
+      expect(customPaint.painter, isA<IOS9SiriWaveformSupportBarPainter>());
+      expect(customPaint.foregroundPainter, isA<IOS9SiriWaveformPainter>());
     });
 
     testWidgets(
-        'widget should only paint the canvas with SupportLinePainter if the amplitude is 0',
+        'widget should only paint the canvas with '
+        'IOS9SiriWaveformSupportBarPainter if the amplitude is 0',
         (tester) async {
-      // Build the SiriWave widget.
+      // Build the IOS9SiriWaveform widget.
       await tester.pumpWidget(
         MaterialApp(
           home: Material(
-            child: IOS9SiriWave(
-              controller: SiriWaveController(amplitude: 0),
+            child: IOS9SiriWaveform(
+              controller: IOS9SiriWaveformController(amplitude: 0),
             ),
           ),
         ),
@@ -73,7 +74,7 @@ void main() {
           matching: find.byType(CustomPaint),
         ),
       );
-      expect(customPaint.painter, isA<SupportLinePainter>());
+      expect(customPaint.painter, isA<IOS9SiriWaveformSupportBarPainter>());
       expect(customPaint.foregroundPainter, null);
     });
   });

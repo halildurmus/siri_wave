@@ -4,8 +4,11 @@
 
 import 'package:flutter/rendering.dart';
 
-class SupportLinePainter extends CustomPainter {
-  const SupportLinePainter();
+/// A custom painter responsible for rendering a support bar on
+/// *iOS 9 Siri-style* waveform.
+class IOS9SiriWaveformSupportBarPainter extends CustomPainter {
+  /// Creates an instance of [IOS9SiriWaveformSupportBarPainter].
+  const IOS9SiriWaveformSupportBarPainter();
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -25,5 +28,5 @@ class SupportLinePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(SupportLinePainter oldDelegate) => false;
+  bool shouldRepaint(IOS9SiriWaveformSupportBarPainter oldDelegate) => false;
 }

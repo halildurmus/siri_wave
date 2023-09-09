@@ -1,6 +1,6 @@
 # Contributing
 
-_See also: [siri_wave's code of conduct](https://github.com/halildurmus/siri_wave/blob/main/CODE_OF_CONDUCT.md)_
+_See also: [siri_wave's code of conduct][code_of_conduct_link]_
 
 First off, thanks for taking the time to contribute!
 
@@ -23,8 +23,10 @@ environment:
 
 ### File an issue first!
 
-If the work you intend to do is non-trivial, **it is necessary to [file an issue](https://github.com/halildurmus/siri_wave/issues/new/choose) before starting writing your code**.
-This helps us and the community to discuss the issue and choose what is deemed to be the best solution.
+If the work you intend to do is non-trivial, **it is necessary to
+[file an issue][file_an_issue_link] before starting writing your code**. This
+helps us and the community to discuss the issue and choose what is deemed
+to be the best solution.
 
 ### Checking your code's quality
 
@@ -48,3 +50,6 @@ These are the steps you should follow when creating a PR:
 
 After you follow the above steps, your PR will hopefully be merged.
 Thanks for contributing!
+
+[code_of_conduct_link]: https://github.com/halildurmus/siri_wave/blob/main/CODE_OF_CONDUCT.md
+[file_an_issue_link]: https://github.com/halildurmus/siri_wave/issues/new
