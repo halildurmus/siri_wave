@@ -4,20 +4,25 @@
 
 import 'package:flutter/material.dart';
 
-import '../models/siri_wave_controller.dart';
-import 'ios_7_siri_wave_painter.dart';
+import '../models/siri_waveform_controller.dart';
+import 'ios_7_siri_waveform_painter.dart';
 
-/// A widget that displays the iOS 7 style Siri waveform.
-class IOS7SiriWave extends StatefulWidget {
-  const IOS7SiriWave({super.key, required this.controller});
+/// An *iOS 7 Siri-style* waveform.
+class IOS7SiriWaveform extends StatefulWidget {
+  /// Creates an instance of [IOS7SiriWaveform].
+  ///
+  /// The [controller] is responsible for controlling the properties and
+  /// behavior of the waveform.
+  const IOS7SiriWaveform({super.key, required this.controller});
 
-  final SiriWaveController controller;
+  /// The controller that manages the properties and behavior of the waveform.
+  final IOS7SiriWaveformController controller;
 
   @override
-  IOS7SiriWaveState createState() => IOS7SiriWaveState();
+  IOS7SiriWaveformState createState() => IOS7SiriWaveformState();
 }
 
-class IOS7SiriWaveState extends State<IOS7SiriWave>
+class IOS7SiriWaveformState extends State<IOS7SiriWaveform>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
@@ -29,21 +34,19 @@ class IOS7SiriWaveState extends State<IOS7SiriWave>
       // the duration value does not impact the animation in any way.
       duration: const Duration(seconds: 1),
     );
-
-    if (widget.controller.amplitude > 0 && widget.controller.speed > 0) {
-      _animationController.repeat();
-    }
+    final IOS7SiriWaveformController(:amplitude, :speed) = widget.controller;
+    if (amplitude > 0 && speed > 0) _animationController.repeat();
     super.initState();
   }
 
   @override
-  void didUpdateWidget(covariant IOS7SiriWave oldWidget) {
+  void didUpdateWidget(covariant IOS7SiriWaveform oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (_animationController.isAnimating &&
-        (widget.controller.amplitude == 0 || widget.controller.speed == 0)) {
+    final isAnimating = _animationController.isAnimating;
+    final IOS7SiriWaveformController(:amplitude, :speed) = widget.controller;
+    if (isAnimating && (amplitude == 0 || speed == 0)) {
       _animationController.stop(canceled: false);
-    } else if (!_animationController.isAnimating &&
-        (widget.controller.amplitude > 0 && widget.controller.speed > 0)) {
+    } else if (!isAnimating && (amplitude > 0 && speed > 0)) {
       _animationController.repeat();
     }
   }
@@ -57,10 +60,11 @@ class IOS7SiriWaveState extends State<IOS7SiriWave>
   @override
   Widget build(BuildContext context) {
     final customPaint = CustomPaint(
-      painter: IOS7SiriWavePainter(
+      painter: IOS7SiriWaveformPainter(
         animationController: _animationController,
         controller: widget.controller,
       ),
+      size: Size.infinite,
     );
 
     return AnimatedBuilder(
