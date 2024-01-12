@@ -28,6 +28,6 @@ dev_dependencies:
   dartwindows_lints: ^1.0.0
   flutter_test:
     sdk: flutter
-  melos: ^3.1.1
+  melos: ">=3.1.1 <5.0.0"
 
 flutter:
