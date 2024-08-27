@@ -38,9 +38,7 @@ class IOS9SiriWaveformPainter extends CustomPainter {
   static const _speedFactor = 1;
   static const _speedRanges = <double>[.5, 1];
   static const _waveColors = [
-    Color.fromRGBO(173, 57, 76, 1),
-    Color.fromRGBO(48, 220, 155, 1),
-    Color.fromRGBO(15, 82, 169, 1),
+    Color.fromRGBO(255, 255, 255, 0.8),
   ];
   static const _widthRanges = [1, 3];
 
