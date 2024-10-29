@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'package:flutter/material.dart' show Color, Colors;
 
 /// A base class for controllers used to manage *Siri-style* waveforms.
@@ -23,8 +19,14 @@ sealed class SiriWaveformController {
     this.speed = .2,
   })  : _interpolationAmplitude = amplitude,
         _interpolationSpeed = speed,
-        assert(amplitude >= 0 && amplitude <= 1),
-        assert(speed >= 0 && speed <= 1);
+        assert(
+          amplitude >= 0 && amplitude <= 1,
+          'The amplitude must be in the [0, 1] range.',
+        ),
+        assert(
+          speed >= 0 && speed <= 1,
+          'The speed must be in the [0, 1] range.',
+        );
 
   /// The amplitude of the waveform.
   ///
@@ -89,7 +91,10 @@ final class IOS7SiriWaveformController extends SiriWaveformController {
     super.speed,
     this.color = Colors.white,
     this.frequency = 6,
-  }) : assert(frequency >= -20 && frequency <= 20);
+  }) : assert(
+          frequency >= -20 && frequency <= 20,
+          'The frequency must be in the [-20, 20] range.',
+        );
 
   /// The color of the waveform.
   ///

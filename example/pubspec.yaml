@@ -1,22 +1,20 @@
 name: example
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: '^3.0.0'
+  sdk: ^3.5.0
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_colorpicker: ^1.0.3
+  flutter_colorpicker: ^1.1.0
   siri_wave:
     path: ../
 
 dev_dependencies:
-  flutter_lints: ^2.0.3
-  flutter_test:
-    sdk: flutter
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true

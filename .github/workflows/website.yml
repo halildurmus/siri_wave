@@ -1,0 +1,32 @@
+name: Deploy Flutter Example App to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/website.yml'
+      - example/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get
+      - run: flutter config --enable-web
+        working-directory: example
+      - run: flutter build web --release --wasm --base-href /siri_wave/
+        working-directory: example
+      - run: git config user.name github-actions
+        working-directory: example
+      - run: git config user.email github-actions@github.com
+        working-directory: example
+      - run: git --work-tree build/web add --all
+        working-directory: example
+      - run: git commit -m "Automatic deployment by github-actions"
+        shell: bash
+      - run: git push origin HEAD:gh-pages --force
+        working-directory: example

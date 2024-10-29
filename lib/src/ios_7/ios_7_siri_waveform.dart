@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 
 import '../models/siri_waveform_controller.dart';
@@ -13,7 +9,7 @@ class IOS7SiriWaveform extends StatefulWidget {
   ///
   /// The [controller] is responsible for controlling the properties and
   /// behavior of the waveform.
-  const IOS7SiriWaveform({super.key, required this.controller});
+  const IOS7SiriWaveform({required this.controller, super.key});
 
   /// The controller that manages the properties and behavior of the waveform.
   final IOS7SiriWaveformController controller;

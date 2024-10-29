@@ -12,11 +12,11 @@ It was inspired from the [siriwave][siriwave_link] library.
 
 Check out the live demo [here][demo_link].
 
-## iOS 7 Siri-style waveform
+## iOS 7 Siri-style waveform GIF
 
 [![iOS 7 Siri-style waveform][ios_7_gif_link]][demo_link]
 
-## iOS 9 Siri-style waveform
+## iOS 9 Siri-style waveform GIF
 
 [![iOS 9 Siri-style waveform][ios_9_gif_link]][demo_link]
 
@@ -115,8 +115,8 @@ Feel free to check the [issue tracker][issue_tracker_link] if you want to
 contribute.
 
 [api_documentation_link]: https://pub.dev/documentation/siri_wave/latest/
-[ci_badge]: https://img.shields.io/cirrus/github/halildurmus/siri_wave
-[ci_link]: https://cirrus-ci.com/halildurmus/siri_wave
+[ci_badge]: https://github.com/halildurmus/siri_wave/actions/workflows/build.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/siri_wave/actions/workflows/build.yml
 [demo_link]: https://halildurmus.github.io/siri_wave
 [example_link]: https://github.com/halildurmus/siri_wave/blob/main/example/lib/main.dart
 [ios_7_gif_link]: https://raw.githubusercontent.com/halildurmus/siri_wave/main/gifs/ios_7.gif

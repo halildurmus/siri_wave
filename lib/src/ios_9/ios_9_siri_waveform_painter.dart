@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -66,7 +62,7 @@ class IOS9SiriWaveformPainter extends CustomPainter {
     waveform.verses[ci] = _getRandomRange([-1, 1]).toDouble();
   }
 
-  List<double> _getEmptyArray(int length) => List.filled(length, 0.0);
+  List<double> _getEmptyArray(int length) => List.filled(length, 0);
 
   void _spawn(String key) {
     final curvesCount = _getRandomRange(_noOfCurvesRanges).floor();
