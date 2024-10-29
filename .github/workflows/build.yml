@@ -1,0 +1,27 @@
+name: Build
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/build.yml'
+      - 'analysis_options.yaml'
+      - 'CHANGELOG.md'
+      - 'pubspec.yaml'
+      - 'lib/**'
+      - 'test/**'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build.yml'
+      - 'analysis_options.yaml'
+      - 'CHANGELOG.md'
+      - 'pubspec.yaml'
+      - 'lib/**'
+      - 'test/**'
+
+jobs:
+  build:
+    uses: halildurmus/workflows/.github/workflows/flutter_package.yml@main
+    with:
+      verify_pana_score: true

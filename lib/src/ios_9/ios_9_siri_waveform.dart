@@ -1,7 +1,3 @@
-// Copyright (c) 2023, Halil Durmus. Please see the AUTHORS file for details.
-// All rights reserved. Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 
 import '../models/siri_waveform_controller.dart';
@@ -18,8 +14,8 @@ class IOS9SiriWaveform extends StatefulWidget {
   /// Additionally, you can customize whether to show the support bar on the
   /// waveform using [showSupportBar]. By default, the support bar is shown.
   const IOS9SiriWaveform({
-    super.key,
     required this.controller,
+    super.key,
     this.showSupportBar = true,
   });
 

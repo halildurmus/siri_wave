@@ -1,3 +1,11 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [2.1.0] - 2024-10-29
+
+- Bump minimum required Dart version to `3.5.0`.
+
 ## 2.0.0+1
 
 - Fixed the API Documentation link in README.
@@ -105,3 +113,5 @@
 ## 0.0.1
 
 - Initial release 🎉
+
+[2.1.0]: https://github.com/halildurmus/siri_wave/compare/v2.0.0+1...v2.1.0
