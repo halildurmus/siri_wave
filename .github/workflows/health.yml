@@ -20,3 +20,5 @@ jobs:
     # Skip this job if the PR is labeled with 'skip health check'
     if: ${{ !contains(github.event.pull_request.labels.*.name, 'skip health check') }}
     uses: halildurmus/workflows/.github/workflows/health.yml@main
+    with:
+      use_flutter: true
