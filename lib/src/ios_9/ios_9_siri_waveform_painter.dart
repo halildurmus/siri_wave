@@ -132,11 +132,8 @@ class IOS9SiriWaveformPainter extends CustomPainter {
     canvas.saveLayer(Rect.fromLTWH(0, 0, size.width, size.height),
         Paint()..color = Colors.white);
 
-    for (final entry in _waveforms.entries) {
-      final wave = entry.value;
-      if (wave.spawnAt == 0) {
-        _spawn(entry.key);
-      }
+    for (final MapEntry(:key, value: wave) in _waveforms.entries) {
+      if (wave.spawnAt == 0) _spawn(key);
 
       for (var ci = 0; ci < wave.noOfCurves; ci++) {
         if (wave.spawnAt + wave.despawnTimeouts[ci] <=
@@ -156,12 +153,12 @@ class IOS9SiriWaveformPainter extends CustomPainter {
       var maxY = double.negativeInfinity;
       var minX = double.infinity;
 
-      // Create two opposite waves
+      // Create two opposite waves.
       for (final sign in [1, -1]) {
         final path = Path()..moveTo(0, maxHeight);
         for (var i = -_graphX; i <= _graphX; i += _pixelDepth) {
           final x = _xPos(i, size.width);
-          final y = _yPos(i, entry.key, maxHeight);
+          final y = _yPos(i, key, maxHeight);
           path.lineTo(x, maxHeight - sign * y);
 
           minX = math.min(minX, x);
