@@ -4,29 +4,42 @@ on:
   push:
     branches: [main]
     paths:
-      - '.github/workflows/website.yml'
+      - .github/workflows/website.yml
       - example/**
 
 jobs:
   build:
+    defaults:
+      run:
+        working-directory: example
+
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v4
+
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
-          channel: stable
-      - run: flutter pub get
-      - run: flutter config --enable-web
-        working-directory: example
-      - run: flutter build web --release --wasm --base-href /siri_wave/
-        working-directory: example
-      - run: git config user.name github-actions
-        working-directory: example
-      - run: git config user.email github-actions@github.com
-        working-directory: example
-      - run: git --work-tree build/web add --all
-        working-directory: example
-      - run: git commit -m "Automatic deployment by github-actions"
-        shell: bash
-      - run: git push origin HEAD:gh-pages --force
-        working-directory: example
+          cache: true
+          cache-key: flutter-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+
+      - name: 📦 Install Dependencies
+        run: flutter pub get
+
+      - name: 🛠️ Enable Web Support & Build
+        run: |
+          flutter config --enable-web
+          flutter build web --release --wasm --base-href /siri_wave/
+
+      - name: 📢 Prepare Git for Deployment
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions@github.com"
+
+      - name: 📤 Commit and Push Changes to GitHub Pages
+        run: |
+          git --work-tree build/web add --all
+          git commit -m "Deploy Flutter example app to GitHub Pages"
+          git push origin HEAD:gh-pages --force

@@ -115,8 +115,8 @@ Feel free to check the [issue tracker][issue_tracker_link] if you want to
 contribute.
 
 [api_documentation_link]: https://pub.dev/documentation/siri_wave/latest/
-[ci_badge]: https://github.com/halildurmus/siri_wave/actions/workflows/build.yml/badge.svg
-[ci_link]: https://github.com/halildurmus/siri_wave/actions/workflows/build.yml
+[ci_badge]: https://github.com/halildurmus/siri_wave/actions/workflows/siri_wave.yml/badge.svg
+[ci_link]: https://github.com/halildurmus/siri_wave/actions/workflows/siri_wave.yml
 [demo_link]: https://halildurmus.github.io/siri_wave
 [example_link]: https://github.com/halildurmus/siri_wave/blob/main/example/lib/main.dart
 [ios_7_gif_link]: https://raw.githubusercontent.com/halildurmus/siri_wave/main/gifs/ios_7.gif
