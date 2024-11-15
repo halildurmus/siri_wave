@@ -24,6 +24,8 @@ jobs:
   dartdoc:
     needs: [build]
     uses: halildurmus/workflows/.github/workflows/dartdoc.yml@main
+    with:
+      use_flutter: true
 
   pana:
     needs: [build]
