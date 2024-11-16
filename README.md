@@ -31,9 +31,9 @@ constructor:
 import 'package:siri_wave/siri_wave.dart';
 
 class MyWidget extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return SiriWaveform.ios7();
-  }
+  MyWidget({super.key});
+
+  Widget build(BuildContext context) => SiriWaveform.ios7();
 }
 ```
 
@@ -41,22 +41,20 @@ You can customize the waveform by passing a `controller` and/or `options`:
 
 ```dart
 class MyWidget extends StatelessWidget {
+  MyWidget({super.key});
+
+  final controller = IOS7SiriWaveformController(
+    amplitude: 0.5,
+    color: Colors.red,
+    frequency: 4,
+    speed: 0.15,
+  );
+
   @override
-  Widget build(BuildContext context) {
-    final controller = IOS7SiriWaveformController(
-      amplitude: 0.5,
-      color: Colors.red,
-      frequency: 4,
-      speed: 0.15,
-    );
-    return SiriWaveform.ios7(
-      controller: controller,
-      options: IOS7SiriWaveformOptions(
-        height: 180,
-        width: 360,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => SiriWaveform.ios7(
+        controller: controller,
+        options: const IOS7SiriWaveformOptions(height: 200, width: 400),
+      );
 }
 ```
 
@@ -76,9 +74,9 @@ constructor:
 import 'package:siri_wave/siri_wave.dart';
 
 class MyWidget extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return SiriWaveform.ios9();
-  }
+  MyWidget({super.key});
+
+  Widget build(BuildContext context) => SiriWaveform.ios9();
 }
 ```
 
@@ -87,20 +85,21 @@ passing a `controller` and/or `options`:
 
 ```dart
 class MyWidget extends StatelessWidget {
+  MyWidget({super.key});
+
+  final controller = IOS9SiriWaveformController(
+    amplitude: 0.5,
+    color1: Colors.red,
+    color2: Colors.green,
+    color3: Colors.blue,
+    speed: 0.15,
+  );
+
   @override
-  Widget build(BuildContext context) {
-    final controller = IOS9SiriWaveformController(
-      amplitude: 0.5,
-      speed: 0.15,
-    );
-    return SiriWaveform.ios9(
-      controller: controller,
-      options: IOS9SiriWaveformOptions(
-        height: 180,
-        width: 360,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => SiriWaveform.ios9(
+        controller: controller,
+        options: const IOS9SiriWaveformOptions(height: 200, width: 400),
+      );
 }
 ```
 

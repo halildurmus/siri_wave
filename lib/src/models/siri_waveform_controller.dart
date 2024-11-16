@@ -111,16 +111,41 @@ final class IOS7SiriWaveformController extends SiriWaveformController {
 
 /// A controller for managing *iOS 9 Siri-style* waveforms.
 ///
-/// Use this controller to adjust properties like [amplitude] and [speed] of the
-/// waveform.
+/// This controller allows you to adjust properties like [amplitude], [speed],
+/// and the waveform's colors ([color1], [color2], and [color3]).
 final class IOS9SiriWaveformController extends SiriWaveformController {
   /// Creates an instance of [IOS9SiriWaveformController].
   ///
-  /// The [amplitude] and [speed] properties can be adjusted to control the
-  /// waveform's behavior.
+  /// The [amplitude] and [speed] properties control the waveform's behavior,
+  /// and the [color1], [color2], and [color3] properties define the colors used
+  /// in the waveform.
   ///
   /// The [amplitude] defaults to `1.0` and must be within the `[0, 1]` range.
   ///
   /// The [speed] defaults to `0.2` and must be within the `[0, 1]` range.
-  IOS9SiriWaveformController({super.amplitude, super.speed});
+  IOS9SiriWaveformController({
+    super.amplitude,
+    super.speed,
+    this.color1 = const Color(0xFFAD394C),
+    this.color2 = const Color(0xFF30DC9B),
+    this.color3 = const Color(0xFF0F52A9),
+  });
+
+  /// The primary color of the waveform.
+  ///
+  /// This color is used for the main waveform curve. Defaults to
+  /// `Color(0xFFAD394C)`.
+  Color color1;
+
+  /// The secondary color of the waveform.
+  ///
+  /// This color is used for the second waveform curve. Defaults to
+  /// `Color(0xFF30DC9B)`.
+  Color color2;
+
+  /// The tertiary color of the waveform.
+  ///
+  /// This color is used for the third waveform curve. Defaults to
+  /// `Color(0xFF0F52A9)`.
+  Color color3;
 }
