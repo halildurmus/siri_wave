@@ -7,13 +7,6 @@ on:
       - lib/**
       - CHANGELOG.md
       - pubspec.yaml
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/health.yml
-      - lib/**
-      - CHANGELOG.md
-      - pubspec.yaml
 
 jobs:
   build:
