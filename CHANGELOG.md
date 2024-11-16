@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- Enable customization of iOS 9 Siri-style waveform colors
+- Enable customization of iOS 9 Siri-style waveform colors ([#30](https://github.com/halildurmus/siri_wave/issues/30))
 
 [unreleased]: https://github.com/halildurmus/siri_wave/compare/v2.1.0..HEAD
 
