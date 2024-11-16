@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🚀 Features
+
+- Enable customization of iOS 9 Siri-style waveform colors
+
+[unreleased]: https://github.com/halildurmus/siri_wave/compare/v2.1.0..HEAD
+
 ## [2.1.0] - 2024-10-29
 
 - Bump minimum required Dart version to `3.5.0`.

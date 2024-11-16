@@ -28,6 +28,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   double amplitude = 1;
   Color color = Colors.white;
+  Color color1 = const Color(0xFFAD394C);
+  Color color2 = const Color(0xFF30DC9B);
+  Color color3 = const Color(0xFF0F52A9);
   SiriWaveformController controller = IOS9SiriWaveformController();
   double frequency = 6;
   final selection = [false, true];
@@ -64,14 +67,47 @@ class _HomePageState extends State<HomePage> {
                 label: 'Speed',
                 value: speed,
               ),
-              if (style == SiriWaveformStyle.ios_9)
+              if (style == SiriWaveformStyle.ios_9) ...[
                 CustomSwitch(
                   onChanged: (value) {
                     setState(() => showSupportBar = value);
                   },
                   value: showSupportBar,
-                )
-              else ...[
+                ),
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  spacing: 10,
+                  children: [
+                    ColorPickerWidget(
+                      title: 'Color 1',
+                      onChanged: (value) {
+                        setState(() => color1 = value);
+                        (controller as IOS9SiriWaveformController).color1 =
+                            value;
+                      },
+                      color: color1,
+                    ),
+                    ColorPickerWidget(
+                      title: 'Color 2',
+                      onChanged: (value) {
+                        setState(() => color2 = value);
+                        (controller as IOS9SiriWaveformController).color2 =
+                            value;
+                      },
+                      color: color2,
+                    ),
+                    ColorPickerWidget(
+                      title: 'Color 3',
+                      onChanged: (value) {
+                        setState(() => color3 = value);
+                        (controller as IOS9SiriWaveformController).color3 =
+                            value;
+                      },
+                      color: color3,
+                    )
+                  ],
+                ),
+              ] else ...[
                 FrequencySlider(
                   onChanged: (value) {
                     (controller as IOS7SiriWaveformController).frequency =
@@ -221,11 +257,13 @@ class ColorPickerWidget extends StatelessWidget {
   const ColorPickerWidget({
     required this.onChanged,
     required this.color,
+    this.title = 'Color',
     super.key,
   });
 
   final ValueChanged<Color> onChanged;
   final Color color;
+  final String title;
 
   @override
   Widget build(BuildContext context) => AnimatedSize(
@@ -234,7 +272,7 @@ class ColorPickerWidget extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Color',
+              title,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             Padding(

@@ -16,10 +16,16 @@ class IOS9SiriWaveformPainter extends CustomPainter {
   IOS9SiriWaveformPainter({
     required this.animationController,
     required this.controller,
-  }) : super(repaint: animationController);
+  })  : _waveforms = [
+          _IOS9SiriWaveformProperties((controller) => controller.color1),
+          _IOS9SiriWaveformProperties((controller) => controller.color2),
+          _IOS9SiriWaveformProperties((controller) => controller.color3),
+        ],
+        super(repaint: animationController);
 
   final AnimationController animationController;
   final IOS9SiriWaveformController controller;
+  final List<_IOS9SiriWaveformProperties> _waveforms;
 
   static const _amplitudeFactor = .8;
   static const _amplitudeRanges = <double>[.3, 1];
@@ -33,24 +39,13 @@ class IOS9SiriWaveformPainter extends CustomPainter {
   static const _pixelDepth = .1;
   static const _speedFactor = 1;
   static const _speedRanges = <double>[.5, 1];
-  static const _waveColors = [
-    Color.fromRGBO(173, 57, 76, 1),
-    Color.fromRGBO(48, 220, 155, 1),
-    Color.fromRGBO(15, 82, 169, 1),
-  ];
   static const _widthRanges = [1, 3];
-
-  final _waveforms = <String, _IOS9SiriWaveformProperties>{
-    'red': _IOS9SiriWaveformProperties(color: _waveColors[0]),
-    'green': _IOS9SiriWaveformProperties(color: _waveColors[1]),
-    'blue': _IOS9SiriWaveformProperties(color: _waveColors[2]),
-  };
 
   num _getRandomRange(List<num> e) =>
       e[0] + math.Random().nextDouble() * (e[1] - e[0]);
 
-  void _spawnSingle(int ci, String key) {
-    final waveform = _waveforms[key]!;
+  void _spawnSingle(int ci, int idx) {
+    final waveform = _waveforms[idx];
     waveform.phases[ci] = 0;
     waveform.amplitudes[ci] = 0;
     waveform.despawnTimeouts[ci] =
@@ -64,9 +59,9 @@ class IOS9SiriWaveformPainter extends CustomPainter {
 
   List<double> _getEmptyArray(int length) => List.filled(length, 0);
 
-  void _spawn(String key) {
+  void _spawn(int idx) {
     final curvesCount = _getRandomRange(_noOfCurvesRanges).floor();
-    final wave = _waveforms[key]!
+    final wave = _waveforms[idx]
       ..spawnAt = DateTime.now().millisecondsSinceEpoch
       ..noOfCurves = curvesCount
       ..amplitudes = _getEmptyArray(curvesCount)
@@ -79,7 +74,7 @@ class IOS9SiriWaveformPainter extends CustomPainter {
       ..widths = _getEmptyArray(curvesCount);
 
     for (var ci = 0; ci < wave.noOfCurves; ci++) {
-      _spawnSingle(ci, key);
+      _spawnSingle(ci, idx);
     }
   }
 
@@ -89,8 +84,8 @@ class IOS9SiriWaveformPainter extends CustomPainter {
 
   num _sin(double x, double phase) => math.sin(x - phase);
 
-  num _yRelativePos(double i, String key) {
-    final wave = _waveforms[key]!;
+  num _yRelativePos(double i, int idx) {
+    final wave = _waveforms[idx];
     var y = .0;
 
     for (var ci = 0; ci < wave.noOfCurves; ci++) {
@@ -112,11 +107,11 @@ class IOS9SiriWaveformPainter extends CustomPainter {
     return y / wave.noOfCurves;
   }
 
-  double _yPos(double i, String key, double maxHeight) =>
+  double _yPos(double i, int idx, double maxHeight) =>
       _amplitudeFactor *
       maxHeight *
       controller.amplitude *
-      _yRelativePos(i, key) *
+      _yRelativePos(i, idx) *
       _globalAttenuationFactor((i / _graphX) * 2);
 
   double _xPos(double i, double width) =>
@@ -132,8 +127,8 @@ class IOS9SiriWaveformPainter extends CustomPainter {
     canvas.saveLayer(Rect.fromLTWH(0, 0, size.width, size.height),
         Paint()..color = Colors.white);
 
-    for (final MapEntry(:key, value: wave) in _waveforms.entries) {
-      if (wave.spawnAt == 0) _spawn(key);
+    for (final (idx, wave) in _waveforms.indexed) {
+      if (wave.spawnAt == 0) _spawn(idx);
 
       for (var ci = 0; ci < wave.noOfCurves; ci++) {
         if (wave.spawnAt + wave.despawnTimeouts[ci] <=
@@ -158,7 +153,7 @@ class IOS9SiriWaveformPainter extends CustomPainter {
         final path = Path()..moveTo(0, maxHeight);
         for (var i = -_graphX; i <= _graphX; i += _pixelDepth) {
           final x = _xPos(i, size.width);
-          final y = _yPos(i, key, maxHeight);
+          final y = _yPos(i, idx, maxHeight);
           path.lineTo(x, maxHeight - sign * y);
 
           minX = math.min(minX, x);
@@ -168,7 +163,7 @@ class IOS9SiriWaveformPainter extends CustomPainter {
         path.close();
         final paint = Paint()
           ..blendMode = BlendMode.plus
-          ..color = wave.color;
+          ..color = wave.color(controller);
         canvas.drawPath(path, paint);
       }
 
@@ -192,10 +187,11 @@ class IOS9SiriWaveformPainter extends CustomPainter {
 
 /// Describes the curve properties will be used by [IOS9SiriWaveformPainter].
 class _IOS9SiriWaveformProperties {
-  _IOS9SiriWaveformProperties({required this.color});
+  _IOS9SiriWaveformProperties(this.color);
+
+  final Color Function(IOS9SiriWaveformController) color;
 
   var amplitudes = <double>[];
-  final Color color;
   var despawnTimeouts = <double>[];
   var finalAmplitudes = <double>[];
   int noOfCurves = 0;
