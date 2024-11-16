@@ -34,6 +34,6 @@ jobs:
   publish:
     needs: check-release
     if: needs.check-release.outputs.should_publish == 'true'
-    uses: halildurmus/workflows/.github/workflows/dart_pub_publish.yml@main
+    uses: halildurmus/workflows/.github/workflows/flutter_pub_publish.yml@main
     secrets:
       token: ${{ secrets.PAT }}
