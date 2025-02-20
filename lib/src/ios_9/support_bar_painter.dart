@@ -12,14 +12,10 @@ class IOS9SiriWaveformSupportBarPainter extends CustomPainter {
     final rect = Rect.fromLTWH(0, maxHeight, size.width, 1);
     final shader = LinearGradient(
       colors: [
-        // ignore: deprecated_member_use
-        const Color(0xFF111111).withOpacity(.7),
-        // ignore: deprecated_member_use
-        const Color(0xFFFFFFFF).withOpacity(.7),
-        // ignore: deprecated_member_use
-        const Color(0xFFFFFFFF).withOpacity(.7),
-        // ignore: deprecated_member_use
-        const Color(0xFF111111).withOpacity(.7),
+        const Color(0xFF111111).withValues(alpha: .7),
+        const Color(0xFFFFFFFF).withValues(alpha: .7),
+        const Color(0xFFFFFFFF).withValues(alpha: .7),
+        const Color(0xFF111111).withValues(alpha: .7),
       ],
       stops: const [0, .1, .8, 1],
     ).createShader(rect);
