@@ -17,7 +17,7 @@ topics:
   - siri
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.7.0
 
 dependencies:
   flutter:

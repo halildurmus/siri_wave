@@ -37,9 +37,9 @@ class IOS7SiriWaveformPainter extends CustomPainter {
   double _phase = 0;
 
   num _globalAttenuationFactor(num x) => math.pow(
-      _attenuationFactor /
-          (_attenuationFactor + math.pow(x, _attenuationFactor)),
-      _attenuationFactor);
+    _attenuationFactor / (_attenuationFactor + math.pow(x, _attenuationFactor)),
+    _attenuationFactor,
+  );
 
   double _xPos(double i, Size size) =>
       size.width * ((i + _graphX) / (_graphX * 2));
@@ -67,11 +67,12 @@ class IOS7SiriWaveformPainter extends CustomPainter {
         path.lineTo(x, y);
       }
 
-      final paint = Paint()
-        // ignore: deprecated_member_use
-        ..color = controller.color.withOpacity(curve.opacity)
-        ..strokeWidth = curve.width
-        ..style = PaintingStyle.stroke;
+      final paint =
+          Paint()
+            // ignore: deprecated_member_use
+            ..color = controller.color.withOpacity(curve.opacity)
+            ..strokeWidth = curve.width
+            ..style = PaintingStyle.stroke;
       canvas.drawPath(path, paint);
     }
 
@@ -88,8 +89,5 @@ class IOS7SiriWaveformPainter extends CustomPainter {
 }
 
 /// Represents the curve properties will be used by [IOS7SiriWaveformPainter].
-typedef _IOS7SiriWaveformCurve = ({
-  double attenuation,
-  double opacity,
-  double width
-});
+typedef _IOS7SiriWaveformCurve =
+    ({double attenuation, double opacity, double width});

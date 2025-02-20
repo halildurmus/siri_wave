@@ -9,16 +9,15 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Material(
-            child: IOS7SiriWaveform(
-              controller: IOS7SiriWaveformController(),
-            ),
+            child: IOS7SiriWaveform(controller: IOS7SiriWaveformController()),
           ),
         ),
       );
 
       // Find the IOS7SiriWaveform widget.
-      final ios7SiriWaveform =
-          tester.firstWidget<IOS7SiriWaveform>(find.byType(IOS7SiriWaveform));
+      final ios7SiriWaveform = tester.firstWidget<IOS7SiriWaveform>(
+        find.byType(IOS7SiriWaveform),
+      );
       final controller = ios7SiriWaveform.controller;
       expect(controller.amplitude, 1);
       expect(controller.color, Colors.white);
@@ -26,15 +25,14 @@ void main() {
       expect(controller.speed, .2);
     });
 
-    testWidgets('widget should paint the canvas with IOS7SiriWaveformPainter',
-        (tester) async {
+    testWidgets('widget should paint the canvas with IOS7SiriWaveformPainter', (
+      tester,
+    ) async {
       // Build the IOS7SiriWaveform widget.
       await tester.pumpWidget(
         MaterialApp(
           home: Material(
-            child: IOS7SiriWaveform(
-              controller: IOS7SiriWaveformController(),
-            ),
+            child: IOS7SiriWaveform(controller: IOS7SiriWaveformController()),
           ),
         ),
       );

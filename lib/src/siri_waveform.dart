@@ -26,9 +26,9 @@ class SiriWaveform extends StatefulWidget {
     IOS7SiriWaveformController? controller,
     IOS7SiriWaveformOptions? options,
     super.key,
-  })  : controller = controller ?? IOS7SiriWaveformController(),
-        options = options ?? const IOS7SiriWaveformOptions(),
-        style = SiriWaveformStyle.ios_7;
+  }) : controller = controller ?? IOS7SiriWaveformController(),
+       options = options ?? const IOS7SiriWaveformOptions(),
+       style = SiriWaveformStyle.ios_7;
 
   /// Creates a widget that displays an *iOS 9 Siri-style* waveform.
   ///
@@ -42,9 +42,9 @@ class SiriWaveform extends StatefulWidget {
     IOS9SiriWaveformController? controller,
     IOS9SiriWaveformOptions? options,
     super.key,
-  })  : controller = controller ?? IOS9SiriWaveformController(),
-        options = options ?? const IOS9SiriWaveformOptions(),
-        style = SiriWaveformStyle.ios_9;
+  }) : controller = controller ?? IOS9SiriWaveformController(),
+       options = options ?? const IOS9SiriWaveformOptions(),
+       style = SiriWaveformStyle.ios_9;
 
   /// See [SiriWaveformController].
   final SiriWaveformController controller;
@@ -65,12 +65,13 @@ class _SiriWaveformState extends State<SiriWaveform> {
   void _setSiriWaveformWidget() {
     final SiriWaveform(:controller, :options, :style) = widget;
     _siriWaveform = switch (style) {
-      SiriWaveformStyle.ios_7 =>
-        IOS7SiriWaveform(controller: controller as IOS7SiriWaveformController),
+      SiriWaveformStyle.ios_7 => IOS7SiriWaveform(
+        controller: controller as IOS7SiriWaveformController,
+      ),
       SiriWaveformStyle.ios_9 => IOS9SiriWaveform(
-          controller: controller as IOS9SiriWaveformController,
-          showSupportBar: (options as IOS9SiriWaveformOptions).showSupportBar,
-        ),
+        controller: controller as IOS9SiriWaveformController,
+        showSupportBar: (options as IOS9SiriWaveformOptions).showSupportBar,
+      ),
     };
   }
 
@@ -86,7 +87,7 @@ class _SiriWaveformState extends State<SiriWaveform> {
     final SiriWaveform(
       controller: oldController,
       options: oldOptions,
-      style: oldStyle
+      style: oldStyle,
     ) = oldWidget;
     final SiriWaveform(:controller, :options, :style) = widget;
     if (oldController != controller ||
