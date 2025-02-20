@@ -7,11 +7,7 @@ void main() {
     testWidgets("widget's properties should be set correctly", (tester) async {
       // Build the SiriWaveform widget.
       await tester.pumpWidget(
-        MaterialApp(
-          home: Material(
-            child: SiriWaveform.ios7(),
-          ),
-        ),
+        MaterialApp(home: Material(child: SiriWaveform.ios7())),
       );
 
       // Find the SizedBox widget.
@@ -20,34 +16,30 @@ void main() {
       expect(sizedBox.width, 360);
     });
 
-    testWidgets('.ios7 constructor should display the IOS7SiriWaveform widget',
-        (tester) async {
-      // Build the SiriWave widget.
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Material(
-            child: SiriWaveform.ios7(),
-          ),
-        ),
-      );
+    testWidgets(
+      '.ios7 constructor should display the IOS7SiriWaveform widget',
+      (tester) async {
+        // Build the SiriWave widget.
+        await tester.pumpWidget(
+          MaterialApp(home: Material(child: SiriWaveform.ios7())),
+        );
 
-      // The IOS7SiriWaveform widget should exist in the widget tree.
-      expect(find.byType(IOS7SiriWaveform), findsOneWidget);
-    });
+        // The IOS7SiriWaveform widget should exist in the widget tree.
+        expect(find.byType(IOS7SiriWaveform), findsOneWidget);
+      },
+    );
 
-    testWidgets('.ios9 constructor should display the IOS9SiriWaveform widget',
-        (tester) async {
-      // Build the SiriWave widget.
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Material(
-            child: SiriWaveform.ios9(),
-          ),
-        ),
-      );
+    testWidgets(
+      '.ios9 constructor should display the IOS9SiriWaveform widget',
+      (tester) async {
+        // Build the SiriWave widget.
+        await tester.pumpWidget(
+          MaterialApp(home: Material(child: SiriWaveform.ios9())),
+        );
 
-      // The IOS9SiriWaveform widget should exist in the widget tree.
-      expect(find.byType(IOS9SiriWaveform), findsOneWidget);
-    });
+        // The IOS9SiriWaveform widget should exist in the widget tree.
+        expect(find.byType(IOS9SiriWaveform), findsOneWidget);
+      },
+    );
   });
 }

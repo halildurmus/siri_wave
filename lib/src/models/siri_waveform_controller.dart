@@ -14,19 +14,17 @@ sealed class SiriWaveformController {
   /// The [amplitude] defaults to `1.0` and must be within the `[0, 1]` range.
   ///
   /// The [speed] defaults to `0.2` and must be within the `[0, 1]` range.
-  SiriWaveformController({
-    this.amplitude = 1,
-    this.speed = .2,
-  })  : _interpolationAmplitude = amplitude,
-        _interpolationSpeed = speed,
-        assert(
-          amplitude >= 0 && amplitude <= 1,
-          'The amplitude must be in the [0, 1] range.',
-        ),
-        assert(
-          speed >= 0 && speed <= 1,
-          'The speed must be in the [0, 1] range.',
-        );
+  SiriWaveformController({this.amplitude = 1, this.speed = .2})
+    : _interpolationAmplitude = amplitude,
+      _interpolationSpeed = speed,
+      assert(
+        amplitude >= 0 && amplitude <= 1,
+        'The amplitude must be in the [0, 1] range.',
+      ),
+      assert(
+        speed >= 0 && speed <= 1,
+        'The speed must be in the [0, 1] range.',
+      );
 
   /// The amplitude of the waveform.
   ///
@@ -92,9 +90,9 @@ final class IOS7SiriWaveformController extends SiriWaveformController {
     this.color = Colors.white,
     this.frequency = 6,
   }) : assert(
-          frequency >= -20 && frequency <= 20,
-          'The frequency must be in the [-20, 20] range.',
-        );
+         frequency >= -20 && frequency <= 20,
+         'The frequency must be in the [-20, 20] range.',
+       );
 
   /// The color of the waveform.
   ///

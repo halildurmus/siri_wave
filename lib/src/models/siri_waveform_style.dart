@@ -5,5 +5,5 @@ enum SiriWaveformStyle {
   ios_7,
 
   /// Represents the *iOS 9 Siri-style* waveform.
-  ios_9
+  ios_9,
 }

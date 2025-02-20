@@ -19,7 +19,7 @@ class IOS9SiriWaveformSupportBarPainter extends CustomPainter {
         // ignore: deprecated_member_use
         const Color(0xFFFFFFFF).withOpacity(.7),
         // ignore: deprecated_member_use
-        const Color(0xFF111111).withOpacity(.7)
+        const Color(0xFF111111).withOpacity(.7),
       ],
       stops: const [0, .1, .8, 1],
     ).createShader(rect);

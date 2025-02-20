@@ -16,12 +16,12 @@ class IOS9SiriWaveformPainter extends CustomPainter {
   IOS9SiriWaveformPainter({
     required this.animationController,
     required this.controller,
-  })  : _waveforms = [
-          _IOS9SiriWaveformProperties((controller) => controller.color1),
-          _IOS9SiriWaveformProperties((controller) => controller.color2),
-          _IOS9SiriWaveformProperties((controller) => controller.color3),
-        ],
-        super(repaint: animationController);
+  }) : _waveforms = [
+         _IOS9SiriWaveformProperties((controller) => controller.color1),
+         _IOS9SiriWaveformProperties((controller) => controller.color2),
+         _IOS9SiriWaveformProperties((controller) => controller.color3),
+       ],
+       super(repaint: animationController);
 
   final AnimationController animationController;
   final IOS9SiriWaveformController controller;
@@ -61,17 +61,18 @@ class IOS9SiriWaveformPainter extends CustomPainter {
 
   void _spawn(int idx) {
     final curvesCount = _getRandomRange(_noOfCurvesRanges).floor();
-    final wave = _waveforms[idx]
-      ..spawnAt = DateTime.now().millisecondsSinceEpoch
-      ..noOfCurves = curvesCount
-      ..amplitudes = _getEmptyArray(curvesCount)
-      ..despawnTimeouts = _getEmptyArray(curvesCount)
-      ..finalAmplitudes = _getEmptyArray(curvesCount)
-      ..offsets = _getEmptyArray(curvesCount)
-      ..phases = _getEmptyArray(curvesCount)
-      ..speeds = _getEmptyArray(curvesCount)
-      ..verses = _getEmptyArray(curvesCount)
-      ..widths = _getEmptyArray(curvesCount);
+    final wave =
+        _waveforms[idx]
+          ..spawnAt = DateTime.now().millisecondsSinceEpoch
+          ..noOfCurves = curvesCount
+          ..amplitudes = _getEmptyArray(curvesCount)
+          ..despawnTimeouts = _getEmptyArray(curvesCount)
+          ..finalAmplitudes = _getEmptyArray(curvesCount)
+          ..offsets = _getEmptyArray(curvesCount)
+          ..phases = _getEmptyArray(curvesCount)
+          ..speeds = _getEmptyArray(curvesCount)
+          ..verses = _getEmptyArray(curvesCount)
+          ..widths = _getEmptyArray(curvesCount);
 
     for (var ci = 0; ci < wave.noOfCurves; ci++) {
       _spawnSingle(ci, idx);
@@ -79,8 +80,9 @@ class IOS9SiriWaveformPainter extends CustomPainter {
   }
 
   num _globalAttenuationFactor(double x) => math.pow(
-      _attenuationFactor / (_attenuationFactor + math.pow(x, 2)),
-      _attenuationFactor);
+    _attenuationFactor / (_attenuationFactor + math.pow(x, 2)),
+    _attenuationFactor,
+  );
 
   num _sin(double x, double phase) => math.sin(x - phase);
 
@@ -97,10 +99,11 @@ class IOS9SiriWaveformPainter extends CustomPainter {
       final k = 1 / wave.widths[ci];
       final x = i * k - t;
 
-      y += (wave.amplitudes[ci] *
-              _sin(wave.verses[ci] * x, wave.phases[ci]) *
-              _globalAttenuationFactor(x))
-          .abs();
+      y +=
+          (wave.amplitudes[ci] *
+                  _sin(wave.verses[ci] * x, wave.phases[ci]) *
+                  _globalAttenuationFactor(x))
+              .abs();
     }
 
     // Divide with noOfCurves so that y <= 1
@@ -124,8 +127,10 @@ class IOS9SiriWaveformPainter extends CustomPainter {
     // Interpolate amplitude and speed values.
     controller.lerp();
 
-    canvas.saveLayer(Rect.fromLTWH(0, 0, size.width, size.height),
-        Paint()..color = Colors.white);
+    canvas.saveLayer(
+      Rect.fromLTWH(0, 0, size.width, size.height),
+      Paint()..color = Colors.white,
+    );
 
     for (final (idx, wave) in _waveforms.indexed) {
       if (wave.spawnAt == 0) _spawn(idx);
@@ -139,8 +144,11 @@ class IOS9SiriWaveformPainter extends CustomPainter {
         }
 
         wave.amplitudes[ci] = math.min(
-            math.max(wave.amplitudes[ci], 0), wave.finalAmplitudes[ci]);
-        wave.phases[ci] = (wave.phases[ci] +
+          math.max(wave.amplitudes[ci], 0),
+          wave.finalAmplitudes[ci],
+        );
+        wave.phases[ci] =
+            (wave.phases[ci] +
                 controller.speed * wave.speeds[ci] * _speedFactor) %
             (2 * math.pi);
       }
@@ -161,9 +169,10 @@ class IOS9SiriWaveformPainter extends CustomPainter {
         }
 
         path.close();
-        final paint = Paint()
-          ..blendMode = BlendMode.plus
-          ..color = wave.color(controller);
+        final paint =
+            Paint()
+              ..blendMode = BlendMode.plus
+              ..color = wave.color(controller);
         canvas.drawPath(path, paint);
       }
 
