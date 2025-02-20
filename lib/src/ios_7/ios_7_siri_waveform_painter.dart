@@ -69,8 +69,7 @@ class IOS7SiriWaveformPainter extends CustomPainter {
 
       final paint =
           Paint()
-            // ignore: deprecated_member_use
-            ..color = controller.color.withOpacity(curve.opacity)
+            ..color = controller.color.withValues(alpha: curve.opacity)
             ..strokeWidth = curve.width
             ..style = PaintingStyle.stroke;
       canvas.drawPath(path, paint);
