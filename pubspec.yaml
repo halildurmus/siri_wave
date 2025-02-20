@@ -1,7 +1,7 @@
 name: siri_wave
 description: >
   A Flutter package that lets you create visually stunning Siri-style waveforms.
-version: 2.2.0
+version: 2.3.0
 repository: https://github.com/halildurmus/siri_wave
 issue_tracker: https://github.com/halildurmus/siri_wave/issues
 

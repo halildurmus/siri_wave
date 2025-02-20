@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.0] - 2025-02-20
+
+### 🧹 Refactor
+
+- Migrate to wide gamut color by @halildurmus in [#35](https://github.com/halildurmus/siri_wave/issues/35)
+
+### 🎨 Styling
+
+- Format with tall-style by @halildurmus in [#34](https://github.com/halildurmus/siri_wave/pull/34)
+
+[2.3.0]: https://github.com/halildurmus/siri_wave/compare/v2.2.0..v2.3.0
+
 ## [2.2.0] - 2024-11-16
 
 ### 🚀 Features
