@@ -14,8 +14,10 @@ sealed class SiriWaveformController {
   /// The [amplitude] defaults to `1.0` and must be within the `[0, 1]` range.
   ///
   /// The [speed] defaults to `0.2` and must be within the `[0, 1]` range.
-  SiriWaveformController({this.amplitude = 1, this.speed = .2})
-    : _interpolationAmplitude = amplitude,
+  SiriWaveformController({double amplitude = 1, double speed = .2})
+    : _amplitude = amplitude,
+      _speed = speed,
+      _interpolationAmplitude = amplitude,
       _interpolationSpeed = speed,
       assert(
         amplitude >= 0 && amplitude <= 1,
@@ -31,14 +33,24 @@ sealed class SiriWaveformController {
   /// Defaults to `1.0`.
   ///
   /// The value must be in the `[0, 1]` range.
-  double amplitude;
+  double get amplitude => _amplitude;
+  set amplitude(double value) {
+    _amplitude = value;
+    _interpolationAmplitude = value;
+  }
+  double _amplitude;
 
   /// The speed of the waveform.
   ///
   /// Defaults to `0.2`.
   ///
   /// The value must be in the `[0, 1]` range.
-  double speed;
+  double get speed => _speed;
+  set speed(double value) {
+    _speed = value;
+    _interpolationSpeed = value;
+  }
+  double _speed;
 
   double? _interpolationAmplitude;
   double? _interpolationSpeed;
@@ -51,16 +63,16 @@ sealed class SiriWaveformController {
   void lerp() {
     final interpolationAmplitude = _interpolationAmplitude;
     if (interpolationAmplitude != null) {
-      amplitude = _intLerp(amplitude, interpolationAmplitude, _lerpSpeed);
-      if (amplitude - interpolationAmplitude == 0) {
+      _amplitude = _intLerp(_amplitude, interpolationAmplitude, _lerpSpeed);
+      if (_amplitude - interpolationAmplitude == 0) {
         _interpolationAmplitude = null;
       }
     }
 
     final interpolationSpeed = _interpolationSpeed;
     if (interpolationSpeed != null) {
-      speed = _intLerp(speed, interpolationSpeed, _lerpSpeed);
-      if (speed - interpolationSpeed == 0) {
+      _speed = _intLerp(_speed, interpolationSpeed, _lerpSpeed);
+      if (_speed - interpolationSpeed == 0) {
         _interpolationSpeed = null;
       }
     }
