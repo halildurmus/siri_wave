@@ -65,10 +65,10 @@ class _SiriWaveformState extends State<SiriWaveform> {
   void _setSiriWaveformWidget() {
     final SiriWaveform(:controller, :options, :style) = widget;
     _siriWaveform = switch (style) {
-      SiriWaveformStyle.ios_7 => IOS7SiriWaveform(
+      .ios_7 => IOS7SiriWaveform(
         controller: controller as IOS7SiriWaveformController,
       ),
-      SiriWaveformStyle.ios_9 => IOS9SiriWaveform(
+      .ios_9 => IOS9SiriWaveform(
         controller: controller as IOS9SiriWaveformController,
         showSupportBar: (options as IOS9SiriWaveformOptions).showSupportBar,
       ),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../models/siri_waveform_controller.dart';
@@ -31,7 +33,7 @@ class IOS7SiriWaveformState extends State<IOS7SiriWaveform>
       duration: const Duration(seconds: 1),
     );
     final IOS7SiriWaveformController(:amplitude, :speed) = widget.controller;
-    if (amplitude > 0 && speed > 0) _animationController.repeat();
+    if (amplitude > 0 && speed > 0) unawaited(_animationController.repeat());
     super.initState();
   }
 
@@ -43,7 +45,7 @@ class IOS7SiriWaveformState extends State<IOS7SiriWaveform>
     if (isAnimating && (amplitude == 0 || speed == 0)) {
       _animationController.stop(canceled: false);
     } else if (!isAnimating && (amplitude > 0 && speed > 0)) {
-      _animationController.repeat();
+      unawaited(_animationController.repeat());
     }
   }
 
@@ -60,7 +62,7 @@ class IOS7SiriWaveformState extends State<IOS7SiriWaveform>
         animationController: _animationController,
         controller: widget.controller,
       ),
-      size: Size.infinite,
+      size: .infinite,
     );
 
     return AnimatedBuilder(

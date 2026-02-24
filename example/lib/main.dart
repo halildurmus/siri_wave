@@ -11,10 +11,33 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
     debugShowCheckedModeBanner: false,
+    title: 'package:siri_wave Demo',
+    theme: ThemeData.dark().copyWith(
+      colorScheme: const .dark(
+        primary: .new(0xFF00A8E8),
+        secondary: .new(0xFF8E44AD),
+        surface: .new(0xFF1A1A2E),
+      ),
+      scaffoldBackgroundColor: const .new(0xFF0F1419),
+      appBarTheme: const AppBarTheme(
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: .new(0xFF1A1A2E),
+      ),
+      cardTheme: CardThemeData(
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: .circular(16)),
+        color: const .new(0xFF1A1A2E),
+      ),
+      sliderTheme: SliderThemeData(
+        activeTrackColor: const .new(0xFF00A8E8),
+        inactiveTrackColor: const Color(0xFF00A8E8).withValues(alpha: 0.2),
+        thumbColor: const .new(0xFF00A8E8),
+        overlayColor: const Color(0xFF00A8E8).withValues(alpha: 0.2),
+        trackHeight: 4,
+      ),
+    ),
     home: const HomePage(),
-    darkTheme: ThemeData(brightness: Brightness.dark),
-    themeMode: ThemeMode.dark,
-    title: 'siri_wave Demo',
   );
 }
 
@@ -26,303 +49,450 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  double amplitude = 1;
+  var amplitude = 1.0;
   Color color = Colors.white;
-  Color color1 = const Color(0xFFAD394C);
-  Color color2 = const Color(0xFF30DC9B);
-  Color color3 = const Color(0xFF0F52A9);
+  var color1 = const Color(0xFF00D9FF);
+  var color2 = const Color(0xFFFF006E);
+  var color3 = const Color(0xFF8338EC);
   SiriWaveformController controller = IOS9SiriWaveformController();
   double frequency = 6;
   final selection = [false, true];
-  bool showSupportBar = true;
-  double speed = .2;
+  var showSupportBar = true;
+  var speed = .2;
 
-  SiriWaveformStyle get style =>
-      selection[0] ? SiriWaveformStyle.ios_7 : SiriWaveformStyle.ios_9;
+  SiriWaveformStyle get style => selection[0] ? .ios_7 : .ios_9;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(centerTitle: kIsWeb, title: const Text('siri_wave Demo')),
-    body: Center(
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isLargeScreen = screenWidth > 1000;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'package:siri_wave Demo',
+          style: .new(fontWeight: .bold, letterSpacing: 1.2),
+        ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: .topLeft,
+              end: .bottomRight,
+              colors: [
+                Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+                Theme.of(context).colorScheme.secondary.withValues(alpha: 0.3),
+              ],
+            ),
+          ),
+        ),
+      ),
+      body: isLargeScreen ? _buildWideLayout() : _buildNarrowLayout(),
+    );
+  }
+
+  Widget _buildWideLayout() => Row(
+    children: [
+      // Left Sidebar - Controls
+      SizedBox(
+        width: 380,
+        child: SingleChildScrollView(
+          padding: const .all(16),
+          child: Column(
+            crossAxisAlignment: .stretch,
+            children: [
+              _buildStyleToggle(),
+              const SizedBox(height: 16),
+              _buildControlsSection(),
+            ],
+          ),
+        ),
+      ),
+
+      // Vertical Divider
+      Container(width: 1, color: Colors.white.withValues(alpha: 0.1)),
+
+      // Right Side - Waveform Display
+      Expanded(
+        child: Center(
+          child: Padding(
+            padding: const .all(40),
+            child: _buildWaveformSection(),
+          ),
+        ),
+      ),
+    ],
+  );
+
+  Widget _buildNarrowLayout() => SingleChildScrollView(
+    padding: const .all(16),
+    child: Column(
+      children: [
+        _buildWaveformSection(),
+        const SizedBox(height: 16),
+        _buildStyleToggle(),
+        const SizedBox(height: 16),
+        _buildControlsSection(),
+        const SizedBox(height: 16),
+      ],
+    ),
+  );
+
+  Widget _buildStyleToggle() => Card(
+    child: Padding(
+      padding: const .all(20),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Spacer(),
-          CustomSlider(
+          const Text(
+            'Waveform Style',
+            style: .new(fontSize: 16, fontWeight: .w600, letterSpacing: 0.5),
+          ),
+          const SizedBox(height: 16),
+          ToggleButtons(
+            borderRadius: .circular(12),
+            isSelected: selection,
+            selectedColor: Colors.white,
+            fillColor: Theme.of(context).colorScheme.primary,
+            color: Colors.white60,
+            constraints: const .new(minHeight: 48, minWidth: 120),
+            onPressed: (index) {
+              if (selection[index]) return;
+              setState(() {
+                for (var i = 0; i < selection.length; i++) {
+                  selection[i] = i == index;
+                }
+                controller = index == 0
+                    ? IOS7SiriWaveformController()
+                    : IOS9SiriWaveformController();
+              });
+            },
+            children: const [
+              Padding(
+                padding: .symmetric(horizontal: 16),
+                child: Text(
+                  'iOS 7',
+                  style: .new(fontSize: 15, fontWeight: .w600),
+                ),
+              ),
+              Padding(
+                padding: .symmetric(horizontal: 16),
+                child: Text(
+                  'iOS 9',
+                  style: .new(fontSize: 15, fontWeight: .w600),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
+
+  Widget _buildWaveformSection() => Card(
+    elevation: 8,
+    child: Container(
+      constraints: const .new(maxWidth: 1200),
+      decoration: BoxDecoration(
+        borderRadius: .circular(16),
+        gradient: const LinearGradient(
+          begin: .topLeft,
+          end: .bottomRight,
+          colors: [.new(0xFF0A0E27), .new(0xFF1A1A2E)],
+        ),
+      ),
+      child: ClipRRect(
+        borderRadius: .circular(16),
+        child: SiriWaveformWidget(
+          controller: controller,
+          showSupportBar: showSupportBar,
+          style: style,
+        ),
+      ),
+    ),
+  );
+
+  Widget _buildControlsSection() => Card(
+    child: Padding(
+      padding: const .all(20),
+      child: Column(
+        crossAxisAlignment: .stretch,
+        children: [
+          // Amplitude Control
+          _buildSliderControl(
+            label: 'Amplitude',
+            value: amplitude,
             onChanged: (value) {
               controller.amplitude = value;
               setState(() => amplitude = value);
             },
-            label: 'Amplitude',
-            value: amplitude,
           ),
-          CustomSlider(
+
+          const SizedBox(height: 20),
+
+          // Speed Control
+          _buildSliderControl(
+            label: 'Speed',
+            value: speed,
             onChanged: (value) {
               controller.speed = value;
               setState(() => speed = value);
             },
-            label: 'Speed',
-            value: speed,
           ),
-          if (style == SiriWaveformStyle.ios_9) ...[
-            CustomSwitch(
-              onChanged: (value) {
-                setState(() => showSupportBar = value);
-              },
-              value: showSupportBar,
+
+          const SizedBox(height: 20),
+
+          // Style-specific controls
+          if (style == .ios_9) ...[
+            // Show Support Bar Toggle
+            Container(
+              padding: const .all(14),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.05),
+                borderRadius: .circular(12),
+              ),
+              child: Row(
+                mainAxisAlignment: .spaceBetween,
+                children: [
+                  const Text(
+                    'Show Support Bar',
+                    style: .new(fontSize: 14, fontWeight: .w600),
+                  ),
+                  Switch(
+                    value: showSupportBar,
+                    onChanged: (value) {
+                      setState(() => showSupportBar = value);
+                    },
+                    activeThumbColor: Theme.of(context).colorScheme.primary,
+                  ),
+                ],
+              ),
             ),
-            Wrap(
-              alignment: WrapAlignment.center,
-              spacing: 10,
+
+            const SizedBox(height: 20),
+
+            // Wave Colors Section
+            const Text(
+              'Wave Colors',
+              textAlign: .center,
+              style: .new(fontSize: 16, fontWeight: .bold, letterSpacing: 0.5),
+            ),
+
+            const SizedBox(height: 16),
+
+            // Color Pickers
+            Row(
+              mainAxisAlignment: .spaceEvenly,
               children: [
-                ColorPickerWidget(
+                _buildColorPicker(
                   title: 'Color 1',
+                  color: color1,
                   onChanged: (value) {
                     setState(() => color1 = value);
                     (controller as IOS9SiriWaveformController).color1 = value;
                   },
-                  color: color1,
                 ),
-                ColorPickerWidget(
+                _buildColorPicker(
                   title: 'Color 2',
+                  color: color2,
                   onChanged: (value) {
                     setState(() => color2 = value);
                     (controller as IOS9SiriWaveformController).color2 = value;
                   },
-                  color: color2,
                 ),
-                ColorPickerWidget(
+                _buildColorPicker(
                   title: 'Color 3',
+                  color: color3,
                   onChanged: (value) {
                     setState(() => color3 = value);
                     (controller as IOS9SiriWaveformController).color3 = value;
                   },
-                  color: color3,
                 ),
               ],
             ),
           ] else ...[
-            FrequencySlider(
-              onChanged: (value) {
-                (controller as IOS7SiriWaveformController).frequency =
-                    value.round();
-                setState(() => frequency = value);
-              },
+            // iOS 7 Frequency Control
+            _buildSliderControl(
+              label: 'Frequency',
               value: frequency,
-            ),
-            ColorPickerWidget(
-              onChanged: (value) {
-                setState(() => color = value);
-                (controller as IOS7SiriWaveformController).color = value;
-              },
-              color: color,
-            ),
-          ],
-          WaveformStyleToggleButtons(
-            onPressed: (index) {
-              if (selection[index]) return;
-              for (var i = 0; i < selection.length; i++) {
-                selection[i] = i == index;
-              }
-              controller =
-                  index == 0
-                      ? IOS7SiriWaveformController()
-                      : IOS9SiriWaveformController();
-              setState(() {});
-            },
-            selection: selection,
-          ),
-          const Spacer(),
-          const CustomDivider(),
-          SiriWaveformWidget(
-            controller: controller,
-            showSupportBar: showSupportBar,
-            style: style,
-          ),
-          const CustomDivider(),
-        ],
-      ),
-    ),
-  );
-}
-
-class CustomSlider extends StatelessWidget {
-  const CustomSlider({
-    required this.onChanged,
-    required this.label,
-    required this.value,
-    super.key,
-  });
-
-  final ValueChanged<double> onChanged;
-
-  final String label;
-  final double value;
-
-  @override
-  Widget build(BuildContext context) => Column(
-    children: [
-      Text(label, style: Theme.of(context).textTheme.titleLarge),
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 5),
-        child: SizedBox(
-          width: 360,
-          child: Slider(value: value, onChanged: onChanged),
-        ),
-      ),
-    ],
-  );
-}
-
-class CustomSwitch extends StatelessWidget {
-  const CustomSwitch({required this.onChanged, required this.value, super.key});
-
-  final ValueChanged<bool> onChanged;
-  final bool value;
-
-  @override
-  Widget build(BuildContext context) => AnimatedSize(
-    curve: Curves.fastOutSlowIn,
-    duration: const Duration(milliseconds: 400),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('Show support bar', style: Theme.of(context).textTheme.titleLarge),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5),
-          child: Switch(value: value, onChanged: onChanged),
-        ),
-      ],
-    ),
-  );
-}
-
-class FrequencySlider extends StatelessWidget {
-  const FrequencySlider({
-    required this.onChanged,
-    required this.value,
-    super.key,
-  });
-
-  final ValueChanged<double> onChanged;
-  final double value;
-
-  @override
-  Widget build(BuildContext context) => AnimatedSize(
-    curve: Curves.fastOutSlowIn,
-    duration: const Duration(milliseconds: 400),
-    child: Column(
-      children: [
-        Text('Frequency', style: Theme.of(context).textTheme.titleLarge),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5),
-          child: SizedBox(
-            width: 360,
-            child: Slider(
-              value: value,
-              divisions: 40,
               min: -20,
               max: 20,
-              onChanged: onChanged,
+              divisions: 40,
+              onChanged: (value) {
+                (controller as IOS7SiriWaveformController).frequency = value
+                    .round();
+                setState(() => frequency = value);
+              },
+            ),
+
+            const SizedBox(height: 20),
+
+            // Wave Color
+            const Text(
+              'Wave Color',
+              textAlign: .center,
+              style: .new(fontSize: 16, fontWeight: .bold, letterSpacing: 0.5),
+            ),
+
+            const SizedBox(height: 16),
+
+            Center(
+              child: _buildColorPicker(
+                title: 'Color',
+                color: color,
+                onChanged: (value) {
+                  setState(() => color = value);
+                  (controller as IOS7SiriWaveformController).color = value;
+                },
+              ),
+            ),
+          ],
+        ],
+      ),
+    ),
+  );
+
+  Widget _buildSliderControl({
+    required String label,
+    required double value,
+    required ValueChanged<double> onChanged,
+    double min = 0.0,
+    double max = 1.0,
+    int? divisions,
+  }) => Column(
+    crossAxisAlignment: .start,
+    children: [
+      Row(
+        mainAxisAlignment: .spaceBetween,
+        children: [
+          Text(
+            label,
+            style: const .new(
+              fontSize: 14,
+              fontWeight: .w600,
+              letterSpacing: 0.3,
             ),
           ),
-        ),
-      ],
-    ),
-  );
-}
-
-class ColorPickerWidget extends StatelessWidget {
-  const ColorPickerWidget({
-    required this.onChanged,
-    required this.color,
-    this.title = 'Color',
-    super.key,
-  });
-
-  final ValueChanged<Color> onChanged;
-  final Color color;
-  final String title;
-
-  @override
-  Widget build(BuildContext context) => AnimatedSize(
-    curve: Curves.fastOutSlowIn,
-    duration: const Duration(milliseconds: 400),
-    child: Column(
-      children: [
-        Text(title, style: Theme.of(context).textTheme.titleLarge),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          child: ElevatedButton(
-            onPressed: () async {
-              await showDialog<void>(
-                context: context,
-                builder:
-                    (context) => AlertDialog(
-                      titlePadding: EdgeInsets.zero,
-                      contentPadding: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(9),
-                      ),
-                      content: SingleChildScrollView(
-                        child: ColorPicker(
-                          pickerColor: color,
-                          onColorChanged: onChanged,
-                          pickerAreaHeightPercent: .7,
-                          displayThumbColor: true,
-                          paletteType: PaletteType.hsl,
-                          pickerAreaBorderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ),
-              );
-            },
-            child: const Text('Change color'),
+          Container(
+            padding: const .symmetric(horizontal: 12, vertical: 4),
+            decoration: BoxDecoration(
+              color: Theme.of(
+                context,
+              ).colorScheme.primary.withValues(alpha: 0.2),
+              borderRadius: .circular(16),
+              border: .all(
+                color: Theme.of(
+                  context,
+                ).colorScheme.primary.withValues(alpha: 0.3),
+              ),
+            ),
+            child: Text(
+              value.toStringAsFixed(2),
+              style: .new(
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: .bold,
+                fontSize: 13,
+              ),
+            ),
           ),
-        ),
-      ],
-    ),
-  );
-}
-
-class WaveformStyleToggleButtons extends StatelessWidget {
-  const WaveformStyleToggleButtons({
-    required this.onPressed,
-    required this.selection,
-    super.key,
-  });
-
-  final ValueChanged<int> onPressed;
-  final List<bool> selection;
-
-  @override
-  Widget build(BuildContext context) => Column(
-    children: [
-      Text('Style', style: Theme.of(context).textTheme.titleLarge),
-      const SizedBox(height: 15),
-      ToggleButtons(
-        onPressed: onPressed,
-        borderColor: Theme.of(context).primaryColorLight,
-        borderRadius: BorderRadius.circular(16),
-        isSelected: selection,
-        selectedBorderColor: Theme.of(context).colorScheme.primary,
-        children: const [
-          Padding(padding: EdgeInsets.all(16), child: Text('iOS 7')),
-          Padding(padding: EdgeInsets.all(16), child: Text('iOS 9')),
         ],
+      ),
+      const SizedBox(height: 4),
+      SliderTheme(
+        data: SliderTheme.of(context).copyWith(
+          thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 7),
+          overlayShape: const RoundSliderOverlayShape(overlayRadius: 18),
+        ),
+        child: Slider(
+          value: value,
+          min: min,
+          max: max,
+          divisions: divisions,
+          onChanged: onChanged,
+        ),
       ),
     ],
   );
-}
 
-class CustomDivider extends StatelessWidget {
-  const CustomDivider({super.key});
-
-  @override
-  Widget build(BuildContext context) => SizedBox(
-    width: kIsWeb ? 600 : 360,
-    child: Divider(color: Theme.of(context).colorScheme.primary, thickness: 1),
+  Widget _buildColorPicker({
+    required String title,
+    required Color color,
+    required ValueChanged<Color> onChanged,
+  }) => Column(
+    children: [
+      Text(title, style: const .new(fontSize: 13, fontWeight: .w600)),
+      const SizedBox(height: 8),
+      GestureDetector(
+        onTap: () => _showColorPickerDialog(color, onChanged),
+        child: Container(
+          width: 48,
+          height: 48,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: .circular(12),
+            border: .all(
+              color: Colors.white.withValues(alpha: 0.3),
+              width: 2.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: color.withValues(alpha: 0.6),
+                blurRadius: 6,
+                spreadRadius: 1,
+              ),
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.3),
+                blurRadius: 8,
+                offset: const .new(0, 3),
+              ),
+            ],
+          ),
+          child: Icon(
+            Icons.palette_outlined,
+            color: _getContrastColor(color),
+            size: 24,
+          ),
+        ),
+      ),
+    ],
   );
+
+  Color _getContrastColor(Color color) =>
+      color.computeLuminance() > 0.5 ? Colors.black : Colors.white;
+
+  Future<void> _showColorPickerDialog(
+    Color currentColor,
+    ValueChanged<Color> onColorChanged,
+  ) async {
+    await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        title: const Text('Pick a Color'),
+        shape: RoundedRectangleBorder(borderRadius: .circular(20)),
+        content: SingleChildScrollView(
+          child: ColorPicker(
+            pickerColor: currentColor,
+            onColorChanged: onColorChanged,
+            pickerAreaHeightPercent: 0.8,
+            displayThumbColor: true,
+            paletteType: .hslWithHue,
+            labelTypes: const [],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            style: TextButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.primary,
+            ),
+            child: const Text(
+              'Done',
+              style: .new(fontSize: 16, fontWeight: .w600),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class SiriWaveformWidget extends StatelessWidget {
@@ -338,21 +508,26 @@ class SiriWaveformWidget extends StatelessWidget {
   final SiriWaveformStyle style;
 
   @override
-  Widget build(BuildContext context) =>
-      style == SiriWaveformStyle.ios_7
+  Widget build(BuildContext context) {
+    const height = kIsWeb ? 400.0 : 250.0;
+    return Padding(
+      padding: const .all(20),
+      child: style == .ios_7
           ? SiriWaveform.ios7(
-            controller: controller as IOS7SiriWaveformController,
-            options: const IOS7SiriWaveformOptions(
-              height: kIsWeb ? 300 : 180,
-              width: kIsWeb ? 600 : 360,
-            ),
-          )
+              controller: controller as IOS7SiriWaveformController,
+              options: const IOS7SiriWaveformOptions(
+                height: height,
+                width: .infinity,
+              ),
+            )
           : SiriWaveform.ios9(
-            controller: controller as IOS9SiriWaveformController,
-            options: IOS9SiriWaveformOptions(
-              height: kIsWeb ? 300 : 180,
-              showSupportBar: showSupportBar,
-              width: kIsWeb ? 600 : 360,
+              controller: controller as IOS9SiriWaveformController,
+              options: IOS9SiriWaveformOptions(
+                height: height,
+                showSupportBar: showSupportBar,
+                width: .infinity,
+              ),
             ),
-          );
+    );
+  }
 }

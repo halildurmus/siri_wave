@@ -5,8 +5,9 @@
 [![Platform: Flutter][platform_badge]][platform_link]
 [![License: BSD-3-Clause][license_badge]][license_link]
 
-Create visually stunning waveforms similar to those found in *Siri*.
-It was inspired from the [siriwave][siriwave_link] library.
+**Create visually stunning waveforms similar to those found in _Siri_.**
+
+> Inspired from the [siriwave][siriwave_link] library.
 
 ## Demo
 
@@ -24,7 +25,7 @@ Check out the live demo [here][demo_link].
 
 ### iOS 7 Siri-style waveform
 
-To create an *iOS 7 Siri-style* waveform, use the `SiriWaveform.ios7()`
+To create an _iOS 7 Siri-style_ waveform, use the `SiriWaveform.ios7()`
 constructor:
 
 ```dart
@@ -67,7 +68,7 @@ You can also change the properties of the waveform later:
 
 ### iOS 9 Siri-style waveform
 
-To create an *iOS 9 Siri-style* waveform, use the `SiriWaveform.ios9()`
+To create an _iOS 9 Siri-style_ waveform, use the `SiriWaveform.ios9()`
 constructor:
 
 ```dart
@@ -80,7 +81,7 @@ class MyWidget extends StatelessWidget {
 }
 ```
 
-As with the *iOS 7 Siri-style* waveform, you can customize the waveform by
+As with the _iOS 7 Siri-style_ waveform, you can customize the waveform by
 passing a `controller` and/or `options`:
 
 ```dart

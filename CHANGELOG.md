@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.1] - 2026-02-24
+
+### 📦 Dependencies
+
+- Bumped minimum required Dart SDK version to `3.11.0`.
+
+[2.3.1]: https://github.com/halildurmus/siri_wave/compare/v2.3.0..siri_wave-v2.3.1
+
 ## [2.3.0] - 2025-02-20
 
 ### 🧹 Refactor

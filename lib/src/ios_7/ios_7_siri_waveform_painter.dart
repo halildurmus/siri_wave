@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'dart:typed_data';
 
 import 'package:flutter/animation.dart' show AnimationController;
 import 'package:flutter/rendering.dart';
@@ -23,70 +24,124 @@ class IOS7SiriWaveformPainter extends CustomPainter {
   final IOS7SiriWaveformController controller;
 
   static const _amplitudeFactor = .6;
-  static const _attenuationFactor = 4;
-  static const _curves = <_IOS7SiriWaveformCurve>[
+  static const _attenuationFactor = 4.0;
+  static const _graphX = 2.0;
+  static const _pixelDepth = .02;
+
+  static const _curves = <_Curve>[
     (attenuation: -2, width: 1, opacity: .1),
     (attenuation: -6, width: 1, opacity: .2),
     (attenuation: 4, width: 1, opacity: .4),
     (attenuation: 2, width: 1, opacity: .6),
     (attenuation: 1, width: 1.5, opacity: 1),
   ];
-  static const _graphX = 2.0;
-  static const _pixelDepth = .02;
 
   double _phase = 0;
 
-  num _globalAttenuationFactor(num x) => math.pow(
-    _attenuationFactor / (_attenuationFactor + math.pow(x, _attenuationFactor)),
-    _attenuationFactor,
-  );
+  // Cached objects
+  final List<Paint?> _paints = .filled(_curves.length, null);
+  final List<Path> _paths = .generate(_curves.length, (_) => .new());
 
-  double _xPos(double i, Size size) =>
-      size.width * ((i + _graphX) / (_graphX * 2));
+  Float64List? _attenuationCache;
+  var _cachedCount = 0;
 
-  double _yPos(double i, double attenuation, double maxHeight) =>
-      _amplitudeFactor *
-      (_globalAttenuationFactor(i) *
-          (maxHeight * controller.amplitude) *
-          (1 / attenuation) *
-          math.sin(controller.frequency * i - _phase));
+  Paint _paintFor(int curveIndex, double opacity, Color color) {
+    var paint = _paints[curveIndex];
+    paint ??= _paints[curveIndex] = .new()
+      ..strokeWidth = _curves[curveIndex].width
+      ..style = .stroke
+      ..strokeCap = .round
+      ..strokeJoin = .round;
+    paint.color = color.withValues(alpha: opacity);
+    return paint;
+  }
+
+  // Fast x⁴ attenuation
+  double _attenuation(double x) {
+    final ax = x.abs();
+    final x2 = ax * ax;
+    final x4 = x2 * x2;
+    final ratio = _attenuationFactor / (_attenuationFactor + x4);
+    final r2 = ratio * ratio;
+    return r2 * r2;
+  }
+
+  void _ensureCache(int count) {
+    if (_cachedCount == count) return;
+
+    _cachedCount = count;
+    _attenuationCache = .new(count + 1);
+
+    for (var s = 0; s <= count; s++) {
+      final i = -_graphX + s * _pixelDepth;
+      _attenuationCache![s] = _attenuation(i);
+    }
+  }
 
   @override
   void paint(Canvas canvas, Size size) {
-    final maxHeight = size.height / 2;
+    final Size(:height, :width) = size;
+    final maxHeight = height * .5;
+    final baseY = maxHeight;
 
-    // Interpolate amplitude and speed values.
     controller.lerp();
 
-    for (final curve in _curves) {
-      final path = Path()..moveTo(0, maxHeight);
-      // Cycle the graph from -X to +X every pixelDepth and draw the line.
-      for (var i = -_graphX; i <= _graphX; i += _pixelDepth) {
-        final x = _xPos(i, size);
-        final y = maxHeight + _yPos(i, curve.attenuation, maxHeight);
-        path.lineTo(x, y);
+    final freq = controller.frequency;
+    final amp = controller.amplitude;
+    final speed = controller.speed;
+    final color = controller.color;
+    final phase = _phase;
+
+    const step = _pixelDepth;
+    final count = ((_graphX * 2) / step).ceil();
+    final dx = width / count;
+
+    _ensureCache(count);
+    final attenuation = _attenuationCache!;
+
+    for (var c = 0; c < _curves.length; c++) {
+      final curve = _curves[c];
+      final path = _paths[c]..reset();
+      final invAtt = 1 / curve.attenuation;
+
+      double x = 0;
+      for (var s = 0; s <= count; s++) {
+        final i = -_graphX + s * step;
+        final y =
+            baseY +
+            _amplitudeFactor *
+                attenuation[s] *
+                maxHeight *
+                amp *
+                invAtt *
+                math.sin(freq * i - phase);
+
+        if (s == 0) {
+          path.moveTo(x, y);
+        } else {
+          path.lineTo(x, y);
+        }
+
+        x += dx;
       }
 
-      final paint =
-          Paint()
-            ..color = controller.color.withValues(alpha: curve.opacity)
-            ..strokeWidth = curve.width
-            ..style = PaintingStyle.stroke;
-      canvas.drawPath(path, paint);
+      canvas.drawPath(path, _paintFor(c, curve.opacity, color));
     }
 
-    _phase = (_phase + (math.pi / 2) * controller.speed) % (2 * math.pi);
+    _phase += (math.pi / 2) * speed;
+    if (_phase > math.pi * 2) _phase -= math.pi * 2;
   }
 
   @override
-  bool shouldRepaint(IOS7SiriWaveformPainter oldDelegate) {
-    final oldController = oldDelegate.controller;
-    return oldController.amplitude != controller.amplitude ||
-        oldController.frequency != controller.frequency ||
-        oldController.speed != controller.speed;
+  bool shouldRepaint(IOS7SiriWaveformPainter old) {
+    final o = old.controller;
+    return o.amplitude != controller.amplitude ||
+        o.frequency != controller.frequency ||
+        o.speed != controller.speed;
   }
+
+  @override
+  bool shouldRebuildSemantics(IOS7SiriWaveformPainter oldDelegate) => false;
 }
 
-/// Represents the curve properties will be used by [IOS7SiriWaveformPainter].
-typedef _IOS7SiriWaveformCurve =
-    ({double attenuation, double opacity, double width});
+typedef _Curve = ({double attenuation, double opacity, double width});

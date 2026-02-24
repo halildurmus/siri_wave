@@ -43,7 +43,7 @@ sealed class SiriWaveformController {
   double? _interpolationAmplitude;
   double? _interpolationSpeed;
 
-  static const double _lerpSpeed = .1;
+  static const _lerpSpeed = .1;
 
   double _intLerp(double v0, double v1, double t) => v0 * (1 - t) + v1 * t;
 
@@ -124,9 +124,9 @@ final class IOS9SiriWaveformController extends SiriWaveformController {
   IOS9SiriWaveformController({
     super.amplitude,
     super.speed,
-    this.color1 = const Color(0xFFAD394C),
-    this.color2 = const Color(0xFF30DC9B),
-    this.color3 = const Color(0xFF0F52A9),
+    this.color1 = const .new(0xFFAD394C),
+    this.color2 = const .new(0xFF30DC9B),
+    this.color3 = const .new(0xFF0F52A9),
   });
 
   /// The primary color of the waveform.
