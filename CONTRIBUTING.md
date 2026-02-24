@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for your interest in contributing to **siri_wave**!
+Thank you for your interest in contributing to `package:siri_wave`!
 
 This guide provides everything you need to get started and make your
 contributions effective and rewarding.
@@ -22,7 +22,7 @@ We strive to maintain a welcoming and inclusive community, so please read our
 - **🐛 Report Bugs**: Found a bug? Let us know on our [GitHub Issues] page.
 - **📝 Improve Documentation**: High-quality documentation is crucial. Help us
   improve it by refining the existing docs or adding new content.
-- **💬 Give Feedback**: Share your experience using **siri_wave**, what
+- **💬 Give Feedback**: Share your experience using `package:siri_wave`, what
   features you’d like, and what works well on [GitHub Discussions].
 - **📢 Share siri_wave**: Spread the word about this project to reach more
   users.
@@ -33,7 +33,7 @@ We strive to maintain a welcoming and inclusive community, so please read our
 
 ### ⚙️ Requirements
 
-- [Dart](https://dart.dev) version `3.5` or higher
+- [Dart](https://dart.dev) version `3.11` or higher
 - [git-cliff](https://git-cliff.org) for generating changelogs
 - [Lefthook](https://github.com/evilmartians/lefthook) for managing Git hooks
 
@@ -42,7 +42,7 @@ set up the project.
 
 ### 📥 Cloning the Repository
 
-Clone your fork of **siri_wave** to your local machine:
+Clone your fork of `package:siri_wave` to your local machine:
 
 ```cmd
 git clone https://github.com/<your-username>/siri_wave.git
@@ -70,7 +70,7 @@ before commits.
 
 ### ✅ Running Tests
 
-To run tests for **siri_wave**, use:
+To run tests for `package:siri_wave`, use:
 
 ```cmd
 dart test
@@ -128,7 +128,7 @@ automatically, and our maintainers will review it.
 Please use the pull request template to provide details about your changes,
 ensuring a smoother review process.
 
-Thank you for contributing to **siri_wave**! 🎉
+Thank you for contributing to `package:siri_wave`! 🎉
 
 [Code of Conduct]: https://github.com/halildurmus/siri_wave/blob/main/CODE_OF_CONDUCT.md
 [Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0/

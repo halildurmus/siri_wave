@@ -17,15 +17,17 @@ class IOS9SiriWaveformPainter extends CustomPainter {
     required this.animationController,
     required this.controller,
   }) : _waveforms = [
-         _IOS9SiriWaveformProperties((controller) => controller.color1),
-         _IOS9SiriWaveformProperties((controller) => controller.color2),
-         _IOS9SiriWaveformProperties((controller) => controller.color3),
+         .new((c) => c.color1),
+         .new((c) => c.color2),
+         .new((c) => c.color3),
        ],
        super(repaint: animationController);
 
   final AnimationController animationController;
   final IOS9SiriWaveformController controller;
   final List<_IOS9SiriWaveformProperties> _waveforms;
+
+  static final _rand = math.Random();
 
   static const _amplitudeFactor = .8;
   static const _amplitudeRanges = <double>[.3, 1];
@@ -41,15 +43,15 @@ class IOS9SiriWaveformPainter extends CustomPainter {
   static const _speedRanges = <double>[.5, 1];
   static const _widthRanges = [1, 3];
 
-  num _getRandomRange(List<num> e) =>
-      e[0] + math.Random().nextDouble() * (e[1] - e[0]);
+  num _getRandomRange(List<num> e) => e[0] + _rand.nextDouble() * (e[1] - e[0]);
 
   void _spawnSingle(int ci, int idx) {
     final waveform = _waveforms[idx];
     waveform.phases[ci] = 0;
     waveform.amplitudes[ci] = 0;
-    waveform.despawnTimeouts[ci] =
-        _getRandomRange(_despawnTimeoutRanges).toDouble();
+    waveform.despawnTimeouts[ci] = _getRandomRange(
+      _despawnTimeoutRanges,
+    ).toDouble();
     waveform.offsets[ci] = _getRandomRange(_offsetRanges).toDouble();
     waveform.speeds[ci] = _getRandomRange(_speedRanges).toDouble();
     waveform.finalAmplitudes[ci] = _getRandomRange(_amplitudeRanges).toDouble();
@@ -61,18 +63,17 @@ class IOS9SiriWaveformPainter extends CustomPainter {
 
   void _spawn(int idx) {
     final curvesCount = _getRandomRange(_noOfCurvesRanges).floor();
-    final wave =
-        _waveforms[idx]
-          ..spawnAt = DateTime.now().millisecondsSinceEpoch
-          ..noOfCurves = curvesCount
-          ..amplitudes = _getEmptyArray(curvesCount)
-          ..despawnTimeouts = _getEmptyArray(curvesCount)
-          ..finalAmplitudes = _getEmptyArray(curvesCount)
-          ..offsets = _getEmptyArray(curvesCount)
-          ..phases = _getEmptyArray(curvesCount)
-          ..speeds = _getEmptyArray(curvesCount)
-          ..verses = _getEmptyArray(curvesCount)
-          ..widths = _getEmptyArray(curvesCount);
+    final wave = _waveforms[idx]
+      ..spawnAt = DateTime.now().millisecondsSinceEpoch
+      ..noOfCurves = curvesCount
+      ..amplitudes = _getEmptyArray(curvesCount)
+      ..despawnTimeouts = _getEmptyArray(curvesCount)
+      ..finalAmplitudes = _getEmptyArray(curvesCount)
+      ..offsets = _getEmptyArray(curvesCount)
+      ..phases = _getEmptyArray(curvesCount)
+      ..speeds = _getEmptyArray(curvesCount)
+      ..verses = _getEmptyArray(curvesCount)
+      ..widths = _getEmptyArray(curvesCount);
 
     for (var ci = 0; ci < wave.noOfCurves; ci++) {
       _spawnSingle(ci, idx);
@@ -122,13 +123,14 @@ class IOS9SiriWaveformPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final maxHeight = size.height / 2;
+    final Size(:height, :width) = size;
+    final maxHeight = height / 2;
 
     // Interpolate amplitude and speed values.
     controller.lerp();
 
     canvas.saveLayer(
-      Rect.fromLTWH(0, 0, size.width, size.height),
+      .fromLTWH(0, 0, width, height),
       Paint()..color = Colors.white,
     );
 
@@ -169,10 +171,9 @@ class IOS9SiriWaveformPainter extends CustomPainter {
         }
 
         path.close();
-        final paint =
-            Paint()
-              ..blendMode = BlendMode.plus
-              ..color = wave.color(controller);
+        final paint = Paint()
+          ..blendMode = .plus
+          ..color = wave.color(controller);
         canvas.drawPath(path, paint);
       }
 
@@ -187,10 +188,9 @@ class IOS9SiriWaveformPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(IOS9SiriWaveformPainter oldDelegate) {
-    final oldController = oldDelegate.controller;
-    return oldController.amplitude != controller.amplitude ||
-        oldController.speed != controller.speed;
+  bool shouldRepaint(covariant IOS9SiriWaveformPainter old) {
+    final o = old.controller;
+    return o.amplitude != controller.amplitude || o.speed != controller.speed;
   }
 }
 
@@ -203,11 +203,11 @@ class _IOS9SiriWaveformProperties {
   var amplitudes = <double>[];
   var despawnTimeouts = <double>[];
   var finalAmplitudes = <double>[];
-  int noOfCurves = 0;
+  var noOfCurves = 0;
   var offsets = <double>[];
   var phases = <double>[];
   double prevMaxY = 0;
-  int spawnAt = 0;
+  var spawnAt = 0;
   var speeds = <double>[];
   var verses = <double>[];
   var widths = <double>[];
