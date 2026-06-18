@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: 📚 Git Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: 🔍 Check if There is a Release Commit
         id: check_release
